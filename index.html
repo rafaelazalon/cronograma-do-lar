@@ -1,0 +1,1558 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cronograma do Lar</title>
+<meta name="description" content="Cronograma de educação domiciliar do 1º ao 4º ano baseado em Charlotte Mason.">
+<meta name="theme-color" content="#3D7369">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cronograma">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Lexend:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout: caderno de estudo calmo — papel acinzentado suave, superfícies quase brancas, cores de matéria dessaturadas usadas como filetes e tintas leves; coluna única de até 1000px. */
+:root{
+  --paper:#F3F3EE; --dotc:transparent; --surface:#FCFCF9; --ink:#2A302D; --muted:#69726D; --line:#E2E3DB; --soft:#EDEEE7; --accent:#3D7369; --accent-ink:#FCFCF9; --danger:#B4464B;
+  --f-display:"Literata",Georgia,"Times New Roman",serif;
+  --f-body:"Lexend","Segoe UI",system-ui,sans-serif;
+  --c-bib:#A8505C; --c-cat:#7A64A8; --c-his:#B06A3F; --c-lin:#4775A3; --c-mat:#3E8A80; --c-cie:#5E8A48; --c-geo:#A2802E; --c-art:#A85A80; --c-mus:#5A6AAB; --c-ing:#B66E4E; --c-edf:#4F8A9C; --c-pau:#8C918C;
+  --y1:#B0585C; --y2:#B27A35; --y3:#4E8A63; --y4:#52699E;
+  --t-hoje:#B27A35; --t-semana:#4E8A63; --t-trimestres:#52699E; --t-horario:#7A64A8; --t-calendario:#3E8A80; --t-diario:#A85A80; --t-metodo:#8A6A4F; --t-estante:#A0643E;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#1B1F1E; --dotc:transparent; --surface:#232827; --ink:#E3E6E1; --muted:#A2AAA5; --line:#343B39; --soft:#2B3130; --accent:#86B8AD; --accent-ink:#1B1F1E; --danger:#E39A9D;
+  --c-bib:#D99AA2; --c-cat:#B9A8D9; --c-his:#D9A787; --c-lin:#93B4D6; --c-mat:#8CC5BC; --c-cie:#A6C795; --c-geo:#D4BC82; --c-art:#D7A0BC; --c-mus:#A3AEDB; --c-ing:#DDA98F; --c-edf:#92C2CF; --c-pau:#A6ACA8;
+  --y1:#D99A9D; --y2:#D9B07E; --y3:#93C4A2; --y4:#9DB0D9;
+  --t-hoje:#D9B07E; --t-semana:#93C4A2; --t-trimestres:#9DB0D9; --t-horario:#B9A8D9; --t-calendario:#8CC5BC; --t-diario:#D7A0BC; --t-metodo:#C9AD94; --t-estante:#D9A787;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1B1F1E; --dotc:transparent; --surface:#232827; --ink:#E3E6E1; --muted:#A2AAA5; --line:#343B39; --soft:#2B3130; --accent:#86B8AD; --accent-ink:#1B1F1E; --danger:#E39A9D;
+  --c-bib:#D99AA2; --c-cat:#B9A8D9; --c-his:#D9A787; --c-lin:#93B4D6; --c-mat:#8CC5BC; --c-cie:#A6C795; --c-geo:#D4BC82; --c-art:#D7A0BC; --c-mus:#A3AEDB; --c-ing:#DDA98F; --c-edf:#92C2CF; --c-pau:#A6ACA8;
+  --y1:#D99A9D; --y2:#D9B07E; --y3:#93C4A2; --y4:#9DB0D9;
+  --t-hoje:#D9B07E; --t-semana:#93C4A2; --t-trimestres:#9DB0D9; --t-horario:#B9A8D9; --t-calendario:#8CC5BC; --t-diario:#D7A0BC; --t-metodo:#C9AD94; --t-estante:#D9A787;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{background-color:var(--paper);background-image:radial-gradient(var(--dotc) 1.2px,transparent 1.3px);background-size:22px 22px;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);box-shadow:0 2px 0 var(--line)}
+.crayon{height:7px;background:linear-gradient(90deg,var(--c-bib) 0 9%,var(--c-his) 9% 18%,var(--c-geo) 18% 27%,var(--c-cie) 27% 36%,var(--c-mat) 36% 45%,var(--c-edf) 45% 54%,var(--c-lin) 54% 63%,var(--c-mus) 63% 72%,var(--c-cat) 72% 81%,var(--c-art) 81% 90%,var(--c-ing) 90% 100%)}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 8px;flex-wrap:wrap}
+.brand h1{font-size:1.7rem;font-weight:800;letter-spacing:-.01em}
+.brand h1 span{display:inline-block}
+.brand h1 .l1{color:var(--c-bib)}.brand h1 .l2{color:var(--c-his)}.brand h1 .l3{color:var(--c-cie)}.brand h1 .l4{color:var(--c-lin)}
+.brand .sub{color:var(--muted);font-size:.85rem;max-width:42ch}
+.sync{font-size:.75rem;font-weight:800;border-radius:999px;padding:3px 10px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.sync.on{background:color-mix(in srgb,var(--c-cie) 18%,var(--surface));color:var(--c-cie)}
+.anos{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.anos button{--yc:var(--y1);flex:0 0 auto;border:2px solid var(--yc);background:var(--surface);color:var(--yc);border-radius:999px;padding:4px 14px;font-weight:800;font-size:.95rem;white-space:nowrap}
+.anos button small{font-weight:600;margin-left:4px;opacity:.85}
+.anos button[data-ano="2"]{--yc:var(--y2)}.anos button[data-ano="3"]{--yc:var(--y3)}.anos button[data-ano="4"]{--yc:var(--y4)}
+.anos button[aria-pressed="true"]{background:var(--yc);color:var(--surface)}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px}
+nav.tabs button{--tc:var(--accent);flex:0 0 auto;background:color-mix(in srgb,var(--tc) 12%,var(--surface));border:0;border-radius:12px;padding:7px 13px;font-weight:800;color:var(--tc);font-size:.93rem;display:flex;align-items:center;gap:6px}
+nav.tabs button[aria-selected="true"]{background:var(--tc);color:var(--surface);box-shadow:0 3px 0 color-mix(in srgb,var(--tc) 60%,#000)}
+nav.tabs button svg{width:17px;height:17px}
+
+main{padding-block:20px 80px}
+section.view{display:grid;gap:18px}
+.eyebrow{font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{font-family:var(--f-display);font-size:2rem;font-weight:800;color:var(--vc,var(--ink))}
+.muted{color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 12px;font-weight:700}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.big{padding:10px 16px;font-size:1rem}
+.btn.color{background:var(--sc);border-color:var(--sc);color:var(--surface)}
+.btn.ghost{border-color:transparent;background:var(--soft)}
+.btn.danger{border-color:var(--danger);color:var(--danger)}
+.btn.danger.armed{background:var(--danger);color:var(--surface)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.panel{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:16px}
+.banner{border-radius:16px;padding:14px 16px;background:color-mix(in srgb,var(--bc,var(--accent)) 12%,var(--surface));border:2px solid color-mix(in srgb,var(--bc,var(--accent)) 35%,var(--surface))}
+.banner strong{font-family:var(--f-display);font-size:1.2rem;display:block;margin-bottom:2px;color:var(--bc,var(--accent))}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:2px 10px;font-size:.8rem;font-weight:800;background:var(--soft);color:var(--muted);white-space:nowrap}
+
+/* matérias */
+.s-bib{--sc:var(--c-bib)}.s-cat{--sc:var(--c-cat)}.s-his{--sc:var(--c-his)}.s-lin{--sc:var(--c-lin)}.s-mat{--sc:var(--c-mat)}.s-cie{--sc:var(--c-cie)}.s-geo{--sc:var(--c-geo)}.s-art{--sc:var(--c-art)}.s-mus{--sc:var(--c-mus)}.s-ing{--sc:var(--c-ing)}.s-edf{--sc:var(--c-edf)}.s-pau{--sc:var(--c-pau)}
+.badge{width:34px;height:34px;border-radius:50%;background:var(--sc);color:var(--surface);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:.85rem;flex:0 0 auto;letter-spacing:-.02em}
+.badge.sm{width:24px;height:24px;font-size:.62rem}
+.tag{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--sc)}
+
+/* Hoje */
+.today-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.datenav{display:flex;gap:6px;align-items:center}
+.datenav input{border:2px solid var(--line);border-radius:10px;padding:5px 8px;background:var(--surface)}
+.timeline{display:grid;gap:10px}
+.lesson{display:grid;grid-template-columns:62px 1fr auto;gap:12px;padding:12px 14px;align-items:start;background:color-mix(in srgb,var(--sc) 8%,var(--surface));border:2px solid color-mix(in srgb,var(--sc) 30%,var(--surface));border-radius:16px}
+.lesson .time{font-variant-numeric:tabular-nums;font-weight:800;font-size:1rem;color:var(--sc)}
+.lesson .time small{display:block;color:var(--muted);font-weight:600;font-size:.78rem}
+.lesson h3{font-size:1.15rem;font-weight:800;margin:2px 0 3px}
+.lesson .what{font-size:.98rem;font-weight:600}
+.lesson .how{font-size:.86rem;color:var(--muted);margin-top:4px}
+.lesson .acts{display:flex;flex-direction:column;align-items:center;gap:8px}
+.lesson .reg{font-size:.72rem;font-weight:800;color:var(--sc);background:var(--surface);border:2px solid color-mix(in srgb,var(--sc) 40%,var(--surface));border-radius:8px;padding:3px 6px;display:flex;align-items:center;gap:3px}
+.lesson .reg svg{width:14px;height:14px}
+.lesson.done h3,.lesson.done .what{opacity:.55;text-decoration:line-through;text-decoration-color:var(--muted)}
+.lesson.break{background:var(--soft);border-color:var(--line)}
+.chk{appearance:none;width:28px;height:28px;border:3px solid var(--sc,var(--accent));border-radius:9px;background:var(--surface);display:grid;place-items:center;margin:0;flex:0 0 auto}
+.chk:checked{background:var(--sc,var(--accent))}
+.chk:checked::after{content:"";width:7px;height:13px;border:solid var(--surface);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.afternoon ul{margin:6px 0 0;padding-left:1.1em}
+.habit{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;background:color-mix(in srgb,var(--c-geo) 12%,var(--surface));border-color:color-mix(in srgb,var(--c-geo) 40%,var(--surface))}
+.habit .seal{width:52px;height:52px;border-radius:50%;background:var(--c-geo);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;color:var(--surface);font-size:1.5rem;transform:rotate(-8deg)}
+
+/* Semana */
+.weekbar{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.weekbar button{flex:0 0 auto;width:42px;height:44px;border-radius:12px;border:2px solid var(--line);background:var(--surface);font-weight:800;font-variant-numeric:tabular-nums;position:relative}
+.weekbar button.rest{background:var(--soft);color:var(--muted)}
+.weekbar button[aria-pressed="true"]{background:var(--t-semana);color:var(--surface);border-color:var(--t-semana)}
+.weekbar button .prog{position:absolute;left:5px;right:5px;bottom:4px;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.weekbar button .prog i{display:block;height:100%;background:var(--c-cie)}
+.weekbar button[aria-pressed="true"] .prog i{background:var(--surface)}
+.termsel{display:flex;gap:6px;flex-wrap:wrap}
+.termsel button{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 14px;font-weight:800}
+.termsel button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{background:var(--surface);border:2px solid color-mix(in srgb,var(--sc) 35%,var(--surface));border-radius:16px;overflow:hidden;display:grid;align-content:start;min-width:0}
+.card .head{display:flex;justify-content:space-between;align-items:center;gap:8px;background:color-mix(in srgb,var(--sc) 14%,var(--surface));padding:10px 12px}
+.card .head .tag{font-size:.82rem}
+.card .body{padding:12px;display:grid;gap:8px}
+.card .assign{font-family:var(--f-display);font-size:1.15rem;font-weight:700;line-height:1.25}
+.card .meta{font-size:.86rem;color:var(--muted)}
+.card ul{margin:0;padding-left:1.1em;font-size:.9rem}
+.card.done{opacity:.72}
+.progress{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;flex:1;min-width:120px}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--c-cie),var(--c-mat))}
+
+/* Trimestres */
+.scroll{overflow-x:auto;border-radius:16px;border:2px solid var(--line);background:var(--surface)}
+table.ov{border-collapse:collapse;width:100%;min-width:760px;font-size:.92rem}
+table.ov th,table.ov td{border-bottom:2px solid var(--line);padding:12px;vertical-align:top;text-align:left}
+table.ov thead th{font-family:var(--f-display);font-size:1.1rem;background:var(--soft)}
+table.ov thead th:nth-child(2){color:var(--y1)}table.ov thead th:nth-child(3){color:var(--y2)}table.ov thead th:nth-child(4){color:var(--y3)}
+table.ov thead th small{display:block;font-family:var(--f-body);font-weight:600;color:var(--muted);font-size:.78rem}
+table.ov th[scope=row]{width:180px;background:color-mix(in srgb,var(--sc) 16%,var(--surface))}
+table.ov th[scope=row] .in{display:flex;gap:8px;align-items:center;color:var(--sc);font-family:var(--f-display);font-size:1.02rem}
+table.ov td{border-left:2px solid var(--line);background:color-mix(in srgb,var(--sc) 4%,var(--surface))}
+table.ov td .r{font-weight:800;margin-bottom:4px}
+table.ov td ol{margin:4px 0 0;padding-left:1.2em;color:var(--muted);font-size:.84rem}
+
+/* Horário */
+.tt{border-collapse:separate;border-spacing:4px;width:100%;min-width:720px;font-size:.88rem}
+.tt th,.tt td{padding:8px;vertical-align:top;border-radius:10px}
+.tt thead th{background:var(--soft);font-family:var(--f-display);font-size:1rem}
+.tt td.t{font-variant-numeric:tabular-nums;font-weight:800;white-space:nowrap;width:78px}
+.tt td.t small{display:block;color:var(--muted);font-weight:600}
+.tt td.c{background:color-mix(in srgb,var(--sc) 16%,var(--surface))}
+.tt td.c b{color:var(--sc);display:block}
+.tt td.af{background:var(--soft);font-size:.82rem}
+
+/* Calendário */
+.cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.cal .y{--yc:var(--y1);background:var(--surface);border:2px solid color-mix(in srgb,var(--yc) 40%,var(--surface));border-radius:16px;padding:14px;display:grid;gap:10px}
+.cal .y[data-y="2"]{--yc:var(--y2)}.cal .y[data-y="3"]{--yc:var(--y3)}.cal .y[data-y="4"]{--yc:var(--y4)}
+.cal .y h3{color:var(--yc);font-size:1.4rem}
+.cal .y.now{box-shadow:0 0 0 3px var(--yc)}
+.cal .t{display:grid;gap:2px;padding-left:10px;border-left:4px solid color-mix(in srgb,var(--yc) 50%,var(--surface))}
+.cal .t b{font-variant-numeric:tabular-nums}
+.cal .t span{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.settings{display:grid;gap:12px}
+.settings label{display:grid;gap:4px;font-weight:800;font-size:.9rem}
+.settings input[type=date],.settings select{border:2px solid var(--line);border-radius:10px;padding:6px 8px;background:var(--surface);max-width:260px}
+.toggle{display:flex!important;align-items:center;gap:8px;font-weight:600!important}
+
+/* Método */
+.principles{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.principles .panel{border-color:color-mix(in srgb,var(--sc) 35%,var(--surface));background:color-mix(in srgb,var(--sc) 7%,var(--surface))}
+.principles .panel h3{font-size:1.15rem;margin-bottom:6px;color:var(--sc)}
+.principles .panel p{margin:0;font-size:.93rem}
+.mlist{display:grid;gap:10px}
+.mitem{background:var(--surface);border:2px solid color-mix(in srgb,var(--sc) 35%,var(--surface));border-radius:16px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:12px}
+.mitem h3{font-size:1.2rem;color:var(--sc)}
+.mitem p{margin:6px 0 0;font-size:.95rem}
+.mitem .ref{font-size:.8rem;color:var(--muted);margin-top:6px}
+.foot{font-size:.82rem;color:var(--muted);padding-top:10px;border-top:2px solid var(--line)}
+
+/* Diário */
+.dtools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;background:var(--soft);border-radius:12px;padding:3px}
+.seg button{border:0;background:none;border-radius:10px;padding:6px 12px;font-weight:800;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--t-diario);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips button{flex:0 0 auto;border:2px solid color-mix(in srgb,var(--sc,var(--accent)) 45%,var(--surface));background:var(--surface);color:var(--sc,var(--ink));border-radius:999px;padding:4px 12px;font-weight:800;font-size:.85rem;white-space:nowrap}
+.chips button[aria-pressed="true"]{background:var(--sc,var(--ink));color:var(--surface);border-color:var(--sc,var(--ink))}
+.form{display:grid;gap:14px;border-color:color-mix(in srgb,var(--t-diario) 45%,var(--surface));background:color-mix(in srgb,var(--t-diario) 5%,var(--surface))}
+.form h2{font-size:1.5rem;color:var(--t-diario)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.field{display:grid;gap:4px;font-weight:800;font-size:.88rem;min-width:0}
+.field input,.field select,.field textarea{border:2px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface);font-weight:500;width:100%;min-width:0}
+.field textarea{min-height:84px;resize:vertical}
+.field .hint{font-weight:500;color:var(--muted);font-size:.8rem}
+.status{display:flex;gap:6px;flex-wrap:wrap}
+.status button{border:2px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-weight:800;font-size:.85rem}
+.status button[aria-pressed="true"][data-st="ok"]{background:var(--c-cie);border-color:var(--c-cie);color:var(--surface)}
+.status button[aria-pressed="true"][data-st="and"]{background:var(--c-geo);border-color:var(--c-geo);color:var(--surface)}
+.status button[aria-pressed="true"][data-st="rev"]{background:var(--c-his);border-color:var(--c-his);color:var(--surface)}
+.stp{border-radius:999px;padding:2px 9px;font-size:.75rem;font-weight:800;color:var(--surface)}
+.stp.ok{background:var(--c-cie)}.stp.and{background:var(--c-geo)}.stp.rev{background:var(--c-his)}
+.photobtns{display:flex;gap:8px;flex-wrap:wrap}
+.photobtns label{cursor:pointer;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:6px}
+.photobtns input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:60px;margin:0}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.thumb{background:var(--surface);border:2px solid var(--line);border-radius:12px;overflow:hidden;display:grid}
+.thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--soft)}
+.thumb .tb{padding:6px;display:grid;gap:6px}
+.thumb input{border:2px solid var(--line);border-radius:8px;padding:5px 7px;background:var(--surface);font-size:.85rem;width:100%;min-width:0}
+.thumb button{font-size:.78rem}
+.records{display:grid;gap:14px}
+.rec{background:var(--surface);border:2px solid color-mix(in srgb,var(--sc) 40%,var(--surface));border-radius:18px;overflow:hidden}
+.rec .rh{display:flex;gap:10px;align-items:center;padding:12px 14px;background:color-mix(in srgb,var(--sc) 14%,var(--surface));flex-wrap:wrap}
+.rec .rh .t{flex:1;min-width:160px}
+.rec .rh h3{font-size:1.2rem}
+.rec .rh .d{font-size:.82rem;color:var(--muted);font-weight:700}
+.rec .rb{padding:12px 14px;display:grid;gap:10px}
+.rec .lbl{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--sc)}
+.rec p{margin:2px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.strip button{flex:0 0 auto;width:120px;border:0;padding:0;background:none;text-align:left}
+.strip img{width:120px;height:90px;object-fit:cover;border-radius:10px;display:block;background:var(--soft);border:2px solid color-mix(in srgb,var(--sc) 40%,var(--surface))}
+.strip span{display:block;font-size:.75rem;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec .ra{display:flex;gap:8px;justify-content:flex-end;padding:0 14px 12px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.gitem{border:0;padding:0;background:var(--surface);border-radius:14px;overflow:hidden;text-align:left;box-shadow:0 0 0 3px var(--sc);display:grid;transform:rotate(var(--rot,0deg));transition:transform .15s}
+.gitem:hover{transform:rotate(0) scale(1.02)}
+.gitem img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--soft)}
+.gitem .gc{padding:8px;display:grid;gap:2px}
+.gitem .gc b{font-size:.85rem;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.gitem .gc small{color:var(--muted);font-size:.75rem}
+.empty{text-align:center;padding:30px 16px;display:grid;gap:10px;justify-items:center}
+.empty .art{display:flex;gap:6px}
+.empty .art i{width:18px;height:46px;border-radius:9px 9px 3px 3px;display:block}
+.notice{font-size:.85rem;border-radius:12px;padding:10px 12px;background:var(--soft);color:var(--muted)}
+.notice b{color:var(--ink)}
+
+
+/* livros */
+.bks{display:grid;gap:4px;margin-top:6px}
+.bk{display:flex;gap:6px;align-items:flex-start;font-size:.9rem;background:var(--surface);border-radius:10px;padding:6px 8px;border:1px dashed color-mix(in srgb,var(--sc,var(--accent)) 50%,var(--surface))}
+.bk svg{flex:0 0 auto;margin-top:3px;color:var(--sc,var(--accent))}
+.bk .pg{font-weight:800;color:var(--sc,var(--accent))}
+.bk .need{font-weight:700;color:var(--muted)}
+.bk.prep{background:color-mix(in srgb,var(--c-cat) 8%,var(--surface));border-color:color-mix(in srgb,var(--c-cat) 45%,var(--surface))}
+.buy{display:inline-block;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--surface);background:var(--c-his);border-radius:6px;padding:0 6px;margin-left:4px}
+.linkish{border:0;background:none;padding:0;color:var(--accent);font-weight:800;text-decoration:underline;font-size:inherit}
+.resume{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--accent) 10%,var(--surface));border:2px solid color-mix(in srgb,var(--accent) 40%,var(--surface))}
+.whobox{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.who{font-size:.85rem;color:var(--muted)}
+.tbooks{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tbooks span{font-size:.75rem;font-weight:800;border-radius:6px;padding:1px 7px;background:color-mix(in srgb,var(--sc) 18%,var(--surface));color:var(--ink)}
+.tbooks span.buy{background:color-mix(in srgb,var(--c-his) 20%,var(--surface));color:var(--ink);text-transform:none;letter-spacing:0;font-size:.75rem;margin:0}
+.shelf{font-size:1.4rem;color:var(--t-estante);display:flex;gap:8px;align-items:center}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.book{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.book .bh{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.book h3{font-size:1.15rem}
+.pill.own{background:color-mix(in srgb,var(--c-cie) 18%,var(--surface));color:var(--c-cie)}
+.got{font-size:.85rem;font-weight:800!important;color:var(--c-his);white-space:nowrap}
+.use{border-radius:12px;padding:10px;background:color-mix(in srgb,var(--sc) 8%,var(--surface));border:2px solid color-mix(in srgb,var(--sc) 28%,var(--surface));display:grid;gap:8px;font-size:.92rem}
+.ugrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px}
+.ugrid .field{font-size:.78rem}
+.ugrid input,.ugrid select{padding:6px 8px}
+.use details summary{cursor:pointer;font-weight:800;font-size:.82rem;color:var(--sc)}
+.use details .ugrid{margin-top:8px}
+.preview{font-size:.85rem;color:var(--muted)}
+.preview b{color:var(--sc)}
+/* login */
+.login{min-height:70vh;display:grid;place-items:center;padding-block:30px}
+.lcard{width:min(440px,100%);background:var(--surface);border:2px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(20,30,70,.12)}
+.lin{padding:22px;display:grid;gap:14px}
+.lin h2{font-size:2rem;font-weight:800}
+.lin h2 .l1{color:var(--c-bib)}.lin h2 .l2{color:var(--c-his)}.lin h2 .l3{color:var(--c-cie)}.lin h2 .l4{color:var(--c-lin)}
+.lform{display:grid;gap:12px}
+.lform .field input,.lform .field select{border:2px solid var(--line);border-radius:10px;padding:10px;background:var(--surface);font-size:1rem}
+.lerr{color:var(--danger);font-weight:700;font-size:.88rem}
+
+/* visualizador de foto */
+.viewer{position:fixed;inset:0;z-index:20;background:rgba(10,14,30,.72);display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.vbox{background:var(--surface);border-radius:18px;width:min(760px,100%);max-height:100%;overflow:auto;display:grid;border:4px solid var(--sc)}
+.vbox img{width:100%;max-height:60vh;object-fit:contain;background:#0B0F1E;display:block}
+.vbox .vb{padding:14px;display:grid;gap:10px}
+.vbox h3{font-size:1.3rem}
+.coms{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.coms li{background:var(--soft);border-radius:12px;padding:8px 10px;font-size:.92rem}
+.coms li small{display:block;color:var(--muted);font-size:.75rem;font-weight:700}
+.vclose{position:sticky;top:0;justify-self:end;margin:8px 8px -46px 0;z-index:1;border:0;width:38px;height:38px;border-radius:50%;background:var(--surface);font-size:1.3rem;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:12px;font-weight:700;z-index:30;max-width:calc(100% - 32px)}
+
+@media (max-width:560px){
+  .lead{font-size:1.6rem}
+  .brand h1{font-size:1.45rem}
+  .lesson{grid-template-columns:50px 1fr auto;gap:10px;padding:12px 10px}
+}
+@media (prefers-reduced-motion:reduce){.gitem{transition:none;transform:none}}
+
+/* ===== tema de estudo: menos saturação, menos contraste duro ===== */
+body{background-image:none;font-size:16.5px;line-height:1.6;font-weight:400;letter-spacing:.005em}
+h1,h2,h3{font-weight:600;letter-spacing:-.005em}
+header.top{box-shadow:none;border-bottom:1px solid var(--line)}
+.crayon{height:3px;opacity:.65}
+.brand h1{font-size:1.55rem;font-weight:600}
+.brand h1 .l1,.brand h1 .l2,.brand h1 .l3{color:var(--ink)}.brand h1 .l4{color:var(--accent);font-style:italic}
+.lin h2 .l1,.lin h2 .l2,.lin h2 .l3{color:var(--ink)}.lin h2 .l4{color:var(--accent);font-style:italic}
+.lin h2{font-weight:600}
+.sync.on{background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent)}
+.anos button{border:1px solid var(--line);color:var(--muted);font-weight:500;background:var(--surface)}
+.anos button[aria-pressed="true"]{background:color-mix(in srgb,var(--yc) 13%,var(--surface));color:var(--ink);border-color:color-mix(in srgb,var(--yc) 55%,var(--surface))}
+nav.tabs button{background:transparent;color:var(--muted);font-weight:500;border-radius:10px}
+nav.tabs button svg{color:var(--tc);opacity:.85}
+nav.tabs button[aria-selected="true"]{background:color-mix(in srgb,var(--tc) 13%,var(--surface));color:var(--ink);box-shadow:none;font-weight:600}
+nav.tabs button[aria-selected="true"] svg{opacity:1}
+.eyebrow{font-weight:600;letter-spacing:.08em}
+.lead{font-weight:600;color:var(--ink);font-size:1.85rem}
+.btn{border:1px solid var(--line);font-weight:500}
+.btn.primary{font-weight:600}
+.btn.color{background:color-mix(in srgb,var(--sc) 12%,var(--surface));border-color:color-mix(in srgb,var(--sc) 35%,var(--surface));color:var(--sc)}
+.panel{border:1px solid var(--line)}
+.banner{border:1px solid color-mix(in srgb,var(--bc,var(--accent)) 25%,var(--surface));background:color-mix(in srgb,var(--bc,var(--accent)) 7%,var(--surface))}
+.banner strong{font-weight:600}
+.pill{font-weight:600}
+.badge{background:color-mix(in srgb,var(--sc) 16%,var(--surface));color:var(--sc);font-weight:700}
+.tag{font-weight:600}
+.lesson{background:var(--surface);border:1px solid var(--line);border-left:4px solid color-mix(in srgb,var(--sc) 70%,var(--surface))}
+.lesson .time{font-weight:600}
+.lesson h3{font-weight:600}
+.lesson .what{font-weight:500}
+.lesson .reg{border:1px solid var(--line);font-weight:600}
+.lesson.break{background:var(--soft);border-left-color:var(--line)}
+.chk{border-width:2px;border-color:color-mix(in srgb,var(--sc,var(--accent)) 60%,var(--surface));border-radius:7px}
+.habit{background:color-mix(in srgb,var(--c-geo) 6%,var(--surface));border-color:color-mix(in srgb,var(--c-geo) 22%,var(--surface))}
+.habit .seal{background:color-mix(in srgb,var(--c-geo) 18%,var(--surface));color:var(--c-geo);transform:none;font-weight:600}
+.weekbar button{border:1px solid var(--line);font-weight:600}
+.weekbar button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.weekbar button .prog i{background:var(--accent)}
+.termsel button{border:1px solid var(--line);font-weight:600}
+.termsel button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 14%,var(--surface));color:var(--ink);border-color:color-mix(in srgb,var(--accent) 45%,var(--surface))}
+.progress i{background:var(--accent)}
+.card{border:1px solid var(--line);border-top:4px solid color-mix(in srgb,var(--sc) 65%,var(--surface))}
+.card .head{background:transparent;border-bottom:1px solid var(--line)}
+.card .assign{font-weight:600}
+.scroll{border:1px solid var(--line)}
+table.ov th,table.ov td{border-bottom:1px solid var(--line)}
+table.ov td{border-left:1px solid var(--line);background:var(--surface)}
+table.ov th[scope=row]{background:color-mix(in srgb,var(--sc) 8%,var(--surface));box-shadow:inset 4px 0 0 color-mix(in srgb,var(--sc) 65%,var(--surface))}
+table.ov thead th:nth-child(n){color:var(--ink)}
+table.ov td .r{font-weight:600}
+.tt td.c{background:color-mix(in srgb,var(--sc) 9%,var(--surface))}
+.cal .y{border:1px solid var(--line);border-top:4px solid color-mix(in srgb,var(--yc) 60%,var(--surface))}
+.cal .y h3{color:var(--ink)}
+.cal .y.now{box-shadow:0 0 0 2px color-mix(in srgb,var(--yc) 50%,var(--surface))}
+.cal .t{border-left:3px solid var(--line)}
+.principles .panel{background:var(--surface);border-color:var(--line);border-top:3px solid color-mix(in srgb,var(--sc) 60%,var(--surface))}
+.principles .panel h3{color:var(--ink)}
+.mitem{border:1px solid var(--line)}
+.mitem h3{color:var(--ink)}
+.form{border-color:var(--line);background:var(--surface)}
+.form h2{color:var(--ink)}
+.field{font-weight:600}
+.field input,.field select,.field textarea{border:1px solid var(--line);font-weight:400}
+.chips button{border:1px solid var(--line);color:var(--muted);font-weight:500;background:var(--surface)}
+.chips button[aria-pressed="true"]{background:color-mix(in srgb,var(--sc,var(--accent)) 14%,var(--surface));color:var(--ink);border-color:color-mix(in srgb,var(--sc,var(--accent)) 50%,var(--surface))}
+.seg button[aria-pressed="true"]{color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.status button{border:1px solid var(--line);font-weight:500}
+.status button[aria-pressed="true"][data-st]{color:var(--ink)}
+.status button[aria-pressed="true"][data-st="ok"]{background:color-mix(in srgb,var(--c-cie) 18%,var(--surface));border-color:color-mix(in srgb,var(--c-cie) 50%,var(--surface))}
+.status button[aria-pressed="true"][data-st="and"]{background:color-mix(in srgb,var(--c-geo) 18%,var(--surface));border-color:color-mix(in srgb,var(--c-geo) 50%,var(--surface))}
+.status button[aria-pressed="true"][data-st="rev"]{background:color-mix(in srgb,var(--c-his) 18%,var(--surface));border-color:color-mix(in srgb,var(--c-his) 50%,var(--surface))}
+.stp{color:var(--ink);font-weight:600}
+.stp.ok{background:color-mix(in srgb,var(--c-cie) 20%,var(--surface))}.stp.and{background:color-mix(in srgb,var(--c-geo) 20%,var(--surface))}.stp.rev{background:color-mix(in srgb,var(--c-his) 20%,var(--surface))}
+.rec{border:1px solid var(--line);border-left:4px solid color-mix(in srgb,var(--sc) 65%,var(--surface))}
+.rec .rh{background:transparent;border-bottom:1px solid var(--line)}
+.rec .lbl{font-weight:600}
+.thumb{border:1px solid var(--line)}
+.strip img{border:1px solid var(--line)}
+.gitem{transform:none;box-shadow:0 0 0 1px var(--line);border-top:4px solid color-mix(in srgb,var(--sc) 65%,var(--surface))}
+.gitem:hover{transform:translateY(-2px)}
+.vbox{border:1px solid var(--line);border-top:5px solid color-mix(in srgb,var(--sc) 65%,var(--surface))}
+.bk{border:1px solid var(--line);background:var(--soft)}
+.bk .pg{font-weight:600}
+.bk.prep{background:color-mix(in srgb,var(--c-cat) 6%,var(--surface));border-color:var(--line)}
+.buy{background:color-mix(in srgb,var(--c-his) 18%,var(--surface));color:var(--ink);font-weight:600}
+.resume{border:1px solid color-mix(in srgb,var(--accent) 30%,var(--surface));background:color-mix(in srgb,var(--accent) 7%,var(--surface))}
+.book{border:1px solid var(--line)}
+.use{border:1px solid var(--line);background:var(--surface);border-left:3px solid color-mix(in srgb,var(--sc) 60%,var(--surface))}
+.shelf{color:var(--ink);font-weight:600}
+.pill.own{background:color-mix(in srgb,var(--c-cie) 15%,var(--surface));color:var(--ink)}
+.got{color:var(--muted)}
+.tbooks span{background:var(--soft);font-weight:500}
+.tbooks span.buy{background:color-mix(in srgb,var(--c-his) 14%,var(--surface))}
+.lcard{border:1px solid var(--line);box-shadow:0 8px 24px rgba(30,40,35,.08)}
+.lform .field input,.lform .field select{border:1px solid var(--line)}
+.toast{font-weight:500}
+@media (max-width:560px){.lead{font-size:1.5rem}.brand h1{font-size:1.35rem}}
+
+/* ===== responsivo ===== */
+.wrap{max-width:1180px}
+/* computador: aulas à esquerda, apoio à direita */
+@media (min-width:1024px){
+  .v-hoje{grid-template-columns:minmax(0,1fr) 320px;align-items:start;column-gap:24px}
+  .v-hoje>*{grid-column:2}
+  .v-hoje>.today-head{grid-column:1/-1}
+  .v-hoje>.timeline{grid-column:1;grid-row:2/span 8}
+  .v-diario .form .fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cards{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .gallery{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+}
+/* tablet */
+@media (min-width:700px) and (max-width:1023px){
+  .cards,.books{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* celular: cabeçalho compacto e abas fixas embaixo, como um app */
+@media (max-width:699px){
+  header.top{position:static}
+  .brand{padding-block:10px 6px;align-items:center}
+  .brand .sub{display:none}
+  .whobox{flex-direction:row;align-items:center;gap:8px}
+  .anos button{padding:3px 11px;font-size:.88rem}
+  nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);gap:0;padding:4px max(6px,env(safe-area-inset-right,0px)) calc(4px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));box-shadow:0 -2px 10px rgba(20,30,25,.06)}
+  nav.tabs button{flex:1 0 64px;flex-direction:column;gap:2px;padding:6px 4px;font-size:.68rem;border-radius:10px;line-height:1.2;text-align:center}
+  nav.tabs button svg{width:21px;height:21px}
+  main{padding-block:16px calc(96px + env(safe-area-inset-bottom,0px))}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .lesson .reg{padding:6px 8px}
+  .lesson .reg svg{width:18px;height:18px}
+  .chk{width:30px;height:30px}
+  .datenav{width:100%}
+  .datenav input{flex:1;min-width:0}
+  .today-head .btn{padding:8px 12px}
+  .books,.cards{grid-template-columns:minmax(0,1fr)}
+  .viewer{align-items:end;padding:0}
+  .vbox{border-radius:18px 18px 0 0;max-height:92vh}
+}
+</style>
+
+<header class="top">
+  <div class="crayon" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="brand">
+      <div><h1><span class="l1">Crono</span><span class="l2">grama</span> <span class="l3">do</span> <span class="l4">Lar</span></h1>
+      <div class="sub">Educação domiciliar · 1º ao 4º ano · baseado em <i>Educação no Lar</i>, de Charlotte Mason</div></div>
+      <div class="whobox"><span class="sync" id="sync">Diário neste aparelho</span><span class="who" id="who"></span></div>
+    </div>
+    <div class="anos" id="anos" role="group" aria-label="Ano escolar"></div>
+    <nav class="tabs" id="tabs" role="tablist"></nav>
+  </div>
+</header>
+<main class="wrap" id="main"></main>
+<div id="viewer"></div>
+<div id="toast" class="toast" hidden></div>
+<script>
+(function(){
+"use strict";
+const mem={};
+const store={
+  get(k,d){try{const v=localStorage.getItem("cdl:"+k);return v==null?(k in mem?mem[k]:d):JSON.parse(v)}catch(e){return k in mem?mem[k]:d}},
+  set(k,v){mem[k]=v;try{localStorage.setItem("cdl:"+k,JSON.stringify(v))}catch(e){}}
+};
+/* ---------- matérias ---------- */
+const S={
+ bib:{n:"Bíblia",how:"Leia direto do texto bíblico, um episódio por vez. Depois, a criança narra o que ouviu.",
+   m:"Leia direto da Bíblia, nunca de paráfrases: o ritmo do texto bíblico encanta a criança e fica com ela para a vida. O Antigo Testamento é lido pelos pais (omitindo o que não convém à idade); os Evangelhos a própria criança pode ler quando já ler bem. Leia um episódio, peça a narração, converse brevemente sobre o ponto moral e, às vezes, deixe-a desenhar a cena. Entre 6 e 9 anos a criança deve conhecer as narrativas do Antigo Testamento e ao menos dois Evangelhos.",
+   ref:"Parte V, Cap. XIV – Lições Bíblicas"},
+ cat:{n:"Catecismo",how:"Poucos minutos: repita em voz alta as perguntas da semana, sem pressa e com atenção.",
+   m:"O Breve Catecismo de Westminster tem 107 perguntas, divididas em três blocos por ano (1–36, 37–72, 73–107). No 1º ano o foco é recitar; no 2º, entender com explicações e versículos-prova; no 3º, recitar e copiar as respostas (transcrição); no 4º, recitar e explicar com as próprias palavras. Assim como na recitação de poemas, a criança aprende pela repetição atenta, sem decoreba cansativa.",
+   ref:"Parte V, Cap. VII – Recitação; Apêndice B (respostas do catecismo com explicações)"},
+ his:{n:"História do Brasil",how:"Leia 2 a 3 páginas de um livro vivo e peça a narração. Escreva nomes difíceis no quadro.",
+   m:"História se aprende por livros vivos e histórias de pessoas, não por resumos secos. Leia de forma contínua um bom livro, 2 ou 3 páginas por vez, e peça a narração, sem corrigir nem completar com palavras do texto. Escreva nomes próprios difíceis no quadro e apague quando a criança disser que os vê de olhos fechados. Ilustrações feitas pela criança e uma linha do tempo na parede ajudam a fixar.",
+   ref:"Parte V, Cap. XVIII – História; Cap. IX – A Arte da Narração"},
+ lin:{n:"Linguagem e Literatura",how:"Leitura, caligrafia e narração em lições curtas. Leia o livro de literatura e peça que a criança conte de novo.",
+   m:"Leitura: primeiro os sons das letras (letras na areia), depois palavras inteiras ligadas a ideias interessantes. Narração: a partir dos 6 anos, leia uma vez e peça que a criança conte de novo, sem interromper nem corrigir; até os 9 anos, redação é narração oral. Caligrafia: lições de 5 a 10 minutos, poucas letras perfeitas por vez. Transcrição (7–8 anos): cópia lenta e bonita de versos favoritos. Ditado (8–9 anos): a criança prepara um parágrafo, ‘vê’ as palavras de olhos fechados e só então escreve. Recitação: Salmos e poemas ditos com beleza. Literatura: apenas clássicos infantis, lidos sem diluir com explicações.",
+   ref:"Parte V, Caps. IV a XIII e XIX"},
+ mat:{n:"Matemática",how:"A família escolhe o material. Use problemas pequenos e reais; demonstre com objetos.",
+   m:"A família escolhe seu material de matemática; os tópicos abaixo servem de guia de progressão. Coloque a matemática no começo da manhã, com a mente descansada. Use problemas pequenos, ao alcance da criança e ligados à vida (maçãs, moedas, receitas), em vez de longas contas. Demonstre com objetos tudo o que puder ser demonstrado. Exija exatidão: em aritmética não existe ‘quase certo’. Use os termos ‘unidades’ e ‘dezenas’ desde o início.",
+   ref:"Parte V, Cap. XV – Aritmética; Apêndices A e B"},
+ cie:{n:"Ciências",how:"Observe ao vivo. Registre no diário da natureza com desenho e uma frase.",
+   m:"Ciência começa com observação direta: saídas de campo, o quintal, a praça. Cada criança mantém um diário da natureza com desenhos a pincel (aquarela) e anotações do que viu, com data. Complementa-se com livros de naturalistas. Na filosofia natural (água, ar, luz, calor), nada deve ser ensinado sem o devido experimento simples feito pela própria criança.",
+   ref:"Parte II, Caps. I a VIII; Parte V, Cap. XVI – Filosofia Natural"},
+ geo:{n:"Geografia",how:"Comece ao ar livre ou na bandeja de areia. Use o mapa antes e depois da lição.",
+   m:"As primeiras ideias de geografia vêm ao ar livre: morros, vales, córregos e planícies da vizinhança, que a criança depois reproduz na bandeja de areia ou desenha. As definições (ilha, lago, rio) surgem da experiência, nunca decoradas. Depois vêm leituras vivas sobre povos e lugares e o uso constante de mapas: perguntas no mapa antes da lição e mapas desenhados de memória.",
+   ref:"Parte II, Cap. IX – Geografia ao Ar Livre; Parte V, Cap. XVII – Geografia"},
+ art:{n:"Artes e Artesanato",how:"Uma obra por semana: olhar em silêncio, guardar a imagem e descrever de memória.",
+   m:"Um artista por trimestre, cerca de seis obras. Mostre a obra e deixe a criança observar em silêncio por 3 a 4 minutos; retire a imagem e peça que descreva o que viu; depois converse sobre a ideia do artista e, se quiser, faça um esboço de memória em 5 minutos. Desenho com pincel a partir da natureza (galhos, folhas, aves). Trabalhos manuais lentos e bem-feitos, dentro da capacidade da criança: dobraduras, argila, costura em tela, tricô com agulhas grossas, caixas e cestos.",
+   ref:"Parte V, Cap. XXI – Arte Pictórica; Trabalhos Manuais"},
+ mus:{n:"Música",how:"Ouça uma obra do compositor várias vezes durante a semana. Cante o hino do mês.",
+   m:"Um compositor por trimestre: uma obra por semana, ouvida várias vezes, com uma breve história da vida do compositor. Cantar hinos e cantigas diariamente. O aprendizado de um instrumento é altamente recomendado, com teoria e ouvido acompanhando a prática.",
+   ref:"Parte V, Cap. XXI – Canto e Música; Apêndices A e B"},
+ ing:{n:"Inglês",how:"Oral primeiro: histórias, canções e séries de ações. Faça frases novas com as palavras.",
+   m:"O livro trata do francês, e o mesmo método serve para o inglês: primeiro o ouvido e a fala, por meio de histórias, canções e das ‘séries de ações’ de Gouin (sequências como levantar, lavar o rosto, vestir-se), dizendo cada ação enquanto se faz. A criança forma frases novas com as palavras aprendidas. Leitura e escrita só vêm depois, no 3º e 4º anos.",
+   ref:"Parte V, Cap. XX – Francês (método aplicado à língua estrangeira)"},
+ edf:{n:"Educação Física",how:"Exercícios simples, brincadeiras e muito tempo ao ar livre.",
+   m:"Exercícios físicos diários simples (como a ginástica sueca), danças e brincadeiras de roda, e longas horas ao ar livre todos os dias, em quase qualquer tempo. As tardes livres ao ar livre fazem parte do método, não são um intervalo dele.",
+   ref:"Parte II, Caps. XI e XIV; Parte III, Cap. IX; Parte V, Cap. XXI"}
+};
+const ORDER=["bib","cat","his","lin","mat","cie","geo","art","mus","ing","edf"];
+
+/* ---------- currículo ---------- */
+/* Bíblia: segmentos [livro, capítulo inicial, final] por trimestre: at (Antigo) e nt (Novo) */
+const BIB={
+ 1:[{r:"Gênesis e Mateus",at:[["Gênesis",1,17]],nt:[["Mateus",1,9]]},{r:"Gênesis e Mateus",at:[["Gênesis",18,33]],nt:[["Mateus",10,19]]},{r:"Gênesis e Mateus",at:[["Gênesis",34,50]],nt:[["Mateus",20,28]]}],
+ 2:[{r:"Êxodo e Marcos",at:[["Êxodo",1,18]],nt:[["Marcos",1,5]]},{r:"Êxodo, Números e Marcos",at:[["Êxodo",19,20],["Êxodo",24,24],["Êxodo",32,34],["Êxodo",40,40],["Números",11,14],["Números",16,17],["Números",20,24]],nt:[["Marcos",6,10]]},{r:"Deuteronômio, Josué e Marcos",at:[["Deuteronômio",34,34],["Josué",1,11],["Josué",23,24]],nt:[["Marcos",11,16]]}],
+ 3:[{r:"Juízes, Rute e Lucas",at:[["Juízes",2,8],["Juízes",13,16],["Rute",1,4]],nt:[["Lucas",1,8]]},{r:"1 Samuel e Lucas",at:[["1 Samuel",1,20]],nt:[["Lucas",9,16]]},{r:"1 e 2 Samuel e Lucas",at:[["1 Samuel",21,31],["2 Samuel",1,7]],nt:[["Lucas",17,24]]}],
+ 4:[{r:"1 Reis e João",at:[["1 Reis",1,12],["1 Reis",17,19]],nt:[["João",1,7]]},{r:"1 e 2 Reis, Jonas e João",at:[["1 Reis",21,21],["2 Reis",2,7],["Jonas",1,4]],nt:[["João",8,14]]},{r:"Daniel, Neemias e João",at:[["Daniel",1,6],["Neemias",1,6]],nt:[["João",15,21]]}]
+};
+const CATV={1:"para recitar",2:"com explicação e versículos-prova",3:"recitar e copiar as respostas",4:"recitar e explicar com as próprias palavras"};
+const CATR=[[1,36],[37,72],[73,107]];
+
+/* Demais matérias: {r: resumo do trimestre, t: tópicos semanais, x: observação} */
+const C={
+1:{
+ his:[{r:"Chegada dos portugueses ao Brasil",t:["Os povos indígenas antes de 1500","Portugal e as Grandes Navegações","A viagem de Pedro Álvares Cabral","A chegada a Porto Seguro e a Primeira Missa","A Carta de Pero Vaz de Caminha","O pau-brasil e o nome do nosso país"]},
+      {r:"Brasil colonial",t:["As capitanias hereditárias","Tomé de Sousa e o Governo-Geral","A fundação de Salvador","Os jesuítas: Nóbrega e Anchieta","A fundação de São Paulo","A fundação do Rio de Janeiro"]},
+      {r:"Brasil colonial",t:["Os engenhos de açúcar","A vida no engenho","A escravidão africana","Os franceses na baía de Guanabara","Estácio de Sá","Linha do tempo do Brasil colonial"]}],
+ lin:[{r:"Alfabetização · prática de leitura · contos de fadas · fábulas · recitação de Salmos e poemas · caligrafia",t:["Sons das letras com o dedo na areia","Primeiras palavras inteiras (gato, bola, casa)","Montar frases com palavras conhecidas","Caligrafia: letras redondas (o, a, c, d)","Fábulas de Tolstói e contos de Grimm, lidos em voz alta","Recitação: Salmo 23"],x:"Literatura do trimestre: Fábulas, de Tolstói, e Contos de Grimm."},
+      {r:"Alfabetização · prática de leitura · contos de fadas · fábulas · recitação de Salmos e poemas · caligrafia",t:["Leitura de palavras de duas sílabas","Pequenas frases lidas pela criança","Caligrafia: letras de haste (l, b, h, k)","Fábulas de Esopo: narrar cada fábula","João e Maria e Cachinhos Dourados","Recitação: Salmo 1 e um poema de Olavo Bilac (Poesias Infantis)"],x:"Literatura do trimestre: Fábulas de Esopo, O Leão e o Camundongo, João e Maria e Cachinhos Dourados."},
+      {r:"Alfabetização · prática de leitura · contos de fadas · fábulas · recitação de Salmos e poemas · caligrafia",t:["Leitura de pequenos textos","Caligrafia: letras que descem (g, j, p, q)","Leitura em voz alta: meia página por dia","Os 77 Melhores Contos de Andersen","Narração dos contos ouvidos","Recitação: Salmo 100 e Salmo 121"],x:"Literatura do trimestre: Os 77 Melhores Contos de Andersen (contos 1 a 25). Leitura de sexta: O Pato e o Sapo."}],
+ mat:[{r:"A família deve escolher seu material de matemática",t:["Contar objetos até 20","Ler e escrever números até 20","Juntar e separar com objetos","Problemas orais curtos","Unidades e dezenas com palitos"]},
+      {r:"A família deve escolher seu material de matemática",t:["Números até 100","Adição e subtração até 20","Dobro e metade","Moedas e notas","Problemas orais do dia a dia"]},
+      {r:"A família deve escolher seu material de matemática",t:["Contar de 2 em 2, de 5 em 5, de 10 em 10","Adição e subtração até 100 com objetos","Horas inteiras no relógio","Medidas: palmo, passo e metro","Revisão com problemas orais"]}],
+ cie:[{r:"Hábitos dos animais · observação dos animais",t:["Formigas e minhocas do quintal","Aves que visitam a casa","Animais domésticos e seus hábitos","Borboletas e lagartas","Como os animais se alimentam","Desenhar um animal no diário da natureza"]},
+      {r:"Hábitos dos animais · observação dos animais",t:["Animais da fazenda","Sapos, rãs e girinos","Abelhas e o mel","Ninhos e tocas","Animais da noite","Caramujos e lesmas"]},
+      {r:"Plantas · observação de plantas",t:["Partes da planta","Plantar um feijão e observar","Flores do jardim","Árvores da vizinhança: folhas e cascas","Frutos e sementes","Uma planta por semana no diário"]}],
+ geo:[{r:"Conceitos básicos em geografia · crianças de outros povos",t:["Dia e noite: o sol nasce e se põe","Rio, lago e ilha observados ao ar livre","Morro, vale e planície na bandeja de areia","Crianças do Japão","Crianças das terras geladas (inuítes)","Crianças da África"]},
+      {r:"Conceitos básicos em geografia · crianças de outros povos",t:["Chuva, nuvens e estações","O mar, a praia e as marés","Crianças da Holanda","Crianças da China","Crianças indígenas da Amazônia","Crianças do deserto"]},
+      {r:"Lateralidade e localização · elaboração de mapas",t:["Direita e esquerda, frente e atrás","Perto e longe, em cima e embaixo","O quarto visto de cima","Mapa da casa","O caminho de casa até a igreja","Nascente e poente: o sol mostra as direções"]}],
+ art:[{r:"Vida e obra de Victor Meirelles · desenho · dobraduras",t:["Quem foi Victor Meirelles","A Primeira Missa no Brasil","Moema","Batalha dos Guararapes","Combate Naval do Riachuelo","Passagem de Humaitá"],x:"Artesanato: dobraduras simples (barco, chapéu, avião). Desenho livre do que observou."},
+      {r:"Vida e obra de Van Gogh · desenho · dobraduras",t:["Quem foi Van Gogh","Os Girassóis","A Noite Estrelada","O Quarto em Arles","Amendoeira em Flor","Terraço do Café à Noite"],x:"Artesanato: dobraduras de animais. Desenho com giz de cera de flores."},
+      {r:"Vida e obra de Leonardo da Vinci · desenho · aquarela",t:["Quem foi Leonardo da Vinci","A Última Ceia","A Anunciação","Mona Lisa","Dama com Arminho","Os cadernos de invenções"],x:"Artesanato: primeiras aquarelas de folhas e flores."}],
+ mus:[{r:"Vida e obra de Mozart · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Mozart, o menino prodígio","Pequena Serenata Noturna","Variações sobre ‘Brilha, brilha, estrelinha’","Marcha Turca","A Flauta Mágica: ária de Papageno","Sinfonia nº 40 (1º movimento)"]},
+      {r:"Vida e obra de Beethoven · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Beethoven","Für Elise","Sinfonia nº 5 (início)","Sinfonia Pastoral","Sonata ao Luar","Ode à Alegria (Sinfonia nº 9)"]},
+      {r:"Vida e obra de Villa-Lobos · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Villa-Lobos","O Trenzinho do Caipira","Cirandas: cantigas de roda","Bachianas Brasileiras nº 5 (Ária)","A Prole do Bebê","Guia Prático: cantar as cantigas"]}],
+ ing:[{r:"Vocabulário através de histórias",t:["Greetings: hello, goodbye, thank you","Colors","Numbers 1–10","My family","Head, shoulders, knees and toes","Animals"]},
+      {r:"Vocabulário através de histórias",t:["Fruits and food","Clothes","Weather","Days of the week","Rooms of the house","Toys"]},
+      {r:"Vocabulário através de histórias",t:["Nature: tree, flower, bird","Action series: I get up, I wash, I dress","Feelings","Numbers 11–20","Story: The Three Little Pigs","Songs and rhymes review"]}]
+},
+2:{
+ his:[{r:"Brasil colonial: o açúcar e os holandeses",t:["O açúcar no Nordeste","Os holandeses em Pernambuco","Maurício de Nassau e o Recife","A Insurreição Pernambucana","As Batalhas dos Guararapes","O Quilombo dos Palmares"]},
+      {r:"Bandeirantes e o ouro",t:["Entradas e bandeiras","Fernão Dias, o caçador de esmeraldas","A descoberta do ouro em Minas","Vila Rica e as cidades do ouro","Aleijadinho e o barroco mineiro","A Estrada Real"]},
+      {r:"O fim do período colonial",t:["A capital muda para o Rio de Janeiro","Tiradentes e a Inconfidência Mineira","A Conjuração Baiana","Napoleão e a vinda da Família Real","D. João no Rio de Janeiro","Linha do tempo: 1500 a 1808"]}],
+ lin:[{r:"Leitura fluente · narração oral · início da transcrição · letra cursiva · contos de Andersen · recitação",t:["Leitura em voz alta pela criança: 1 página","Narração oral após cada leitura","Letra cursiva: duas letras por lição","Transcrição lenta de uma frase bonita","Contos de Andersen","Recitação: Salmo 8 e poemas de A Arca de Noé"],x:"Literatura do trimestre: Os 77 Melhores Contos de Andersen (contos 26 a 50). Leitura: Coleção O Pequeno Pescador."},
+      {r:"Leitura · narração · transcrição · letra cursiva · Pinóquio · recitação",t:["Ler sozinha um capítulo curto","Narrar capítulo por capítulo","Transcrição de um verso favorito","Ver a palavra de olhos fechados (ortografia)","As Aventuras de Pinóquio","Recitação: Salmo 19 e Poesias Infantis de Olavo Bilac"],x:"Literatura do trimestre: As Aventuras de Pinóquio (Collodi)."},
+      {r:"Leitura · narração · transcrição · letra cursiva · Stuart Little · recitação",t:["Leitura em voz alta com expressão","Narração de capítulos inteiros","Caderno de versos favoritos transcritos","Palavras difíceis no quadro","Stuart Little, de E. B. White","Recitação: Salmo 91"],x:"Literatura do trimestre: Stuart Little, de E. B. White."}],
+ mat:[{r:"A família deve escolher seu material de matemática",t:["Unidades, dezenas e centenas","Números até 1000","Adição com reagrupamento (com material)","Subtração com reagrupamento","Problemas de duas etapas"]},
+      {r:"A família deve escolher seu material de matemática",t:["Tabuada do 2 e do 10","Tabuada do 5","Multiplicação como soma de parcelas iguais","Compras e troco","Calendário: dias, semanas, meses"]},
+      {r:"A família deve escolher seu material de matemática",t:["Tabuada do 3 e do 4","Divisão como repartir","Metade, terço e quarto","Horas e meias horas","Metro, quilo e litro"]}],
+ cie:[{r:"Aves: observar e descrever doze pássaros",t:["Sabiá-laranjeira","Bem-te-vi","João-de-barro e seu ninho","Beija-flor","Pardal e rolinha","Tico-tico","Quero-quero","Canário-da-terra","Coruja-buraqueira","Garça e anu","Sanhaço e revisão das aves"],x:"Como no livro: registrar no diário e descrever doze pássaros, observando tudo o que puder sobre eles."},
+      {r:"Insetos e pequenos animais",t:["Formigas: o formigueiro","Abelhas e vespas","Joaninhas","Grilos e gafanhotos","Aranhas e suas teias","Libélulas e o brejo","Vaga-lumes"]},
+      {r:"Árvores e flores",t:["Ipê: uma árvore ao longo das estações","Mangueira e seus frutos","Folhas: formas e nervuras","Cascas e raízes","Sementes que voam","Flores do campo","Herbário: prensar folhas"]}],
+ geo:[{r:"Geografia ao ar livre: o lugar onde moro",t:["A rua e o bairro","Pontos cardeais pelo sol","A rosa dos ventos","Planta da casa","Mapa do bairro","Rios e córregos da região"]},
+      {r:"Minha cidade e meu estado",t:["A cidade e seus serviços","Campo e cidade","O mapa do meu estado","Relevo e rios do estado","Os trabalhos da região","Bandeira e símbolos do estado"]},
+      {r:"O Brasil e suas regiões",t:["O mapa do Brasil","Região Norte e a floresta","Região Nordeste e o sertão","Região Centro-Oeste e o Pantanal","Região Sudeste","Região Sul e as araucárias"]}],
+ art:[{r:"Vida e obra de Frans Post (Brasil holandês) · desenho com pincel · argila",t:["Quem foi Frans Post","Vista de Itamaracá","Paisagem com tamanduá","Engenho de açúcar","Ruínas da Sé de Olinda","Vista do rio São Francisco"],x:"Artesanato: modelagem em argila de animais e frutos."},
+      {r:"Vida e obra de Millet · desenho com pincel · costura",t:["Quem foi Millet","O Ângelus","As Respigadoras","O Semeador","Primeiros Passos","A Lição de Tricô"],x:"Artesanato: pontos de costura em tela grossa com lã (o livro cita Millet na avaliação de 7 anos)."},
+      {r:"Vida e obra de Rembrandt · desenho com pincel · tecelagem",t:["Quem foi Rembrandt","A Tempestade no Mar da Galileia","O Retorno do Filho Pródigo","A Ronda Noturna","Autorretrato","O Moinho"],x:"Artesanato: tecelagem de um pequeno tapete em tear de papelão."}],
+ mus:[{r:"Vida e obra de Bach · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Bach","Jesus, alegria dos homens","Minueto em Sol (Caderno de Anna Magdalena)","Ária na corda Sol","Concerto de Brandemburgo nº 3","Tocata e Fuga em Ré menor"]},
+      {r:"Vida e obra de Handel · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Handel","Aleluia (O Messias)","Música Aquática","Largo (Xerxes)","O Ferreiro Harmonioso","Chegada da Rainha de Sabá"]},
+      {r:"Vida e obra de Carlos Gomes · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Carlos Gomes","O Guarani: abertura","Quem sabe? (modinha)","Lo Schiavo: Alvorada","Salvator Rosa: abertura","Cantar o Hino Nacional e o Hino à Bandeira"]}],
+ ing:[{r:"Vocabulário através de histórias e séries de ações",t:["Classroom words","Numbers 1–20","My house","Action series: getting up","Pets","Story: The Little Red Hen"]},
+      {r:"Vocabulário através de histórias e séries de ações",t:["Fruits and vegetables","Shapes and sizes","In, on, under","Action series: washing hands","Farm animals","Story: Goldilocks and the Three Bears"]},
+      {r:"Vocabulário através de histórias e séries de ações",t:["Seasons and weather","Telling time: o’clock","Clothes for each season","Action series: planting a seed","Jobs","Story: The Gingerbread Man"]}]
+},
+3:{
+ his:[{r:"A Família Real e a Independência",t:["D. João VI e as mudanças no Rio","A abertura dos portos","Reino Unido de Portugal, Brasil e Algarves","A Revolução Pernambucana de 1817","D. Pedro e o Dia do Fico","7 de setembro de 1822"]},
+      {r:"Primeiro Reinado e Regências",t:["D. Pedro I, imperador","A Constituição de 1824","Maria Leopoldina","A abdicação de D. Pedro I","O período regencial","A Revolução Farroupilha"]},
+      {r:"Segundo Reinado",t:["D. Pedro II, o menino imperador","O imperador estudioso","O café e as ferrovias","A Guerra do Paraguai","A chegada dos imigrantes","Princesa Isabel e a Lei Áurea"]}],
+ lin:[{r:"Transcrição · ditado preparado · narração oral e primeiras narrações escritas · O Peregrino (adaptação infantil) · recitação",t:["Transcrição de versos favoritos","Ditado preparado: 1 parágrafo","Primeiras narrações escritas (3 frases)","Ortografia: ver a palavra de olhos fechados","O Peregrino (adaptação infantil)","Recitação: Salmo 46"],x:"Literatura do trimestre: O Peregrino, de John Bunyan (adaptação infantil), lido no apêndice A do livro."},
+      {r:"Transcrição · ditado · narração escrita · gramática inicial · Robinson Crusoé · recitação",t:["Ditado preparado: 1 parágrafo","Narração escrita curta (1 por semana)","Gramática: o que é um substantivo","Gramática: o que é um verbo","Robinson Crusoé (adaptação)","Recitação: Salmo 103 e ‘Meus Oito Anos’ (Casimiro de Abreu)"],x:"Literatura do trimestre: Robinson Crusoé, de Daniel Defoe."},
+      {r:"Transcrição · ditado · narração escrita · gramática inicial · mitos gregos · recitação",t:["Ditado preparado: 2 parágrafos","Narração escrita de uma história","Gramática: adjetivos","Transcrição para o caderno de versos","Mitos gregos para crianças (Hawthorne)","Recitação: Salmo 139 (v. 1–14)"],x:"Literatura do trimestre: Os 77 Melhores Contos de Andersen (contos 51 a 77) e Mitos gregos para crianças, de Nathaniel Hawthorne (o livro cita Tanglewood Tales)."}],
+ mat:[{r:"A família deve escolher seu material de matemática",t:["Tabuada do 6 e do 7","Multiplicação por um algarismo","Problemas com as quatro operações","Números até 10 000","Aritmética mental, 5 minutos em dias alternados"]},
+      {r:"A família deve escolher seu material de matemática",t:["Tabuada do 8 e do 9","Divisão com resto","Problemas de compra e troco","Quilômetro, metro e centímetro","Perímetro com régua"]},
+      {r:"A família deve escolher seu material de matemática",t:["Tabuada até 12 × 12","Multiplicação por dois algarismos","Frações: metade, terço, quarto, quinto","Massa e capacidade","Problemas de vários passos"]}],
+ cie:[{r:"A água e o ar",t:["O ciclo da água","Evaporação: a experiência do pires","Flutuar e afundar","O ar ocupa espaço: a experiência do copo","Vento e cata-vento","Pluviômetro caseiro"]},
+      {r:"Rochas, solo e o tempo",t:["As pedras da região","O solo e as minhocas","A água como escultora: erosão","Vulcões e terremotos","Termômetro e temperatura","Diário do tempo"]},
+      {r:"O céu",t:["O Sol, nossa estrela","As fases da Lua","O Cruzeiro do Sul","Planetas visíveis a olho nu","Dia e noite: a Terra gira","As estações do ano"]}],
+ geo:[{r:"Brasil: estados e capitais · mapas de memória",t:["O mapa do Brasil de memória","Estados do Norte","Estados do Nordeste","Estados do Centro-Oeste","Estados do Sudeste e do Sul","Brasília, a capital"]},
+      {r:"Biomas brasileiros",t:["Amazônia","Cerrado","Caatinga","Mata Atlântica","Pantanal","Pampa"]},
+      {r:"Rios, relevo e litoral do Brasil",t:["O rio Amazonas","O rio São Francisco","O rio Paraná e as Cataratas do Iguaçu","Planaltos e planícies","Serra do Mar e Mantiqueira","O litoral e as ilhas"]}],
+ art:[{r:"Vida e obra de Pedro Américo · desenho com pincel · cestaria",t:["Quem foi Pedro Américo","Independência ou Morte!","Fala do Trono","A Carioca","Paz e Concórdia","Moisés e Jocabed"],x:"Artesanato: cestinhos e caixas de papel cartão."},
+      {r:"Vida e obra de Debret · desenho com pincel · costura",t:["Quem foi Debret","Coroação de D. Pedro I","Aclamação de D. Pedro I","Um jantar brasileiro","Vendedores de rua do Rio","Engenho de mandioca"],x:"Artesanato: bordado fácil em pano de prato."},
+      {r:"Vida e obra de Monet · aquarela ao ar livre · tricô",t:["Quem foi Monet","Impressão, nascer do sol","A Ponte Japonesa","Ninfeias","Mulher com sombrinha","Os Montes de Feno"],x:"Artesanato: tricô com agulhas grossas (um cachecol de boneca)."}],
+ mus:[{r:"Vida e obra de Haydn · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Haydn","Sinfonia Surpresa","Sinfonia do Relógio","Concerto para trompete (3º mov.)","A Criação: ‘Os céus proclamam’","Sinfonia do Adeus"]},
+      {r:"Vida e obra de Vivaldi · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Vivaldi","A Primavera","O Verão","O Outono","O Inverno","Gloria"]},
+      {r:"Ernesto Nazareth e Chiquinha Gonzaga · o aprendizado de um instrumento é altamente recomendado",t:["Quem foram Nazareth e Chiquinha","Odeon","Brejeiro","Apanhei-te, Cavaquinho","Atraente","Ó Abre Alas"]}],
+ ing:[{r:"Vocabulário através de histórias · primeiras leituras",t:["Reading: short words","Story: The Ugly Duckling","Action series: making breakfast","My day","What? Where? Who?","A hymn in English"]},
+      {r:"Vocabulário através de histórias · primeiras leituras",t:["Story: The Lion and the Mouse","Places in town","I like / I don’t like","Action series: going to the market","Numbers to 100","Copy a short sentence"]},
+      {r:"Vocabulário através de histórias · primeiras leituras",t:["Story: The Tortoise and the Hare","Nature walk words","Big, small, fast, slow","Action series: writing a letter","My family tree","Recite a short poem"]}]
+},
+4:{
+ his:[{r:"A Proclamação da República",t:["O fim do Império","Marechal Deodoro e o 15 de Novembro","A primeira Constituição republicana","Rui Barbosa","Santos Dumont e o 14-Bis","Oswaldo Cruz e a saúde pública"]},
+      {r:"A Primeira República",t:["Café com leite","Rondon e as linhas telegráficas","Os imigrantes e as fábricas","O Brasil na Primeira Guerra","A Semana de Arte Moderna","A Revolução de 1930"]},
+      {r:"Do Brasil de Vargas até hoje",t:["Getúlio Vargas","A FEB na Segunda Guerra","JK e a construção de Brasília","Os símbolos nacionais","A Constituição de 1988","Linha do tempo: 1500 até hoje"]}],
+ lin:[{r:"Ditado preparado · narração escrita · gramática · Contos de Shakespeare · recitação",t:["Ditado: preparar 1 página, ditar 1 parágrafo","Narração escrita semanal","Gramática: substantivo, verbo e adjetivo","Transcrição de passagens favoritas","Contos de Shakespeare (Charles e Mary Lamb)","Recitação: Salmo 27"],x:"Literatura do trimestre: Contos de Shakespeare, de Charles e Mary Lamb."},
+      {r:"Ditado · narração escrita · gramática · Plutarco · recitação",t:["Ditado de memória de um parágrafo","Narração escrita de Plutarco","Gramática: sujeito e verbo","Gramática: objeto","Vidas de Plutarco: Júlio César (adaptado)","Recitação: Mateus 5.1–12 e Salmo 90"],x:"Literatura do trimestre: Vidas de Plutarco, Júlio César, omitindo o que não convém (como no apêndice B do livro)."},
+      {r:"Ditado · narração escrita · gramática · Rei Arthur · recitação",t:["Ditado preparado de 2 páginas","Narração escrita: cena favorita","Análise da frase: sujeito, verbo e objeto","Caderno de transcrições","Histórias do Rei Arthur","Recitação: Salmo 145 e João 1.1–14"],x:"Literatura do trimestre: Histórias do Rei Arthur (o livro usa A Morte d’Arthur)."}],
+ mat:[{r:"A família deve escolher seu material de matemática",t:["Números até 1 000 000","Divisão longa com problemas","Multiplicação por três algarismos","Aritmética mental, 5 minutos em dias alternados","Problemas com dinheiro"]},
+      {r:"A família deve escolher seu material de matemática",t:["Frações equivalentes","Somar e subtrair frações","Decimais e dinheiro","Horas, minutos e segundos","Gráficos simples"]},
+      {r:"A família deve escolher seu material de matemática",t:["Área e perímetro","Ângulos e figuras geométricas","Porcentagem simples: 10% e 50%","Média simples","Revisão com problemas de vários passos"]}],
+ cie:[{r:"O corpo humano e os hábitos de saúde",t:["Esqueleto e músculos","Coração e circulação","Respiração e pulmões","Digestão","Os cinco sentidos","Sono, ar puro e boa alimentação"]},
+      {r:"Luz, som e calor",t:["Luz e sombra","O prisma e o arco-íris","Espelhos e reflexos","Como o som viaja","Por que o metal parece frio","Calor e dilatação"]},
+      {r:"Máquinas simples e ímãs",t:["A alavanca: pá e gangorra","Roda e eixo","Plano inclinado","Polia","Ímãs e a bússola","Construir uma máquina simples"]}],
+ geo:[{r:"O globo e o mundo",t:["Como sabemos que a Terra é redonda","Equador e hemisférios","Os continentes","Os oceanos","Paralelos e meridianos","Mapa-múndi de memória"]},
+      {r:"As Américas",t:["Países da América do Sul","A Cordilheira dos Andes","Argentina, Chile e Uruguai","Peru e os incas","América do Norte","América Central e Caribe"]},
+      {r:"Europa, África, Ásia e Oceania",t:["Portugal e a Europa","A Terra Santa","África","China, Japão e Índia","Oceania","Lugares que aparecem nas notícias"]}],
+ art:[{r:"Vida e obra de Almeida Júnior · desenho com pincel · marcenaria simples",t:["Quem foi Almeida Júnior","Caipira Picando Fumo","O Violeiro","Leitura","Saudade","Partida da Monção"],x:"Artesanato: móveis de papelão para casa de bonecas (como no apêndice B)."},
+      {r:"Vida e obra de Michelangelo · desenho com pincel · argila",t:["Quem foi Michelangelo","A Criação de Adão","Davi","Pietà","Moisés","A cúpula de São Pedro"],x:"Artesanato: escultura em argila ou sabão."},
+      {r:"Vida e obra de Landseer · desenho de animais · costura",t:["Quem foi Landseer","Alexandre e Diógenes","O Monarca do Vale","Dignidade e Impudência","Salvo!","O Último Adeus do Velho Pastor"],x:"Artesanato: costura de cortinas e lençóis para a casa de bonecas. Landseer é o artista da aula modelo do livro."}],
+ mus:[{r:"Vida e obra de Schubert · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Schubert","Ave Maria","Sinfonia Inacabada","Quinteto A Truta","Marcha Militar","Serenata"]},
+      {r:"Vida e obra de Tchaikovsky · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Tchaikovsky","O Quebra-Nozes: Valsa das Flores","Dança da Fada Açucarada","O Lago dos Cisnes","Álbum para a Juventude","Abertura 1812"]},
+      {r:"Vida e obra de Mendelssohn · o aprendizado de um instrumento é altamente recomendado",t:["Quem foi Mendelssohn","Abertura As Hébridas","Canção da Primavera","Sonho de uma Noite de Verão","Sinfonia Italiana","Elias: ‘Se de todo o coração’"]}],
+ ing:[{r:"Vocabulário através de histórias · leitura e escrita simples",t:["Reading: The Tale of Peter Rabbit","Writing short sentences","Verbs in the present","Action series: a day at school","Describing pictures","Dictation of three words"]},
+      {r:"Vocabulário através de histórias · leitura e escrita simples",t:["Reading: Aesop’s Fables","Questions and answers","Was and were","Action series: cooking rice","My town","Recite Psalm 23 in English"]},
+      {r:"Vocabulário através de histórias · leitura e escrita simples",t:["Reading: a Bible story in English","Writing a postcard","Numbers and money","Action series: a trip","Describing animals","Narrate a story in simple English"]}]
+}};
+const EDF=[{r:"Exercícios simples · brincadeiras ao ar livre",t:["Correr, pular e equilibrar","Brincadeiras de roda","Pular corda","Ginástica simples (estilo sueco)","Jogos com bola","Caminhada na natureza"]}];
+const HAB={
+ 1:[["Atenção","Fazer uma coisa de cada vez, com toda a mente nela. Lições curtas ajudam a criança a não se distrair."],["Obediência","Obedecer de pronto e com alegria, sem precisar repetir a ordem."],["Execução perfeita","Fazer bem feito: seis letras bonitas valem mais que seis linhas desleixadas."]],
+ 2:[["Ordem","Guardar cada coisa no seu lugar; ‘feche a porta atrás de si’."],["Veracidade","Dizer as coisas exatamente como foram, sem aumentar nem diminuir."],["Pontualidade","Começar cada lição na hora; o que não é feito no seu tempo fica sem tempo."]],
+ 3:[["Aplicação","Persistir na tarefa até terminar, mesmo quando é difícil."],["Memória","Guardar o que se aprende com atenção na primeira vez."],["Cortesia","Gentileza com irmãos, pais e visitas: por favor, obrigado, com licença."]],
+ 4:[["Raciocínio","Pensar antes de responder; na aritmética, saber por que se usa cada operação."],["Imaginação","Nutrir a imaginação com bons livros e a natureza, não com excesso de telas."],["Domínio próprio","A vontade governa os desejos: escolher o que é certo mesmo sem vontade."]]
+};
+
+/* ---------- horário diário ---------- */
+/* rot: matéria por dia da semana (1=seg ... 5=sex) */
+const TT={
+ A:{label:"1º e 2º ano (6–7 anos)",end:"10:30",slots:[
+  {h:"08:00",m:20,k:"bib",l:"Abertura: oração, hino e Bíblia"},
+  {h:"08:20",m:20,k:"mat",l:"Matemática"},
+  {h:"08:40",m:10,k:"lin",l:"Caligrafia",tip:"Poucas letras, perfeitas. Terminou bem antes? O tempo que sobra é dela."},
+  {h:"08:50",m:15,k:"lin",l:"Leitura",tip:"A criança lê em voz alta; palavras novas no quadro."},
+  {h:"09:05",m:15,k:"pau",l:"Intervalo: lanche e movimento"},
+  {h:"09:20",m:20,rot:{1:"his",2:"cie",3:"geo",4:"his",5:"cie"}},
+  {h:"09:40",m:10,k:"cat",l:"Catecismo e recitação",tip:"Repita as perguntas da semana e o Salmo/poema do trimestre."},
+  {h:"09:50",m:20,rot:{1:"ing",2:"mus",3:"art",4:"ing",5:"art"},alt:{5:"Artesanato"}},
+  {h:"10:10",m:20,k:"lin",l:"Literatura e narração",tip:"Leia um episódio do livro do trimestre e peça a narração."}
+ ]},
+ B:{label:"3º e 4º ano (8–9 anos)",end:"11:10",slots:[
+  {h:"08:00",m:20,k:"bib",l:"Abertura: oração, hino e Bíblia"},
+  {h:"08:20",m:25,k:"mat",l:"Matemática",tip:"Em dias alternados, 5 minutos de cálculo mental."},
+  {h:"08:45",m:15,k:"lin",l:"Transcrição ou ditado",alt:{1:"Transcrição",2:"Ditado preparado",3:"Transcrição",4:"Ditado preparado",5:"Transcrição"}},
+  {h:"09:00",m:25,rot:{1:"his",2:"geo",3:"cie",4:"his",5:"geo"}},
+  {h:"09:25",m:10,k:"cat",l:"Catecismo e recitação"},
+  {h:"09:35",m:15,k:"pau",l:"Intervalo: lanche e movimento"},
+  {h:"09:50",m:20,rot:{1:"ing",2:"lin",3:"ing",4:"lin",5:"ing"},alt:{2:"Gramática",4:"Gramática"}},
+  {h:"10:10",m:20,rot:{1:"mus",2:"art",3:"mus",4:"art",5:"cie"},alt:{4:"Artesanato",5:"Ciências: experimento"}},
+  {h:"10:30",m:25,k:"lin",l:"Literatura e narração",tip:"Às sextas, narração escrita."},
+  {h:"10:55",m:15,k:"edf",l:"Educação física"}
+ ]}
+};
+const AFTER={
+ 1:["Tarde livre ao ar livre (pelo menos 1 a 2 horas)","Educação física: brincadeiras e jogos com bola"],
+ 2:["Saída de campo e diário da natureza","Leitura livre ou leitura em família"],
+ 3:["Trabalhos manuais (artesanato do trimestre)","Educação física: pular corda, correr"],
+ 4:["Saída de campo e diário da natureza","Prática do instrumento musical"],
+ 5:["Tarde livre ao ar livre","Leitura em família: o livro de literatura ou uma biografia"]
+};
+const DAYN=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+
+/* ---------- cálculo semanal ---------- */
+function bibleWeek(ano,t,w){
+  const T=BIB[ano][t-1];
+  const chunk=segs=>{
+    const list=[];segs.forEach(([b,a,z])=>{for(let c=a;c<=z;c++)list.push([b,c])});
+    const n=list.length,s=Math.floor((w-1)*n/11),e=Math.max(s+1,Math.floor(w*n/11));
+    return fmtRange(list.slice(s,Math.min(e,n)));
+  };
+  return {at:chunk(T.at),nt:chunk(T.nt)};
+}
+function fmtRange(items){
+  if(!items.length)return "revisão";
+  const groups=[];
+  items.forEach(([b,c])=>{const g=groups[groups.length-1];if(g&&g.b===b&&g.z===c-1)g.z=c;else groups.push({b,a:c,z:c})});
+  const out=[];let last=null;
+  groups.forEach(g=>{const r=g.a===g.z?""+g.a:g.a+"–"+g.z;if(g.b===last)out[out.length-1]+=", "+r;else{out.push(g.b+" "+r);last=g.b}});
+  return out.join("; ");
+}
+function catWeek(t,w){
+  const [a,z]=CATR[t-1],n=z-a+1;
+  const s=a+Math.floor((w-1)*n/11),e=a+Math.floor(w*n/11)-1;
+  return e<=s?"Pergunta "+s:"Perguntas "+s+" a "+e;
+}
+function termData(ano,k,t){
+  if(k==="bib")return {r:BIB[ano][t-1].r};
+  if(k==="cat"){const [a,z]=CATR[t-1];return {r:"Catecismo de Westminster, perguntas "+a+" a "+z+" "+CATV[ano]}}
+  if(k==="edf")return EDF[0];
+  return C[ano][k][t-1];
+}
+function topicOf(list,w){return list[Math.min(list.length-1,Math.floor((w-1)*list.length/11))]}
+function assignment(ano,k,t,w){
+  if(k==="bib"){const b=bibleWeek(ano,t,w);return {main:"AT: "+b.at,sub:"NT: "+b.nt}}
+  if(k==="cat"){return {main:catWeek(t,w),sub:CATV[ano][0].toUpperCase()+CATV[ano].slice(1)}}
+  const d=termData(ano,k,t);
+  return {main:topicOf(d.t,w),sub:d.x||""};
+}
+
+/* ---------- calendário ---------- */
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function parseISO(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function mondayOnOrAfter(d){const x=new Date(d);while(x.getDay()!==1)x.setDate(x.getDate()+1);return x}
+function fmt(d,o){return d.toLocaleDateString("pt-BR",o||{day:"2-digit",month:"short"}).replace(".","")}
+function settings(){return {start:store.get("start","2027-02-01"),ano0:store.get("ano0",1),julho:store.get("julho",true)}}
+function yearPlan(ano){
+  const st=settings();const base=parseISO(st.start);
+  const yOff=ano-st.ano0;
+  const s0=mondayOnOrAfter(yOff===0?base:new Date(base.getFullYear()+yOff,base.getMonth(),base.getDate()));
+  const terms=[];let cur=s0;
+  for(let t=1;t<=3;t++){
+    if(t===3&&st.julho)cur=addDays(cur,14);
+    terms.push({t,start:cur,instrEnd:addDays(cur,7*11-3),restStart:addDays(cur,77),end:addDays(cur,7*12-3)});
+    cur=addDays(cur,84);
+  }
+  return {ano,start:s0,end:terms[2].end,terms};
+}
+function locate(date){
+  const d=new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  for(let ano=1;ano<=4;ano++){
+    const p=yearPlan(ano);
+    for(const T of p.terms){
+      const last=addDays(T.start,83);
+      if(d>=T.start&&d<=last){const w=Math.floor((d-T.start)/864e5/7)+1;return {ano,t:T.t,w,dow:d.getDay(),plan:p}}
+    }
+    if(d>=p.start&&d<=p.end)return {ano,gap:true,plan:p,dow:d.getDay()};
+  }
+  return null;
+}
+
+/* ---------- livros da família ---------- */
+/* uses: ano, t (trimestre), k (matéria), slot (parte do nome da aula), w [semana inicial, final], days (1=seg..5=sex), unit, def [início, fim], txt (texto fixo) */
+const BOOKS=[
+ {id:"mh",n:"Comentário Bíblico",a:"Matthew Henry",own:1,mh:1,uses:[]},
+ {id:"estrela",n:"Coleção Estrela D’Alva",a:"Frans Hopp",own:1,uses:[{ano:1,t:1,k:"bib",w:[1,11],days:[5],unit:"volumes",txt:"História complementar de sexta"}]},
+ {id:"fonico",n:"Alfabetização: Método Fônico",a:"Alessandra Capovilla",own:1,uses:[{ano:1,t:1,k:"lin",slot:"Leitura",w:[1,11],unit:"páginas"},{ano:1,t:2,k:"lin",slot:"Leitura",w:[1,11],unit:"páginas"},{ano:1,t:3,k:"lin",slot:"Leitura",w:[1,11],unit:"páginas"}]},
+ {id:"tolstoi",n:"Fábulas",a:"Liev Tolstói",own:1,uses:[{ano:1,t:1,k:"lin",slot:"Literatura",w:[1,11],unit:"páginas"}]},
+ {id:"andersen",n:"Os 77 Melhores Contos",a:"Hans Christian Andersen",own:1,uses:[{ano:1,t:3,k:"lin",slot:"Literatura",w:[1,11],unit:"contos",def:[1,25]},{ano:2,t:1,k:"lin",slot:"Literatura",w:[1,11],unit:"contos",def:[26,50]},{ano:3,t:3,k:"lin",slot:"Literatura",w:[1,11],unit:"contos",def:[51,77]}]},
+ {id:"colombo",n:"Cristóvão Colombo",a:"Mina Lacey",own:1,uses:[{ano:1,t:1,k:"his",w:[2,4],unit:"páginas"}]},
+ {id:"nossahist",n:"Vamos Conhecer Nossa História",a:"",own:1,uses:[{ano:1,t:1,k:"his",w:[1,11],unit:"páginas"},{ano:1,t:2,k:"his",w:[1,11],unit:"páginas"},{ano:1,t:3,k:"his",w:[1,11],unit:"páginas"}]},
+ {id:"truques",n:"Coleção Truques, Artes e Manhas dos Animais",a:"",own:1,uses:[{ano:1,t:1,k:"cie",w:[1,11],unit:"volumes"},{ano:1,t:2,k:"cie",w:[5,11],unit:"volumes"}]},
+ {id:"arvores",n:"O que Devemos Saber Sobre Árvores",a:"Luiz Fernandes",own:1,uses:[{ano:1,t:3,k:"cie",w:[1,11],unit:"páginas"}]},
+ {id:"balao",n:"Coleção Viajando em um Balão",a:"Kate Petty",own:1,uses:[{ano:1,t:3,k:"geo",w:[1,11],unit:"volumes"}]},
+ {id:"pescador",n:"Coleção O Pequeno Pescador",a:"Bastos Freitas",own:1,uses:[{ano:2,t:1,k:"lin",slot:"Leitura",w:[1,11],unit:"volumes"}]},
+ {id:"berger",n:"Coleção Vamos Ler e Descobrir",a:"Melvin Berger",own:1,uses:[{ano:2,t:1,k:"cie",w:[1,11],days:[5],unit:"volumes"},{ano:2,t:2,k:"cie",w:[1,11],days:[5],unit:"volumes"},{ano:2,t:3,k:"cie",w:[1,11],days:[5],unit:"volumes"}]},
+ {id:"esmeraldas",n:"A Bandeira das Esmeraldas",a:"Viriato Corrêa",own:1,uses:[{ano:2,t:2,k:"his",w:[1,11],unit:"páginas"}]},
+ {id:"pedro2",n:"Dom Pedro II",a:"Bia Bernardes",own:1,uses:[{ano:3,t:3,k:"his",w:[1,11],unit:"páginas"}]},
+
+ {id:"esopo",n:"Fábulas de Esopo",a:"",own:0,uses:[{ano:1,t:2,k:"lin",slot:"Literatura",w:[1,5],unit:"páginas"}]},
+ {id:"leao",n:"O Leão e o Camundongo",a:"Jerry Pinkney",own:0,uses:[{ano:1,t:2,k:"lin",slot:"Literatura",w:[6,6],unit:"páginas",txt:"Livro de imagens: a criança conta a história olhando as figuras"}]},
+ {id:"joao",n:"João e Maria",a:"",own:0,uses:[{ano:1,t:2,k:"lin",slot:"Literatura",w:[7,8],unit:"páginas"}]},
+ {id:"cachinhos",n:"Cachinhos Dourados",a:"",own:0,uses:[{ano:1,t:2,k:"lin",slot:"Literatura",w:[9,11],unit:"páginas"}]},
+ {id:"bilac",n:"Poesias Infantis",a:"Olavo Bilac",own:0,uses:[{ano:1,t:2,k:"cat",w:[1,11],days:[2,4],unit:"poemas"},{ano:1,t:3,k:"cat",w:[1,11],days:[2,4],unit:"poemas"},{ano:2,t:2,k:"cat",w:[1,11],days:[2,4],unit:"poemas"}]},
+ {id:"fazenda",n:"A Fazenda e a Vida no Campo",a:"",own:0,uses:[{ano:1,t:2,k:"cie",w:[1,4],unit:"páginas"}]},
+ {id:"comovoce",n:"Crianças como Você",a:"",own:0,uses:[{ano:1,t:2,k:"geo",w:[1,6],unit:"páginas"}]},
+ {id:"mundocriancas",n:"Um Mundo de Crianças",a:"Ana Busch",own:0,uses:[{ano:1,t:2,k:"geo",w:[7,11],unit:"páginas"}]},
+ {id:"famosas",n:"Coleção Crianças Famosas",a:"",own:0,uses:[{ano:1,t:2,k:"mus",w:[1,11],unit:"páginas",txt:"Volume de Beethoven"},{ano:2,t:1,k:"mus",w:[1,11],unit:"páginas",txt:"Volume de Bach"},{ano:2,t:2,k:"mus",w:[1,11],unit:"páginas",txt:"Volume de Handel"},{ano:3,t:1,k:"mus",w:[1,11],unit:"páginas",txt:"Volume de Haydn"},{ano:4,t:1,k:"mus",w:[1,11],unit:"páginas",txt:"Volume de Schubert"},{ano:4,t:2,k:"mus",w:[1,11],unit:"páginas",txt:"Volume de Tchaikovsky"},{ano:4,t:3,k:"mus",w:[1,11],unit:"páginas",txt:"Volume de Mendelssohn"}]},
+ {id:"sitio",n:"O Sítio no Descobrimento",a:"Monteiro Lobato",own:0,uses:[{ano:1,t:3,k:"his",w:[1,11],days:[4],unit:"capítulos"}]},
+ {id:"patosapo",n:"O Pato e o Sapo",a:"Sônia Junqueira",own:0,uses:[{ano:1,t:3,k:"lin",slot:"Leitura",w:[6,11],days:[5],unit:"páginas",txt:"A criança lê sozinha"}]},
+ {id:"atoz",n:"Geography from A to Z",a:"Jack Knowlton",own:0,uses:[{ano:2,t:2,k:"geo",w:[1,11],unit:"páginas"}]},
+ {id:"hatch",n:"Outdoor Geography",a:"Herbert Hatch",own:0,uses:[{ano:2,t:1,k:"geo",w:[1,11],unit:"páginas",txt:"Preparação dos pais para a aula ao ar livre"}]},
+ {id:"atlas",n:"Meu Primeiro Atlas",a:"",own:0,uses:[{ano:2,t:3,k:"geo",w:[1,11],unit:"páginas"},{ano:3,t:1,k:"geo",w:[1,11],unit:"páginas"}]},
+ {id:"arca",n:"A Arca de Noé",a:"",own:0,uses:[{ano:2,t:1,k:"cat",w:[1,11],days:[2,4],unit:"poemas"}]},
+ {id:"pinoquio",n:"As Aventuras de Pinóquio",a:"Carlo Collodi",own:0,uses:[{ano:2,t:2,k:"lin",slot:"Literatura",w:[1,11],unit:"capítulos"}]},
+ {id:"stuart",n:"Stuart Little",a:"E. B. White (trad. Jim Anotsu)",own:0,uses:[{ano:2,t:3,k:"lin",slot:"Literatura",w:[1,11],unit:"capítulos"}]},
+ {id:"grandesbr",n:"Coleção Grandes Brasileiros",a:"",own:0,uses:[{ano:2,t:1,k:"his",w:[1,11],days:[4],unit:"páginas",txt:"Volume do personagem da semana"},{ano:3,t:1,k:"his",w:[1,11],days:[4],unit:"páginas",txt:"Volume do personagem da semana"},{ano:3,t:2,k:"his",w:[1,11],days:[4],unit:"páginas",txt:"Volume do personagem da semana"},{ano:4,t:2,k:"his",w:[1,11],days:[4],unit:"páginas",txt:"Volume do personagem da semana"}]},
+ {id:"amazonias",n:"As Amazônias",a:"Paula Saldanha",own:0,uses:[{ano:3,t:2,k:"geo",w:[1,5],unit:"páginas"}]},
+ {id:"pantanais",n:"Os Pantanais",a:"Paula Saldanha",own:0,uses:[{ano:3,t:2,k:"geo",w:[6,11],unit:"páginas"}]},
+ {id:"santosdumont",n:"Santos Dumont",a:"",own:0,uses:[{ano:4,t:1,k:"his",w:[5,6],unit:"páginas"}]},
+ {id:"corpo",n:"Como o Corpo Funciona",a:"",own:0,uses:[{ano:4,t:1,k:"cie",w:[1,11],unit:"páginas"}]},
+ {id:"mundointro",n:"Mundo: uma Introdução para Crianças",a:"",own:0,uses:[{ano:4,t:1,k:"geo",w:[1,11],unit:"páginas"}]},
+ {id:"klink",n:"Vamos Dar a Volta ao Mundo?",a:"Marina Klink",own:0,uses:[{ano:4,t:3,k:"geo",w:[1,11],unit:"páginas"}]},
+ {id:"nono",n:"Nonô, o Menino de Diamantina",a:"",own:0,uses:[{ano:4,t:3,k:"his",w:[3,5],unit:"páginas"}]},
+ {id:"iflived",n:"If You Lived Here: Houses of the World",a:"Giles Laroche",own:0,uses:[{ano:4,t:3,k:"ing",w:[1,11],days:[5],unit:"páginas",txt:"Leitura em inglês"}]}
+];
+const UNITS={"páginas":["p.","pp."],"capítulos":["cap.","caps."],"contos":["conto","contos"],"volumes":["volume","volumes"],"poemas":["poema","poemas"],"lições":["lição","lições"]};
+/* ---------- estado ---------- */
+const st={tab:store.get("tab","hoje"),ano:store.get("ano",1),t:store.get("t",1),w:store.get("w",1),day:null,
+  dview:store.get("dview","linha"),dsubj:"todas",dano:0,draft:null};
+const TABS=[["hoje","Hoje"],["semana","Semana"],["trimestres","Visão geral"],["estante","Estante"],["horario","Horário"],["calendario","Calendário"],["diario","Diário e fotos"],["metodo","Método"]];
+const ICON={
+ hoje:'<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>',
+ semana:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M7 14h3M7 17h3M13 14h4"/>',
+ trimestres:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M15 4v16M3 10h18"/>',
+ horario:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ calendario:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15.5" r="2"/>',
+ diario:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/>',
+ metodo:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7M8 11h7"/>',
+ estante:'<path d="M4 4h4v16H4zM10 4h4v16h-4z"/><path d="M16.5 5.2l3.8-1 3.2 15.3-3.8 1z" transform="translate(-2.5 0)"/><path d="M2 20h20"/>',
+ cam:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/>',
+ pic:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
+ pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/>'
+};
+const svg=(k,w)=>`<svg viewBox="0 0 24 24" width="${w||18}" height="${w||18}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>`;
+const MONO={bib:"Bí",cat:"Ca",his:"Hi",lin:"Le",mat:"Ma",cie:"Ci",geo:"Ge",art:"Ar",mus:"Mú",ing:"In",edf:"EF",pau:"··"};
+const badge=(k,sm)=>`<span class="badge${sm?" sm":""} s-${k}" aria-hidden="true">${MONO[k]}</span>`;
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+const grp=ano=>ano<=2?"A":"B";
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>{t.hidden=true},2600)}
+
+/* ---------- nuvem (compartilhada) ou aparelho ---------- */
+const cloud={db:null,assets:null,mode:"local",unsubM:null,unsubR:null};
+const marks=Object.assign({},store.get("prog",{}));
+function isDone(key){return !!marks[key]}
+function setDone(key,v,label){
+  if(v)marks[key]=1;else delete marks[key];
+  if(v&&label){prof.last={label,date:iso(new Date()),ano:st.tab==="semana"?st.ano:(locate(new Date())||{}).ano||st.ano,t:st.t,w:st.w,key};const m=key.match(/^w:(\d):(\d):(\d+):/);if(m){prof.last.ano=+m[1];prof.last.t=+m[2];prof.last.w=+m[3]}else{const dm=key.match(/^d:(\d{4}-\d\d-\d\d):/);if(dm){const l=locate(parseISO(dm[1]));if(l&&!l.gap){prof.last.ano=l.ano;prof.last.t=l.t;prof.last.w=l.w;prof.last.date=dm[1]}}}queueProfileSave()}
+  store.set("prog",marks);
+  if(cloud.db){const ref=cloud.db.collection("marcas").doc(key);(v?ref.set({k:key,done:true,ts:Date.now()}):ref.delete()).catch(()=>toast("Não foi possível salvar a marcação na nuvem."))}
+}
+let recs=[];          // registros do diário
+const urlCache={};    // id local -> objectURL
+
+/* IndexedDB local */
+let idbP=null;
+function idb(){
+  if(idbP)return idbP;
+  idbP=new Promise((res,rej)=>{
+    try{const r=indexedDB.open("cronograma-do-lar",1);
+      r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains("registros"))d.createObjectStore("registros",{keyPath:"id"});if(!d.objectStoreNames.contains("fotos"))d.createObjectStore("fotos",{keyPath:"id"})};
+      r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}
+  });
+  return idbP;
+}
+function tx(storeName,mode,fn){return idb().then(d=>new Promise((res,rej)=>{const t=d.transaction(storeName,mode);const s=t.objectStore(storeName);const out=fn(s);t.oncomplete=()=>res(out&&out.result!==undefined?out.result:out);t.onerror=()=>rej(t.error)}))}
+const localDB={
+  all(){return tx("registros","readonly",s=>s.getAll())},
+  put(r){return tx("registros","readwrite",s=>s.put(r))},
+  del(id){return tx("registros","readwrite",s=>s.delete(id))},
+  putPhoto(id,blob){return tx("fotos","readwrite",s=>s.put({id,blob}))},
+  getPhoto(id){return tx("fotos","readonly",s=>s.get(id))},
+  delPhoto(id){return tx("fotos","readwrite",s=>s.delete(id))}
+};
+const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+
+function photoSrc(f){
+  if(f.cloud)return "/_blob/"+f.id;
+  if(f.db){
+    if(urlCache[f.id])return urlCache[f.id];
+    if(cloud.db)cloud.db.collection("fotos").doc(f.id).get().then(snap=>{const d=snap.exists&&snap.data();if(d&&d.src){urlCache[f.id]=d.src;document.querySelectorAll('img[data-pid="'+f.id+'"]').forEach(i=>i.src=d.src)}}).catch(()=>{});
+    return "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+  }
+  if(urlCache[f.id])return urlCache[f.id];
+  localDB.getPhoto(f.id).then(r=>{if(r&&r.blob){urlCache[f.id]=URL.createObjectURL(r.blob);document.querySelectorAll('img[data-pid="'+f.id+'"]').forEach(i=>i.src=urlCache[f.id])}}).catch(()=>{});
+  return "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+}
+const img=(f,alt)=>`<img data-pid="${esc(f.id)}" src="${esc(photoSrc(f))}" alt="${esc(alt||f.legenda||"Foto da aula")}" loading="lazy" onerror="this.style.opacity=.3">`;
+
+async function loadRecords(){
+  if(cloud.mode==="cloud")return;
+  try{recs=(await localDB.all())||[];}catch(e){recs=[]}
+  sortRecs();if(st.tab==="diario")render();
+}
+function sortRecs(){recs.sort((a,b)=>(b.date||"").localeCompare(a.date||"")||(b.ts||0)-(a.ts||0))}
+async function saveRecord(r){
+  r.ts=r.ts||Date.now();r.upd=Date.now();
+  const clean=JSON.parse(JSON.stringify(r));
+  if(cloud.mode==="cloud"){await cloud.db.collection("registros").doc(r.id).set(clean)}
+  else{await localDB.put(clean);const i=recs.findIndex(x=>x.id===r.id);if(i>=0)recs[i]=clean;else recs.push(clean);sortRecs()}
+}
+async function deleteRecord(r){
+  if(cloud.mode==="cloud"){
+    await cloud.db.collection("registros").doc(r.id).delete();
+    for(const f of r.fotos||[])delPhotoAny(f);
+  }else{
+    await localDB.del(r.id);for(const f of r.fotos||[])localDB.delPhoto(f.id).catch(()=>{});
+    recs=recs.filter(x=>x.id!==r.id);
+  }
+}
+function delPhotoAny(f){
+  if(!f)return;
+  if(f.db){if(cloud.db)cloud.db.collection("fotos").doc(f.id).delete().catch(()=>{})}
+  else if(f.cloud){if(cloud.assets)cloud.assets.delete(f.id).catch(()=>{})}
+  else localDB.delPhoto(f.id).catch(()=>{});
+}
+async function decodeImg(file){
+  try{return await createImageBitmap(file)}catch(e){}
+  return await new Promise((res,rej)=>{const u=URL.createObjectURL(file);const im=new Image();im.onload=()=>res(im);im.onerror=()=>rej(new Error("decode"));im.src=u});
+}
+async function smallDataURL(blob){
+  const bmp=await decodeImg(blob);const W=bmp.width||bmp.naturalWidth,H=bmp.height||bmp.naturalHeight;
+  for(const max of [1280,1024,800,640]){
+    const sc=Math.min(1,max/Math.max(W,H));const c=document.createElement("canvas");c.width=Math.round(W*sc);c.height=Math.round(H*sc);
+    c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+    for(const q of [0.75,0.6,0.5]){const u=c.toDataURL("image/jpeg",q);if(u.length<230000)return u}
+  }
+  throw new Error("toolarge");
+}
+async function compress(file){
+  try{
+    const bmp=await decodeImg(file);
+    const W=bmp.width||bmp.naturalWidth,H=bmp.height||bmp.naturalHeight;
+    const max=1600,s=Math.min(1,max/Math.max(W,H));
+    const c=document.createElement("canvas");c.width=Math.round(W*s);c.height=Math.round(H*s);
+    c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+    const b=await new Promise(r=>c.toBlob(r,"image/jpeg",0.82));
+    return b||file;
+  }catch(e){return file}
+}
+async function storePhoto(blob){
+  if(cloud.mode==="cloud"){
+    if(cloud.assets){
+      try{const r=await cloud.assets.upload(blob,{type:blob.type||"image/jpeg"});return {id:r.id,cloud:true}}
+      catch(e){if(e&&(e.code==="rate_limited"||e.code==="store_unavailable"))throw e;cloud.assets=null}
+    }
+    const src=await smallDataURL(blob);const id="p"+newId();
+    await cloud.db.collection("fotos").doc(id).set({src,ts:Date.now()});
+    urlCache[id]=src;return {id,db:true};
+  }
+  const id="f"+newId();await localDB.putPhoto(id,blob);urlCache[id]=URL.createObjectURL(blob);return {id,cloud:false};
+}
+
+async function connect(){
+  let db=null,assets=null;
+  if(window.FB_DB){db=window.FB_DB}
+  else{
+    if(!window.claude||typeof window.claude.use!=="function"){loadRecords();return}
+    try{db=await window.claude.use("db")}catch(e){db=null}
+    if(!db){loadRecords();return}
+    try{assets=await window.claude.use("assets")}catch(e){assets=null}
+  }
+  cloud.db=db;cloud.assets=assets;cloud.mode="cloud";
+  const sy=document.getElementById("sync");sy.textContent="Compartilhado na nuvem";sy.classList.add("on");
+  cloud.unsubR=db.collection("registros").onSnapshot(snap=>{
+    recs=snap.docs.map(d=>Object.assign({id:d.id},JSON.parse(JSON.stringify(d.data()||{}))));sortRecs();
+    if(st.tab==="diario"&&!st.draft)render();
+    if(openPhoto)renderViewer();
+  },()=>{cloud.mode="local";cloud.db=null;sy.textContent="Diário neste aparelho";sy.classList.remove("on");loadRecords()});
+  db.doc("config/estante").onSnapshot(snap=>{
+    if(!snap.exists)return;const d=JSON.parse(JSON.stringify(snap.data()||{}));
+    cfg={u:d.u||{},comprado:d.comprado||{}};sessCache={};store.set("estante",cfg);
+    if(!st.draft&&st.tab!=="estante"&&["hoje","semana","trimestres"].includes(st.tab))render();
+  },()=>{});
+  loadProfile();
+  cloud.unsubM=db.collection("marcas").onSnapshot(snap=>{
+    const remote={};snap.docs.forEach(d=>{const v=d.data();if(v&&v.done)remote[d.id]=1});
+    Object.keys(marks).forEach(k=>{if(!remote[k])delete marks[k]});Object.assign(marks,remote);store.set("prog",marks);
+    if((st.tab==="hoje"||st.tab==="semana"))render();
+  },()=>{});
+}
+
+
+const UNOUN={"páginas":"Página","capítulos":"Capítulo","contos":"Conto","volumes":"Volume","poemas":"Poema","lições":"Lição"};
+/* ---------- estante: configuração compartilhada ---------- */
+let cfg=store.get("estante",{u:{},comprado:{}});
+if(!cfg.u)cfg.u={};if(!cfg.comprado)cfg.comprado={};
+let cfgTimer=null,sessCache={};
+function saveCfg(){
+  sessCache={};store.set("estante",cfg);
+  clearTimeout(cfgTimer);
+  cfgTimer=setTimeout(()=>{if(cloud.db)cloud.db.doc("config/estante").set(JSON.parse(JSON.stringify(cfg))).catch(()=>toast("Não foi possível salvar a estante na nuvem."))},700);
+}
+const useId=(b,i)=>b.id+"-"+i;
+function effUse(b,i){
+  const u=b.uses[i],o=cfg.u[useId(b,i)]||{};
+  const def=u.def||[null,null];
+  return {book:b,i,id:useId(b,i),ano:+(o.ano||u.ano),t:+(o.t||u.t),k:o.k||u.k,slot:o.k&&o.k!==u.k?null:u.slot,
+    w0:+(o.w0||u.w[0]),w1:+(o.w1||u.w[1]),days:o.k&&o.k!==u.k?null:u.days,unit:o.unit||u.unit,
+    from:o.from!=null&&o.from!==""?+o.from:def[0],to:o.to!=null&&o.to!==""?+o.to:def[1],txt:u.txt};
+}
+function allUses(){const out=[];BOOKS.forEach(b=>b.uses.forEach((_,i)=>out.push(effUse(b,i))));return out}
+function slotMatches(u,s,dow){
+  if(slotSubject(s,dow)!==u.k)return false;
+  if(u.slot)return slotLabel(s,dow).includes(u.slot);
+  if(u.k==="lin")return slotLabel(s,dow).includes("Literatura");
+  return true;
+}
+function sessions(u){
+  const key=[u.id,u.ano,u.t,u.k,u.w0,u.w1,(u.days||[]).join(".")].join("|");
+  if(sessCache[key])return sessCache[key];
+  const g=TT[grp(u.ano)],out=[];
+  for(let w=Math.max(1,u.w0);w<=Math.min(11,u.w1);w++)for(let d=1;d<=5;d++){
+    if(u.days&&!u.days.includes(d))continue;
+    if(g.slots.some(s=>slotMatches(u,s,d)))out.push(w*10+d);
+  }
+  return sessCache[key]=out;
+}
+function unitText(u,j0,j1,N){
+  const lab=UNITS[u.unit]||["",""];
+  if(u.from==null||u.to==null||isNaN(u.from)||isNaN(u.to)||u.to<u.from)
+    return {txt:(j0===j1?"Aula "+(j0+1):"Aulas "+(j0+1)+" a "+(j1+1))+" de "+N,need:true};
+  const U=u.to-u.from+1;
+  let s=u.from+Math.floor(j0*U/N),e=u.from+Math.floor((j1+1)*U/N)-1,cont=false;
+  if(e<s){e=s;cont=j0>0&&u.from+Math.floor((j0-1)*U/N)===s}
+  return {txt:(s===e?lab[0]+" "+s:lab[1]+" "+s+"–"+e)+(cont?" (continuação)":""),need:false};
+}
+function bookBits(u,ownOk){
+  const b=u.book;const buy=!b.own&&!cfg.comprado[b.id];
+  return {title:b.n,buy};
+}
+/* linhas de livro para uma aula do dia */
+function lessonBooks(ano,t,w,dow,s){
+  const out=[];
+  allUses().forEach(u=>{
+    if(u.ano!==ano||u.t!==t||w<u.w0||w>u.w1)return;
+    if(!slotMatches(u,s,dow))return;
+    if(u.days&&!u.days.includes(dow))return;
+    const ss=sessions(u);const j=ss.indexOf(w*10+dow);if(j<0)return;
+    const r=unitText(u,j,j,ss.length);
+    out.push({u,txt:r.txt,need:r.need});
+  });
+  return out;
+}
+/* linhas de livro para a semana inteira de uma matéria */
+function weekBooks(ano,t,w,k){
+  const out=[];
+  allUses().forEach(u=>{
+    if(u.ano!==ano||u.t!==t||u.k!==k||w<u.w0||w>u.w1)return;
+    const ss=sessions(u);const idx=ss.map((x,i)=>Math.floor(x/10)===w?i:-1).filter(i=>i>=0);
+    if(!idx.length)return;
+    const r=unitText(u,idx[0],idx[idx.length-1],ss.length);
+    const dias=idx.map(i=>DAYN[ss[i]%10].slice(0,3).toLowerCase()).join(", ");
+    out.push({u,txt:r.txt,need:r.need,dias});
+  });
+  return out;
+}
+function bookLine(x,withDays){
+  const b=x.u.book,buy=!b.own&&!cfg.comprado[b.id];
+  return `<div class="bk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg><span><b>${esc(b.n)}</b>${x.u.txt?` · ${esc(x.u.txt)}`:""} — <span class="${x.need?"need":"pg"}">${esc(x.txt)}</span>${withDays&&x.dias?` <span class="muted">(${esc(x.dias)})</span>`:""}${x.need?` <button type="button" class="linkish" data-tab="estante">informar páginas</button>`:""}${buy?` <span class="buy">a comprar</span>`:""}</span></div>`;
+}
+/* Bíblia do dia: AT seg/qua/sex, NT ter/qui */
+function bibWeekLists(ano,t,w){
+  const T=BIB[ano][t-1];
+  const chunk=segs=>{const list=[];segs.forEach(([b,a,z])=>{for(let c=a;c<=z;c++)list.push([b,c])});
+    const n=list.length,s=Math.floor((w-1)*n/11),e=Math.max(s+1,Math.floor(w*n/11));return list.slice(s,Math.min(e,n))};
+  return {at:chunk(T.at),nt:chunk(T.nt)};
+}
+function splitDay(list,D,j){
+  const n=list.length;if(!n)return "revisão";
+  if(n>=D)return fmtRange(list.slice(Math.floor(j*n/D),Math.floor((j+1)*n/D)));
+  const i=Math.floor(j*n/D);const cont=j>0&&Math.floor((j-1)*n/D)===i;
+  return fmtRange([list[i]])+(cont?" (continuação)":"");
+}
+function bibleDay(ano,t,w,dow){
+  const L=bibWeekLists(ano,t,w);
+  if(dow===2||dow===4)return {lab:"Novo Testamento",ref:splitDay(L.nt,2,dow===2?0:1)};
+  return {lab:"Antigo Testamento",ref:splitDay(L.at,3,dow===1?0:dow===3?1:2)};
+}
+
+/* ---------- perfil por e-mail ---------- */
+const prof={email:store.get("email",""),quem:store.get("quem","Mãe"),last:null};
+const pid=e=>(e||"").toLowerCase().trim().replace(/[^a-z0-9_\-.~:@+]/g,"_").slice(0,190)||"anonimo";
+let profSaved="",profTimer=null,touched=false;
+function profSnapshot(){return {email:prof.email,quem:prof.quem,tab:st.tab,ano:st.ano,t:st.t,w:st.w,dview:st.dview,last:prof.last||null}}
+function queueProfileSave(){
+  if(!prof.email)return;
+  const s=JSON.stringify(profSnapshot());if(s===profSaved)return;
+  clearTimeout(profTimer);
+  profTimer=setTimeout(()=>{
+    profSaved=s;const body=Object.assign(JSON.parse(s),{upd:Date.now()});
+    store.set("perfil:"+pid(prof.email),body);
+    if(cloud.db)cloud.db.collection("perfis").doc(pid(prof.email)).set(body).catch(()=>{});
+  },400);
+}
+function applyProfile(p){
+  if(!p)return;
+  if(p.tab&&p.tab!=="login")st.tab=p.tab;if(p.ano)st.ano=+p.ano;if(p.t)st.t=+p.t;if(p.w)st.w=+p.w;if(p.dview)st.dview=p.dview;
+  if(p.quem)prof.quem=p.quem;prof.last=p.last||null;
+  store.set("quem",prof.quem);profSaved=JSON.stringify(profSnapshot());
+}
+async function loadProfile(){
+  if(!prof.email)return;
+  let p=store.get("perfil:"+pid(prof.email),null);
+  if(cloud.db){try{const s=await cloud.db.collection("perfis").doc(pid(prof.email)).get();if(s.exists){const r=JSON.parse(JSON.stringify(s.data()));if(!p||(r.upd||0)>(p.upd||0))p=r}}catch(e){}}
+  if(p&&!touched){applyProfile(p);render()}
+}
+let fbPending=!!window.FB_AUTH;
+function vLoginFB(){
+  return `<div class="login"><div class="lcard"><div class="crayon" aria-hidden="true"></div><div class="lin">
+  <h2><span class="l1">Crono</span><span class="l2">grama</span> <span class="l3">do</span> <span class="l4">Lar</span></h2>
+  <p class="muted" style="margin:0">Entre com o e-mail e a senha da família. O progresso, o diário e as fotos ficam sincronizados entre vocês.</p>
+  <form id="loginform" class="lform" novalidate>
+   <label class="field" for="l-email">E-mail<input type="email" id="l-email" autocomplete="username" inputmode="email" placeholder="voce@exemplo.com" value="${esc(store.get("email",""))}" required></label>
+   <label class="field" for="l-pass">Senha<input type="password" id="l-pass" autocomplete="current-password" required></label>
+   <label class="field" for="l-quem">Você é<select id="l-quem">${["Mãe","Pai","Outro"].map(q=>`<option ${q===prof.quem?"selected":""}>${q}</option>`).join("")}</select></label>
+   <div class="lerr" id="l-err" hidden></div>
+   <button type="submit" class="btn primary big" id="l-go">Entrar</button>
+   <button type="button" class="linkish" data-forgot="1" style="justify-self:start">Esqueci minha senha</button>
+  </form>
+  </div></div></div>`;
+}
+function vLogin(){
+  return `<div class="login"><div class="lcard"><div class="crayon" aria-hidden="true"></div><div class="lin">
+  <h2><span class="l1">Crono</span><span class="l2">grama</span> <span class="l3">do</span> <span class="l4">Lar</span></h2>
+  <p class="muted" style="margin:0">Entre com seu e-mail para o app guardar de onde você parou.</p>
+  <form id="loginform" class="lform" novalidate>
+   <label class="field" for="l-email">Seu e-mail<input type="email" id="l-email" autocomplete="email" inputmode="email" placeholder="voce@exemplo.com" value="${esc(prof.email)}" required></label>
+   <label class="field" for="l-quem">Você é<select id="l-quem">${["Mãe","Pai","Outro"].map(q=>`<option ${q===prof.quem?"selected":""}>${q}</option>`).join("")}</select></label>
+   <div class="lerr" id="l-err" hidden>Digite um e-mail válido, como nome@gmail.com.</div>
+   <button type="submit" class="btn primary big">Entrar</button>
+  </form>
+  <p class="muted" style="font-size:.8rem;margin:0">Não há senha: o e-mail serve só para identificar quem está usando e salvar o seu ponto de parada.</p>
+  </div></div></div>`;
+}
+
+function previewHTML(u,ss){
+  if(u.from!=null&&u.to!=null&&!isNaN(u.from)&&!isNaN(u.to)&&u.to>=u.from){const r0=ss.length?unitText(u,0,0,ss.length).txt:"";return `1ª aula: <b>${esc(r0)}</b> · ritmo de ~${Math.max(1,Math.round((u.to-u.from+1)/Math.max(1,ss.length)*10)/10)} por aula`}
+  return `Informe o número inicial e final (${esc((UNOUN[u.unit]||"").toLowerCase())}) para o app dividir a leitura pelos dias.`;
+}
+/* ---------- Estante ---------- */
+function vEstante(){
+  const sel=(id,opts,val)=>`<select id="${id}" data-cfg="${id}">${opts.map(([v,l])=>`<option value="${v}" ${String(v)===String(val)?"selected":""}>${esc(l)}</option>`).join("")}</select>`;
+  const card=b=>{
+    const buy=!b.own;const got=!!cfg.comprado[b.id];
+    const head=`<div class="bh"><div><h3>${esc(b.n)}</h3>${b.a?`<div class="muted" style="font-size:.88rem">${esc(b.a)}</div>`:""}</div>${buy?`<label class="toggle got" for="got-${b.id}"><input type="checkbox" id="got-${b.id}" data-got="${b.id}" ${got?"checked":""}> Já comprei</label>`:`<span class="pill own">Tenho</span>`}</div>`;
+    if(b.mh)return `<article class="book s-bib">${head}<div class="use"><span class="tag">${badge("bib",true)}Bíblia · todos os anos</span><div>Preparação dos pais: antes de cada aula de Bíblia, leia o comentário de Matthew Henry sobre a passagem do dia (o app mostra qual).</div></div></article>`;
+    const uses=b.uses.map((_,i)=>{const u=effUse(b,i);const ss=sessions(u);const r0=ss.length?unitText(u,0,0,ss.length).txt:"";
+      const p=u.id;
+      return `<div class="use s-${u.k}"><div class="row" style="justify-content:space-between"><span class="tag">${badge(u.k,true)}${esc(S[u.k].n)} · ${u.ano}º ano · ${u.t}º trimestre</span><span class="pill">${ss.length} aula${ss.length===1?"":"s"}${u.days?" · "+u.days.map(d=>DAYN[d].slice(0,3).toLowerCase()).join(", "):""}</span></div>
+      ${u.txt?`<div class="muted" style="font-size:.85rem">${esc(u.txt)}</div>`:""}
+      <div class="ugrid">
+       <label class="field" for="${p}-from">${esc(UNOUN[u.unit]||"Início")} inicial<input type="number" min="1" inputmode="numeric" id="${p}-from" data-cfg="${p}-from" value="${u.from==null?"":u.from}" placeholder="1"></label>
+       <label class="field" for="${p}-to">${esc(UNOUN[u.unit]||"")} final<input type="number" min="1" inputmode="numeric" id="${p}-to" data-cfg="${p}-to" value="${u.to==null?"":u.to}" placeholder="última"></label>
+       <label class="field" for="${p}-unit">Contar por${sel(p+"-unit",Object.keys(UNITS).map(x=>[x,x]),u.unit)}</label>
+      </div>
+      <details><summary>Mudar onde o livro é usado</summary><div class="ugrid">
+       <label class="field" for="${p}-ano">Ano${sel(p+"-ano",[1,2,3,4].map(a=>[a,a+"º ano"]),u.ano)}</label>
+       <label class="field" for="${p}-t">Trimestre${sel(p+"-t",[1,2,3].map(a=>[a,a+"º"]),u.t)}</label>
+       <label class="field" for="${p}-k">Matéria${sel(p+"-k",ORDER.map(k=>[k,S[k].n]),u.k)}</label>
+       <label class="field" for="${p}-w0">Da semana${sel(p+"-w0",Array.from({length:11},(_,i)=>[i+1,i+1]),u.w0)}</label>
+       <label class="field" for="${p}-w1">até a semana${sel(p+"-w1",Array.from({length:11},(_,i)=>[i+1,i+1]),u.w1)}</label>
+      </div></details>
+      <div class="preview" id="${p}-prev">${previewHTML(u,ss)}</div></div>`}).join("");
+    return `<article class="book">${head}${uses}</article>`;
+  };
+  const own=BOOKS.filter(b=>b.own),buy=BOOKS.filter(b=>!b.own);
+  return `<div><div class="eyebrow">Livros da família</div><div class="lead">Estante</div><p class="muted" style="margin:4px 0 0">Digite a primeira e a última página (ou capítulo, conto, volume) que serão lidas. O app divide a leitura pelas aulas e mostra, em cada dia, exatamente o que ler. Os livros que vocês têm entram primeiro; os que vão comprar ficam mais para a frente.</p></div>
+  <h2 class="shelf">Livros que tenho <span class="pill">${own.length}</span></h2><div class="books">${own.map(card).join("")}</div>
+  <h2 class="shelf">Vou comprar <span class="pill">${buy.length}</span></h2><div class="books">${buy.map(card).join("")}</div>`;
+}
+/* ---------- topo ---------- */
+function renderAnos(){
+  document.getElementById("anos").innerHTML=[1,2,3,4].map(a=>`<button type="button" data-ano="${a}" aria-pressed="${a===st.ano}">${a}º ano<small>${a+5} anos</small></button>`).join("");
+}
+function renderTabs(){
+  document.getElementById("tabs").innerHTML=TABS.map(([k,l])=>`<button role="tab" type="button" data-tab="${k}" aria-selected="${k===st.tab}" style="--tc:var(--t-${k})">${svg(k)}${l}</button>`).join("");
+}
+function render(){
+  const m=document.getElementById("main");
+  const top=document.querySelector("header.top");
+  if(window.FB_AUTH&&fbPending){top.hidden=true;m.innerHTML='<div class="login"><p class="muted">Carregando…</p></div>';return}
+  if(!prof.email){top.hidden=true;m.innerHTML=window.FB_AUTH?vLoginFB():vLogin();return}
+  top.hidden=false;
+  renderAnos();renderTabs();
+  document.getElementById("who").innerHTML=`Olá, <b>${esc(prof.quem)}</b> · <button type="button" class="linkish" data-logout="1">sair</button>`;
+  const fn={hoje:vHoje,semana:vSemana,trimestres:vTri,estante:vEstante,horario:vHorario,calendario:vCal,diario:vDiario,metodo:vMetodo}[st.tab]||vHoje;
+  m.innerHTML=`<section class="view v-${st.tab}" style="--vc:var(--t-${st.tab})">${fn()}</section>`;
+  queueProfileSave();
+}
+
+/* ---------- Hoje ---------- */
+function slotSubject(s,dow){return s.rot?s.rot[dow]:s.k}
+function slotLabel(s,dow){if(s.alt&&s.alt[dow])return s.alt[dow];if(s.rot)return S[s.rot[dow]].n;return s.l}
+function lessonWhat(ano,t,w,k,label){
+  const a=assignment(ano,k,t,w);let what=a.main;
+  if(k==="lin"){
+    const l=label.toLowerCase();
+    if(l.includes("literatura"))what=(termData(ano,"lin",t).x||"Livro do trimestre").replace("Literatura do trimestre: ","");
+    else if(l.includes("caligrafia"))what=ano===1?"Caligrafia: "+["letras redondas (o, a, c, d)","letras de haste (l, b, h, k)","letras que descem (g, j, p, q)"][t-1]:"Letra cursiva: duas letras perfeitas";
+    else if(l.includes("leitura"))what=ano===1?"Leitura: "+a.main:"Leitura em voz alta: 1 página do livro do trimestre";
+    else if(l.includes("ditado"))what="Preparar um parágrafo e ditá-lo, oração por oração";
+    else if(l.includes("transcrição"))what="Copiar devagar um verso ou trecho favorito";
+    else if(l.includes("gramática"))what=/gramática|análise/i.test(a.main)?a.main:"Gramática: classes de palavras com frases do livro de leitura";
+  }
+  if(k==="cat"){const rec=termData(ano,"lin",t).t.find(x=>x.startsWith("Recitação"));what=a.main+(rec?" · "+rec:"")}
+  if(k==="bib")what=a.main+" · "+a.sub;
+  return what;
+}
+function lessonWhatDay(ano,t,w,k,label,dow,bks){
+  if(k==="bib"){const b=bibleDay(ano,t,w,dow);return b.lab+": "+b.ref}
+  if(k==="lin"&&label.toLowerCase().includes("literatura")&&bks.length)return "Ler o trecho do dia em voz alta e pedir a narração";
+  return lessonWhat(ano,t,w,k,label);
+}
+function dayLessons(ano,t,w,dow,dateKey){
+  const g=TT[grp(ano)];
+  const rows=g.slots.map((s,i)=>{
+    const k=slotSubject(s,dow);
+    if(k==="pau")return `<div class="lesson break s-pau"><div class="time">${s.h}<small>${s.m} min</small></div><div><h3>${esc(s.l)}</h3><div class="how">Lanche, água e movimento livre.</div></div><span></span></div>`;
+    const label=slotLabel(s,dow);
+    const bks=lessonBooks(ano,t,w,dow,s);
+    const what=lessonWhatDay(ano,t,w,k,label,dow,bks);
+    const key="d:"+dateKey+":"+i;const done=isDone(key);
+    const tip=s.tip||S[k].how;
+    let blines=bks.map(x=>bookLine(x)).join("");
+    if(k==="bib"){const b=bibleDay(ano,t,w,dow);blines=`<div class="bk prep"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg><span>Preparação dos pais: <b>Comentário Bíblico de Matthew Henry</b> — ${esc(b.ref)}</span></div>`+blines}
+    const nfotos=recs.filter(r=>r.date===dateKey&&r.subj===k).reduce((n,r)=>n+(r.fotos||[]).length,0);
+    return `<div class="lesson s-${k}${done?" done":""}"><div class="time">${s.h}<small>${s.m} min</small></div><div><span class="tag">${badge(k,true)}${esc(S[k].n)}</span><h3>${esc(label)}</h3><div class="what">${esc(what)}</div>${blines?`<div class="bks">${blines}</div>`:""}<div class="how">${esc(tip)}</div></div><div class="acts"><input class="chk" type="checkbox" id="c-${esc(key)}" data-key="${esc(key)}" data-label="${esc(label+" · "+what)}" ${done?"checked":""} aria-label="Concluída: ${esc(label)}">${dateKey!=="previa"?`<button type="button" class="reg" data-reg="${k}" data-rdate="${dateKey}" data-rlabel="${esc(label+": "+what)}" aria-label="Registrar aula de ${esc(S[k].n)}">${svg("cam",14)}${nfotos?nfotos:""}</button>`:""}</div></div>`;
+  });
+  rows.push(`<div class="lesson break s-pau"><div class="time">${g.end}</div><div><h3>Fim das lições da manhã</h3></div><span></span></div>`);
+  return `<div class="timeline">${rows.join("")}</div>`;
+}
+function vHoje(){
+  const date=st.day?parseISO(st.day):new Date();
+  const dk=iso(date);
+  const loc=locate(date);
+  const nav=`<div class="datenav"><button class="btn" type="button" data-day="-1" aria-label="Dia anterior">‹</button><input type="date" id="daypick" value="${dk}" aria-label="Escolher data"><button class="btn" type="button" data-day="1" aria-label="Próximo dia">›</button><button class="btn" type="button" data-day="0">Hoje</button></div>`;
+  const head=(eyebrow,lead)=>`<div class="today-head"><div><div class="eyebrow">${eyebrow}</div><div class="lead">${lead}</div></div>${nav}</div>`+lastBanner();
+  const dayTitle=DAYN[date.getDay()]+", "+date.toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"});
+  if(!loc){
+    const p1=yearPlan(settings().ano0);
+    if(date<p1.start){
+      const days=Math.ceil((p1.start-date)/864e5);const ano=settings().ano0;
+      return head(dayTitle,"Faltam "+days+" dias para começar!")+
+        `<div class="banner" style="--bc:var(--t-hoje)"><strong>O ${ano}º ano começa em ${fmt(p1.start,{weekday:"long",day:"numeric",month:"long",year:"numeric"})}</strong>Abaixo, a prévia do primeiro dia de aula. A data de início pode ser mudada na aba Calendário.</div>`+
+        habitBox(ano,1)+`<div class="eyebrow">Prévia · Segunda-feira · 1º trimestre, semana 1</div>`+dayLessons(ano,1,1,1,"previa")+afternoon(1);
+    }
+    return head(dayTitle,"Fora do calendário escolar")+`<div class="banner"><strong>Os quatro anos letivos já terminaram nesta data.</strong>Ajuste a data de início na aba Calendário, se precisar.</div>`;
+  }
+  if(loc.gap)return head(dayTitle,"Férias!")+`<div class="banner" style="--bc:var(--c-geo)"><strong>Férias de julho do ${loc.ano}º ano</strong>Duas semanas entre o 2º e o 3º trimestre. Aproveite para passeios, museus e tempo ao ar livre.</div>`;
+  const {ano,t,w,dow}=loc;
+  const eb=`${ano}º ano · ${t}º trimestre · semana ${w} de 12`;
+  if(dow===0||dow===6)return head(eb,dayTitle)+`<div class="banner" style="--bc:var(--c-cie)"><strong>Fim de semana</strong>Sem lições. Um bom dia para passeio em família, leitura juntos e o culto.</div>`+habitBox(ano,t);
+  if(w===12)return head(eb,dayTitle)+`<div class="banner" style="--bc:var(--c-edf)"><strong>Semana de descanso</strong>Sem lições formais. Revise o diário da natureza, organize os cadernos, faça passeios e prepare os livros do próximo trimestre.</div>`;
+  st.ano=ano;
+  let extra="";
+  if(w===11&&dow===5)extra=`<div class="banner" style="--bc:var(--c-cat)"><strong>Avaliação do trimestre</strong>Hoje, no lugar das lições, faça as perguntas de narração da aba Semana (semana 11). A criança responde contando, oralmente${ano>=3?" ou por escrito":""}.</div>`;
+  return head(eb,dayTitle)+extra+habitBox(ano,t)+`<div class="notice">Toque no ícone da câmera ao lado de cada aula para registrar fotos, resumo e observações no Diário.</div>`+dayLessons(ano,t,w,dow,dk)+afternoon(dow);
+}
+function lastBanner(){
+  const L=prof.last;if(!L||!L.label)return "";
+  return `<div class="resume"><div><div class="eyebrow">Você parou aqui</div><b>${esc(L.label)}</b><div class="muted" style="font-size:.85rem">${L.ano?L.ano+"º ano · "+L.t+"º trimestre · semana "+L.w+" · ":""}marcado em ${parseISO(L.date).toLocaleDateString("pt-BR")}</div></div>${L.ano?`<button type="button" class="btn primary" data-goto="${L.ano}-${L.t}-${L.w}">Continuar</button>`:""}</div>`;
+}
+function afternoon(dow){
+  return `<div class="panel afternoon"><div class="eyebrow">Tarde</div><ul>${(AFTER[dow]||AFTER[1]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+}
+function habitBox(ano,t){
+  const [h,d]=HAB[ano][t-1];
+  return `<div class="panel habit"><div class="seal" aria-hidden="true">${esc(h[0])}</div><div><div class="eyebrow">Hábito do trimestre</div><h3 style="font-size:1.3rem">${esc(h)}</h3><div class="muted">${esc(d)}</div></div></div>`;
+}
+
+/* ---------- Semana ---------- */
+function weekProgress(ano,t,w){let n=0;ORDER.forEach(k=>{if(isDone(`w:${ano}:${t}:${w}:${k}`))n++});return n/ORDER.length}
+function vSemana(){
+  const {ano,t,w}=st;const p=yearPlan(ano);const T=p.terms[t-1];
+  const ws=addDays(T.start,(w-1)*7),we=addDays(ws,4);
+  const termBtns=[1,2,3].map(x=>`<button type="button" data-term="${x}" aria-pressed="${x===t}">${x}º trimestre</button>`).join("");
+  const weekBtns=Array.from({length:12},(_,i)=>{const n=i+1;const pr=n<12?weekProgress(ano,t,n):0;return `<button type="button" data-week="${n}" class="${n===12?"rest":""}" aria-pressed="${n===w}" aria-label="Semana ${n}${n===12?" (descanso)":""}">${n===12?"D":n}${n<12?`<span class="prog"><i style="width:${Math.round(pr*100)}%"></i></span>`:""}</button>`}).join("");
+  let body;
+  if(w===12){
+    body=`<div class="banner" style="--bc:var(--c-edf)"><strong>Semana 12: descanso</strong>${fmt(ws)} a ${fmt(we)}. Sem lições formais. Revise o diário da natureza, organize cadernos e prepare os livros do próximo trimestre.</div>`;
+  }else{
+    const pr=weekProgress(ano,t,w);
+    const today=new Date();const regDate=(today>=ws&&today<=addDays(we,1))?iso(today):iso(ws);
+    const cards=ORDER.map(k=>{
+      const a=assignment(ano,k,t,w);const key=`w:${ano}:${t}:${w}:${k}`;const done=isDone(key);
+      const d=termData(ano,k,t);
+      const list=k==="lin"?`<ul>${d.t.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"";
+      const nreg=recs.filter(r=>r.ano===ano&&r.t===t&&r.w===w&&r.subj===k).length;
+      let wb=weekBooks(ano,t,w,k).map(x=>bookLine(x,true)).join("");
+      if(k==="bib"){const L=bibWeekLists(ano,t,w);wb=`<div class="bk prep"><span>Preparação dos pais: <b>Matthew Henry</b> sobre ${esc(fmtRange(L.at))} e ${esc(fmtRange(L.nt))}</span></div>`+wb}
+      return `<article class="card s-${k}${done?" done":""}"><div class="head"><span class="tag">${badge(k)}${esc(S[k].n)}</span><input class="chk" type="checkbox" id="c-${key}" data-key="${key}" data-label="${esc(S[k].n+" · "+a.main)}" ${done?"checked":""} aria-label="Semana concluída: ${esc(S[k].n)}"></div><div class="body"><div class="assign">${k==="lin"?"Foco: "+esc(a.main):esc(a.main)}</div>${wb?`<div class="bks">${wb}</div>`:""}${a.sub&&k!=="lin"?`<div class="meta">${esc(a.sub)}</div>`:""}${list}${k==="lin"&&a.sub?`<div class="meta">${esc(a.sub)}</div>`:""}<div class="meta">${esc(S[k].how)}</div><div class="row"><button type="button" class="btn color" data-reg="${k}" data-rdate="${regDate}" data-rlabel="${esc(a.main)}">${svg("cam",15)} Registrar aula</button>${nreg?`<span class="pill">${nreg} registro${nreg>1?"s":""}</span>`:""}</div></div></article>`;
+    }).join("");
+    let aval="";
+    if(w===11){
+      const qs=["his","cie","geo","art","mus"].map(k=>{const d=termData(ano,k,t);const pick=d.t[Math.min(d.t.length-1,2)];return `<li><b class="s-${k}" style="color:var(--sc)">${esc(S[k].n)}:</b> Conte tudo o que você sabe sobre “${esc(pick)}”.</li>`});
+      const b=BIB[ano][t-1];
+      qs.unshift(`<li><b class="s-bib" style="color:var(--sc)">Bíblia:</b> Escolha uma história de ${esc(b.at[0][0])} que você ouviu neste trimestre e conte-a com todos os detalhes.</li>`);
+      qs.push(`<li><b class="s-lin" style="color:var(--sc)">Literatura:</b> Narre a parte de que você mais gostou do livro do trimestre.</li>`);
+      qs.push(`<li><b class="s-cat" style="color:var(--sc)">Recitação:</b> Os pais escolhem um Salmo ou poema e três perguntas do catecismo.</li>`);
+      aval=`<div class="banner" style="--bc:var(--c-cat)"><strong>Avaliação do trimestre · sexta-feira da semana 11</strong><p class="muted" style="margin:4px 0 8px">No modelo dos apêndices do livro: perguntas abertas, respondidas por narração. Não há nota; observe o que a criança sabe.</p><ol style="margin:0;padding-left:1.2em;display:grid;gap:4px">${qs.join("")}</ol></div>`;
+    }
+    body=`<div class="row"><span class="pill">${fmt(ws)} a ${fmt(we)}</span><div class="progress" role="img" aria-label="Progresso da semana ${Math.round(pr*100)}%"><i style="width:${Math.round(pr*100)}%"></i></div><span class="muted" style="font-variant-numeric:tabular-nums;font-weight:700">${Math.round(pr*ORDER.length)} de ${ORDER.length} matérias</span></div>${aval}<div class="cards">${cards}</div>`;
+  }
+  return `<div><div class="eyebrow">${ano}º ano · ${ano+5} anos</div><div class="lead">Plano da semana</div></div><div class="termsel">${termBtns}</div><div class="weekbar">${weekBtns}</div>${habitBox(ano,t)}${body}`;
+}
+
+/* ---------- Visão geral, Horário, Calendário ---------- */
+function vTri(){
+  const ano=st.ano;const p=yearPlan(ano);
+  const flat=segs=>segs.flatMap(([bk,a,z])=>Array.from({length:z-a+1},(_,i)=>[bk,a+i]));
+  const rows=ORDER.map(k=>`<tr class="s-${k}"><th scope="row"><span class="in">${badge(k,true)}${esc(S[k].n)}</span></th>${[1,2,3].map(t=>{const d=termData(ano,k,t);let det="";
+    if(k==="bib"){const b=BIB[ano][t-1];det=`<ol style="list-style:none;padding:0"><li>AT: ${esc(fmtRange(flat(b.at)))}</li><li>NT: ${esc(fmtRange(flat(b.nt)))}</li></ol>`}
+    else if(d.t)det=`<ol>${d.t.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`;
+    const bl=allUses().filter(u=>u.ano===ano&&u.t===t&&u.k===k);
+    if(k==="bib")bl.unshift({book:BOOKS[0],w0:1,w1:11});
+    if(bl.length)det+=`<div class="tbooks">${bl.map(u=>`<span class="${!u.book.own&&!cfg.comprado[u.book.id]?"buy":"own"}">${esc(u.book.n)}${u.w0>1||u.w1<11?` (sem. ${u.w0}–${u.w1})`:""}</span>`).join("")}</div>`;
+    return `<td><div class="r">${esc(d.r)}</div>${det}</td>`}).join("")}</tr>`).join("");
+  const hab=`<tr style="--sc:var(--c-geo)"><th scope="row"><span class="in" style="color:var(--c-geo)">Hábito</span></th>${[1,2,3].map(t=>`<td><div class="r">${esc(HAB[ano][t-1][0])}</div></td>`).join("")}</tr>`;
+  return `<div><div class="eyebrow">${ano}º ano · ${ano+5} anos</div><div class="lead">Visão geral dos trimestres</div><p class="muted" style="margin:4px 0 0">Cada trimestre tem 12 semanas: 11 de instrução e 1 de descanso. Os tópicos numerados são distribuídos pelas 11 semanas.</p></div>
+  <div class="scroll"><table class="ov"><thead><tr><th>Matéria</th>${p.terms.map(T=>`<th>${T.t}º Trimestre<small>${fmt(T.start)} a ${fmt(T.end)}</small></th>`).join("")}</tr></thead><tbody>${rows}${hab}</tbody></table></div>`;
+}
+function vHorario(){
+  const g=TT[grp(st.ano)];
+  const head=`<tr><th>Hora</th>${[1,2,3,4,5].map(d=>`<th>${DAYN[d]}</th>`).join("")}</tr>`;
+  const rows=g.slots.map(s=>`<tr><td class="t">${s.h}<small>${s.m} min</small></td>${[1,2,3,4,5].map(d=>{const k=slotSubject(s,d);return `<td class="c s-${k}"><b>${esc(slotLabel(s,d))}</b></td>`}).join("")}</tr>`).join("");
+  const aft=`<tr><td class="t">Tarde</td>${[1,2,3,4,5].map(d=>`<td class="af">${AFTER[d].map(esc).join("<br>")}</td>`).join("")}</tr>`;
+  return `<div><div class="eyebrow">${g.label}</div><div class="lead">Horário semanal</div><p class="muted" style="margin:4px 0 0">Lições curtas pela manhã (até 20 minutos para menores de 8 anos), alternando matérias que exigem raciocínio com outras mais leves. As tardes ficam livres para a natureza e os trabalhos manuais.</p></div>
+  <div class="scroll"><table class="tt"><thead>${head}</thead><tbody>${rows}<tr><td class="t">${g.end}</td><td colspan="5" class="af">Fim das lições da manhã</td></tr>${aft}</tbody></table></div>
+  <div class="banner" style="--bc:var(--c-cie)"><strong>Recompensa natural</strong>Se a criança termina bem a lição antes do tempo, os minutos que sobram são dela, para brincar. É o estímulo que o livro recomenda no lugar de notas e competição.</div>`;
+}
+function vCal(){
+  const s=settings();const cur=locate(new Date());
+  const years=[1,2,3,4].map(a=>{const p=yearPlan(a);return `<div class="y${cur&&cur.ano===a?" now":""}" data-y="${a}"><div class="row" style="justify-content:space-between"><h3>${a}º ano</h3><span class="pill">${p.start.getFullYear()} · ${a+5} anos</span></div>${p.terms.map(T=>`<div class="t"><b>${T.t}º trimestre</b><span>Aulas: ${fmt(T.start)} a ${fmt(T.instrEnd)}</span><span>Descanso: ${fmt(T.restStart)} a ${fmt(T.end)}</span></div>${T.t===2&&s.julho?`<div class="t"><b>Férias de julho</b><span>${fmt(addDays(T.end,3))} a ${fmt(addDays(T.end,14))}</span></div>`:""}`).join("")}<div class="muted" style="font-size:.85rem">Fim do ano letivo: ${fmt(p.end,{day:"numeric",month:"long",year:"numeric"})}</div></div>`}).join("");
+  return `<div><div class="eyebrow">Ano letivo</div><div class="lead">Calendário</div><p class="muted" style="margin:4px 0 0">Três trimestres de 12 semanas (11 de instrução + 1 de descanso), de segunda a sexta. Total: 33 semanas de aula e 165 dias letivos por ano.</p></div>
+  <div class="panel settings"><label for="startDate">Início do ano letivo<input type="date" id="startDate" value="${esc(s.start)}"></label>
+  <label for="ano0">Em que ano a criança está nesse início?<select id="ano0">${[1,2,3,4].map(a=>`<option value="${a}" ${a===s.ano0?"selected":""}>${a}º ano</option>`).join("")}</select></label>
+  <label class="toggle" for="julho"><input type="checkbox" id="julho" ${s.julho?"checked":""}> Duas semanas de férias em julho, entre o 2º e o 3º trimestre</label>
+  <div class="muted" style="font-size:.85rem">Os anos seguintes começam na primeira segunda-feira a partir da mesma data. Feriados não estão descontados: em semana com feriado, junte as lições daquele dia às de sexta ou pule a lição rotativa.</div></div>
+  <div class="cal">${years}</div>`;
+}
+
+/* ---------- Diário e fotos ---------- */
+const STATUS={ok:"Aula concluída",and:"Em andamento",rev:"Precisa revisar"};
+function newDraft(subj,date,label){
+  const d=date||iso(new Date());const loc=locate(parseISO(d));
+  const ano=loc&&!loc.gap?loc.ano:st.ano;
+  return {id:null,date:d,ano,subj:subj||"bib",aula:label||"",status:"ok",resumo:"",obs:"",quem:store.get("quem","Mãe"),fotos:[]};
+}
+function curLabelFor(subj,date){
+  const loc=locate(parseISO(date));if(!loc||loc.gap||loc.w===12)return "";
+  return assignment(loc.ano,subj,loc.t,loc.w).main;
+}
+function vForm(){
+  const d=st.draft;
+  const subjChips=ORDER.map(k=>`<button type="button" class="s-${k}" data-fsubj="${k}" aria-pressed="${d.subj===k}">${esc(S[k].n)}</button>`).join("");
+  const where=cloud.mode!=="cloud"?"As fotos ficam salvas neste aparelho.":cloud.assets?"As fotos ficam salvas na nuvem do cronograma, em boa qualidade.":"As fotos ficam salvas na nuvem do cronograma, em tamanho reduzido.";
+  const thumbs=d.fotos.map((f,i)=>`<div class="thumb">${f.preview?`<img src="${esc(f.preview)}" alt="Nova foto">`:img(f)}<div class="tb"><input type="text" id="leg-${i}" data-leg="${i}" value="${esc(f.legenda||"")}" placeholder="O que mostra a foto?" aria-label="Legenda da foto ${i+1}"><button type="button" class="btn danger" data-rmfoto="${i}">Remover</button></div></div>`).join("");
+  return `<div class="panel form" id="formbox"><div class="row" style="justify-content:space-between"><h2>${d.id?"Editar registro":"Novo registro de aula"}</h2><button type="button" class="btn ghost" data-fcancel="1">Cancelar</button></div>
+  <div class="fgrid">
+    <label class="field" for="f-date">Data da aula<input type="date" id="f-date" value="${esc(d.date)}"></label>
+    <label class="field" for="f-quem">Quem está registrando<select id="f-quem">${["Mãe","Pai","Criança","Outro"].map(q=>`<option ${q===d.quem?"selected":""}>${q}</option>`).join("")}</select></label>
+    <label class="field" for="f-ano">Ano<select id="f-ano">${[1,2,3,4].map(a=>`<option value="${a}" ${a===d.ano?"selected":""}>${a}º ano</option>`).join("")}</select></label>
+  </div>
+  <div class="field">Matéria<div class="chips" role="group" aria-label="Matéria">${subjChips}</div></div>
+  <label class="field" for="f-aula">Aula / tema<input type="text" id="f-aula" value="${esc(d.aula)}" placeholder="Ex.: Gênesis 1 · A criação"><span class="hint">Preenchido com a lição do cronograma; pode mudar.</span></label>
+  <div class="field">Andamento<div class="status" role="group" aria-label="Andamento">${Object.entries(STATUS).map(([k,v])=>`<button type="button" data-st="${k}" aria-pressed="${d.status===k}">${v}</button>`).join("")}</div></div>
+  <label class="field" for="f-resumo">Resumo do que foi feito<textarea id="f-resumo" placeholder="Ex.: Lemos Gênesis 1. Ele narrou a criação dia por dia e desenhou o sol e a lua.">${esc(d.resumo)}</textarea></label>
+  <label class="field" for="f-obs">Observações<textarea id="f-obs" placeholder="Dificuldades, o que chamou a atenção, o que retomar na próxima aula…">${esc(d.obs)}</textarea></label>
+  <div class="field">Fotos da aula
+    <div class="photobtns"><label class="btn color s-art">${svg("cam",16)} Tirar foto<input type="file" id="f-cam" accept="image/*" capture="environment" aria-label="Tirar foto"></label><label class="btn">${svg("pic",16)} Escolher da galeria<input type="file" id="f-gal" accept="image/*" multiple aria-label="Escolher fotos da galeria"></label></div>
+    <span class="hint">${where}</span>
+    ${d.fotos.length?`<div class="thumbs">${thumbs}</div>`:`<span class="hint">Tire uma foto do caderno, do desenho, da atividade ou da criança narrando.</span>`}
+  </div>
+  <div class="row"><button type="button" class="btn primary big" data-fsave="1" id="fsave">Salvar registro</button><span class="muted" style="font-size:.85rem">${cloud.mode==="cloud"?"Salvo na nuvem: quem tem acesso ao cronograma vê o mesmo diário.":"Salvo neste aparelho."}</span></div></div>`;
+}
+function recCard(r){
+  const fotos=(r.fotos||[]).map((f,i)=>`<button type="button" data-open="${esc(r.id)}" data-fi="${i}" aria-label="Abrir foto ${i+1}">${img(f)}<span>${esc(f.legenda||"Sem legenda")}${f.comentarios&&f.comentarios.length?` · ${f.comentarios.length} coment.`:""}</span></button>`).join("");
+  const dt=parseISO(r.date);
+  return `<article class="rec s-${r.subj}"><div class="rh">${badge(r.subj)}<div class="t"><div class="tag">${esc(S[r.subj]?S[r.subj].n:"")} · ${r.ano}º ano</div><h3>${esc(r.aula||"Aula")}</h3><div class="d">${DAYN[dt.getDay()]}, ${dt.toLocaleDateString("pt-BR")} · por ${esc(r.quem||"")}</div></div><span class="stp ${esc(r.status)}">${esc(STATUS[r.status]||"")}</span></div>
+  <div class="rb">${r.resumo?`<div><div class="lbl">Resumo</div><p>${esc(r.resumo)}</p></div>`:""}${r.obs?`<div><div class="lbl">Observações</div><p>${esc(r.obs)}</p></div>`:""}${fotos?`<div class="strip">${fotos}</div>`:""}</div>
+  <div class="ra"><button type="button" class="btn" data-edit="${esc(r.id)}">${svg("pen",14)} Editar</button><button type="button" class="btn danger" data-del="${esc(r.id)}">Excluir</button></div></article>`;
+}
+function vDiario(){
+  const filt=recs.filter(r=>(st.dsubj==="todas"||r.subj===st.dsubj)&&(!st.dano||r.ano===st.dano));
+  const chips=`<button type="button" data-dsubj="todas" aria-pressed="${st.dsubj==="todas"}">Todas</button>`+ORDER.map(k=>`<button type="button" class="s-${k}" data-dsubj="${k}" aria-pressed="${st.dsubj===k}">${esc(S[k].n)}</button>`).join("");
+  const anoChips=`<button type="button" data-dano="0" aria-pressed="${!st.dano}">Todos os anos</button>`+[1,2,3,4].map(a=>`<button type="button" data-dano="${a}" aria-pressed="${st.dano===a}">${a}º ano</button>`).join("");
+  const totF=filt.reduce((n,r)=>n+(r.fotos||[]).length,0);
+  let list;
+  if(!filt.length){
+    list=`<div class="panel empty"><div class="art" aria-hidden="true">${["bib","his","geo","cie","lin","mus","art"].map(k=>`<i class="s-${k}" style="background:var(--sc)"></i>`).join("")}</div><h3 style="font-size:1.3rem">Nenhum registro ainda</h3><p class="muted" style="margin:0;max-width:44ch">Cada registro guarda a aula, um resumo do que foi feito, observações e fotos. Comece pelo botão “Novo registro” ou pelo ícone da câmera em cada aula da aba Hoje.</p></div>`;
+  }else if(st.dview==="galeria"){
+    const items=[];filt.forEach(r=>(r.fotos||[]).forEach((f,i)=>items.push([r,f,i])));
+    list=items.length?`<div class="gallery">${items.map(([r,f,i],n)=>`<button type="button" class="gitem s-${r.subj}" style="--rot:${[-1.5,1,-.5,1.5][n%4]}deg" data-open="${esc(r.id)}" data-fi="${i}">${img(f)}<span class="gc"><span class="tag">${esc(S[r.subj].n)}</span><b>${esc(f.legenda||r.aula||"Foto da aula")}</b><small>${parseISO(r.date).toLocaleDateString("pt-BR")}</small></span></button>`).join("")}</div>`:`<div class="notice">Os registros filtrados ainda não têm fotos.</div>`;
+  }else list=`<div class="records">${filt.map(recCard).join("")}</div>`;
+  return `<div class="today-head"><div><div class="eyebrow">Registro fotográfico e andamento</div><div class="lead">Diário das aulas</div></div>${st.draft?"":`<button type="button" class="btn primary big" data-newrec="1">+ Novo registro</button>`}</div>
+  ${st.draft?vForm():""}
+  <div class="dtools"><div class="seg" role="group" aria-label="Modo de exibição"><button type="button" data-dview="linha" aria-pressed="${st.dview==="linha"}">Linha do tempo</button><button type="button" data-dview="galeria" aria-pressed="${st.dview==="galeria"}">Galeria</button></div><span class="muted" style="font-weight:700;font-size:.9rem">${filt.length} registro${filt.length===1?"":"s"} · ${totF} foto${totF===1?"":"s"}</span></div>
+  <div class="chips" role="group" aria-label="Filtrar por matéria">${chips}</div>
+  <div class="chips" role="group" aria-label="Filtrar por ano">${anoChips}</div>
+  ${list}
+  <div class="notice">${cloud.mode==="cloud"?"<b>Compartilhado:</b> registros e fotos ficam salvos com o cronograma; quem entra com o e-mail da família vê e acrescenta.":"<b>Neste aparelho:</b> registros e fotos ficam salvos só neste celular/navegador."}</div>`;
+}
+
+/* visualizador */
+let openPhoto=null;
+function renderViewer(){
+  const v=document.getElementById("viewer");
+  if(!openPhoto){v.innerHTML="";document.body.style.overflow="";return}
+  const r=recs.find(x=>x.id===openPhoto.rid);const f=r&&(r.fotos||[])[openPhoto.i];
+  if(!f){openPhoto=null;v.innerHTML="";document.body.style.overflow="";return}
+  document.body.style.overflow="hidden";
+  const coms=(f.comentarios||[]).map(c=>`<li><small>${esc(c.quem)} · ${new Date(c.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</small>${esc(c.t)}</li>`).join("");
+  const n=(r.fotos||[]).length;
+  v.innerHTML=`<div class="viewer" data-vbg="1"><div class="vbox s-${r.subj}" role="dialog" aria-modal="true" aria-label="Foto da aula"><button type="button" class="vclose" data-vclose="1" aria-label="Fechar">×</button>${img(f)}<div class="vb">
+   <div class="row" style="justify-content:space-between"><span class="tag">${badge(r.subj,true)}${esc(S[r.subj].n)} · ${r.ano}º ano · ${parseISO(r.date).toLocaleDateString("pt-BR")}</span>${n>1?`<span class="row"><button type="button" class="btn" data-vnav="-1" aria-label="Foto anterior">‹</button><span class="muted" style="font-weight:700">${openPhoto.i+1}/${n}</span><button type="button" class="btn" data-vnav="1" aria-label="Próxima foto">›</button></span>`:""}</div>
+   <h3>${esc(r.aula||"Aula")}</h3>
+   <label class="field" for="v-leg">Legenda da foto<input type="text" id="v-leg" value="${esc(f.legenda||"")}" placeholder="O que mostra a foto?"></label>
+   ${r.resumo?`<div><div class="lbl" style="color:var(--sc);font-weight:800;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em">Resumo da aula</div><p style="margin:2px 0 0;white-space:pre-wrap">${esc(r.resumo)}</p></div>`:""}
+   <div><div class="eyebrow">Comentários</div>${coms?`<ul class="coms">${coms}</ul>`:`<p class="muted" style="margin:4px 0 0">Nenhum comentário nesta foto.</p>`}</div>
+   <div class="fgrid" style="grid-template-columns:1fr auto;align-items:end"><label class="field" for="v-com">Comentar a foto<input type="text" id="v-com" placeholder="Ex.: Que desenho caprichado do João-de-barro!"></label><button type="button" class="btn primary" data-vcom="1">Comentar</button></div>
+   <div class="row" style="justify-content:space-between"><button type="button" class="btn" data-vleg="1">Salvar legenda</button><button type="button" class="btn danger" data-vdel="1">Excluir foto</button></div>
+  </div></div></div>`;
+}
+
+/* ---------- Método ---------- */
+function vMetodo(){
+  const pr=[["Lições curtas","Até 20 minutos para crianças com menos de 8 anos. A criança sabe que o tempo é curto e presta atenção.","Parte IV, Cap. I","mat"],
+   ["Alternar as lições","Primeiro a que exige raciocínio (matemática), depois uma mais mecânica (caligrafia), e assim por diante.","Parte IV, Cap. I","lin"],
+   ["Narração","Ler uma única vez e pedir que a criança conte de novo, com suas palavras. A partir dos 6 anos, não antes.","Parte V, Cap. IX","his"],
+   ["Livros vivos","Só clássicos infantis e livros bem escritos, sem diluir com conversa nem interromper com perguntas.","Parte V, Cap. IX","cat"],
+   ["Manhãs de lição, tardes ao ar livre","Horas ao ar livre todos os dias, observando a natureza e brincando.","Parte II","cie"],
+   ["Hábitos","Um hábito por trimestre, formado com paciência e constância.","Partes III e IV","geo"],
+   ["Avaliação por narração","No fim do trimestre, perguntas abertas como ‘Conte tudo o que sabe sobre…’, sem provas de múltipla escolha.","Apêndices A e B","bib"],
+   ["Trabalho definido","Um horário fixo, para a criança saber o que fazer e por quanto tempo.","Parte IV, Cap. I","mus"]];
+  return `<div><div class="eyebrow">Educação no Lar · Volume 1</div><div class="lead">Como ensinar cada matéria</div><p class="muted" style="margin:4px 0 0">Resumo do método de Charlotte Mason, com a indicação do capítulo do livro.</p></div>
+  <div class="principles">${pr.map(([h,p,r,k])=>`<div class="panel s-${k}"><h3>${esc(h)}</h3><p>${esc(p)}</p><p class="muted" style="font-size:.8rem;margin-top:6px">${esc(r)}</p></div>`).join("")}</div>
+  <div class="mlist">${ORDER.map(k=>`<div class="mitem s-${k}">${badge(k)}<div><h3>${esc(S[k].n)}</h3><p>${esc(S[k].m)}</p><div class="ref">${esc(S[k].ref)}</div></div></div>`).join("")}</div>
+  <p class="foot">Os títulos de livros e obras sugeridos são indicações; troque por edições que a família tiver.</p>`;
+}
+
+/* ---------- ações do diário ---------- */
+function openForm(subj,date,label){
+  const d=newDraft(subj,date,label||curLabelFor(subj||"bib",date||iso(new Date())));
+  st.draft=d;st.tab="diario";store.set("tab","diario");render();
+  const fb=document.getElementById("formbox");if(fb)fb.scrollIntoView({block:"start"});
+}
+let saving=false;
+async function saveDraft(){
+  if(saving)return;const d=st.draft;if(!d)return;
+  saving=true;const b=document.getElementById("fsave");if(b){b.disabled=true;b.textContent="Salvando…"}
+  try{
+    const fotos=[];
+    for(const f of d.fotos){
+      if(f.blob){const s=await storePhoto(f.blob);fotos.push(Object.assign({id:s.id,cloud:!!s.cloud,legenda:f.legenda||"",comentarios:[]},s.db?{db:true}:{}))}
+      else fotos.push(Object.assign({id:f.id,cloud:!!f.cloud,legenda:f.legenda||"",comentarios:f.comentarios||[]},f.db?{db:true}:{}));
+    }
+    const loc=locate(parseISO(d.date));
+    const old=d.id?recs.find(x=>x.id===d.id):null;
+    const r={id:d.id||("r"+newId()),date:d.date,ano:+d.ano,t:loc&&!loc.gap?loc.t:0,w:loc&&!loc.gap?loc.w:0,subj:d.subj,aula:d.aula.trim(),status:d.status,resumo:d.resumo.trim(),obs:d.obs.trim(),quem:d.quem,fotos,ts:old?old.ts:Date.now()};
+    store.set("quem",d.quem);
+    await saveRecord(r);
+    d.fotos.forEach(f=>{if(f.preview)URL.revokeObjectURL(f.preview)});
+    st.draft=null;st.dsubj="todas";st.dano=0;toast("Registro salvo.");render();scrollTo(0,0);
+  }catch(e){
+    const code=e&&e.code;
+    toast(e&&e.message==="decode"?"Não foi possível ler essa foto. Tente outra.":e&&e.message==="toolarge"?"A foto é grande demais.":code==="too_large"?"A foto é grande demais.":code==="quota_or_state"||code==="quota_exceeded"?"O espaço de armazenamento acabou. Exclua fotos antigas.":"Não foi possível salvar. Tente de novo.");
+    if(b){b.disabled=false;b.textContent="Salvar registro"}
+  }finally{saving=false}
+}
+async function addFiles(files){
+  if(!st.draft)return;
+  let n=0;
+  for(const file of files){
+    if(file.type&&!file.type.startsWith("image/"))continue;n++;
+    const blob=await compress(file);
+    st.draft.fotos.push({blob,preview:URL.createObjectURL(blob),legenda:""});
+  }
+  toast(n?(n===1?"Foto adicionada. Não esqueça de salvar o registro.":n+" fotos adicionadas. Não esqueça de salvar o registro."):"Nenhuma imagem foi recebida.");
+  render();const fb=document.querySelector(".thumbs");if(fb)fb.scrollIntoView({block:"nearest"});
+}
+async function updateRecord(rid,fn){
+  const r=recs.find(x=>x.id===rid);if(!r)return;
+  const copy=JSON.parse(JSON.stringify(r));fn(copy);
+  try{await saveRecord(copy);if(cloud.mode!=="cloud"){renderViewer();render()}}catch(e){toast("Não foi possível salvar. Tente de novo.")}
+}
+
+/* ---------- eventos ---------- */
+const armed={};
+function arm(btn,key,label,fn){
+  if(armed[key]){clearTimeout(armed[key]);delete armed[key];fn();return}
+  btn.classList.add("armed");const old=btn.textContent;btn.textContent=label;
+  armed[key]=setTimeout(()=>{delete armed[key];btn.classList.remove("armed");btn.textContent=old},4000);
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");
+  if(!b){if(e.target.dataset&&e.target.dataset.vbg){openPhoto=null;renderViewer()}return}
+  const ds=b.dataset;touched=true;
+  if(ds.logout){if(window.FB_AUTH){FB_AUTH.signOut().finally(()=>location.reload());return}prof.email="";prof.last=null;store.set("email","");profSaved="";render();scrollTo(0,0);return}
+  if(ds.forgot){const em=(document.getElementById("l-email").value||"").trim();const er=document.getElementById("l-err");if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){er.textContent="Digite seu e-mail acima e toque de novo em “Esqueci minha senha”.";er.hidden=false;return}FB_AUTH.sendPasswordResetEmail(em).then(()=>{er.hidden=true;toast("Enviamos um e-mail para criar uma nova senha.")}).catch(()=>{er.textContent="Não foi possível enviar o e-mail. Confira o endereço.";er.hidden=false});return}
+  if(ds.goto){const [a,t,w]=ds.goto.split("-").map(Number);st.ano=a;st.t=t;st.w=w;st.tab="semana";render();scrollTo(0,0);return}
+  if(ds.ano){st.ano=+ds.ano;store.set("ano",st.ano);if(st.tab==="hoje"){st.tab="semana";store.set("tab","semana")}render()}
+  else if(ds.tab){st.tab=ds.tab;store.set("tab",st.tab);if(st.tab==="semana"){const l=locate(new Date());if(l&&!l.gap&&l.ano===st.ano){st.t=l.t;st.w=l.w}}render();scrollTo(0,0)}
+  else if(ds.term){st.t=+ds.term;store.set("t",st.t);render()}
+  else if(ds.week){st.w=+ds.week;store.set("w",st.w);render()}
+  else if(ds.day!=null){const n=+ds.day;if(n===0)st.day=null;else{const d=st.day?parseISO(st.day):new Date();st.day=iso(addDays(d,n))}render()}
+  else if(ds.reg){openForm(ds.reg,ds.rdate,ds.rlabel)}
+  else if(ds.newrec){openForm(null,null,null)}
+  else if(ds.fcancel){if(st.draft)st.draft.fotos.forEach(f=>{if(f.preview)URL.revokeObjectURL(f.preview)});st.draft=null;render()}
+  else if(ds.fsubj){const d=st.draft;const auto=!d.aula||d.aula===curLabelFor(d.subj,d.date);d.subj=ds.fsubj;if(auto)d.aula=curLabelFor(d.subj,d.date);render()}
+  else if(ds.st&&st.draft){st.draft.status=ds.st;render()}
+  else if(ds.rmfoto!=null&&st.draft){const f=st.draft.fotos.splice(+ds.rmfoto,1)[0];if(f&&f.preview)URL.revokeObjectURL(f.preview);render()}
+  else if(ds.fsave){saveDraft()}
+  else if(ds.dview){st.dview=ds.dview;store.set("dview",st.dview);render()}
+  else if(ds.dsubj){st.dsubj=ds.dsubj;render()}
+  else if(ds.dano!=null){st.dano=+ds.dano;render()}
+  else if(ds.edit){const r=recs.find(x=>x.id===ds.edit);if(r){st.draft={id:r.id,date:r.date,ano:r.ano,subj:r.subj,aula:r.aula||"",status:r.status||"ok",resumo:r.resumo||"",obs:r.obs||"",quem:r.quem||"Mãe",fotos:(r.fotos||[]).map(f=>Object.assign({},f))};render();scrollTo(0,0)}}
+  else if(ds.del){arm(b,"del"+ds.del,"Confirmar exclusão",async()=>{const r=recs.find(x=>x.id===ds.del);if(r){try{await deleteRecord(r);toast("Registro excluído.");render()}catch(err){toast("Não foi possível excluir.")}}})}
+  else if(ds.open){openPhoto={rid:ds.open,i:+ds.fi};renderViewer()}
+  else if(ds.vclose){openPhoto=null;renderViewer()}
+  else if(ds.vnav){const r=recs.find(x=>x.id===openPhoto.rid);const n=(r.fotos||[]).length;openPhoto.i=(openPhoto.i+(+ds.vnav)+n)%n;renderViewer()}
+  else if(ds.vcom){const inp=document.getElementById("v-com");const t=(inp.value||"").trim();if(!t)return;const i=openPhoto.i;updateRecord(openPhoto.rid,r=>{const f=r.fotos[i];f.comentarios=f.comentarios||[];f.comentarios.push({t,quem:store.get("quem","Mãe"),ts:Date.now()})});inp.value="";toast("Comentário adicionado.")}
+  else if(ds.vleg){const v=document.getElementById("v-leg").value;const i=openPhoto.i;updateRecord(openPhoto.rid,r=>{r.fotos[i].legenda=v.trim()});toast("Legenda salva.")}
+  else if(ds.vdel){const {rid,i}=openPhoto;arm(b,"vdel"+rid+i,"Confirmar exclusão",()=>{const r=recs.find(x=>x.id===rid);const f=r&&r.fotos[i];updateRecord(rid,c=>{c.fotos.splice(i,1)});delPhotoAny(f);openPhoto=null;renderViewer();toast("Foto excluída.")})}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&openPhoto){openPhoto=null;renderViewer()}if(e.key==="Enter"&&e.target.id==="v-com"){e.preventDefault();document.querySelector("[data-vcom]").click()}});
+document.addEventListener("input",e=>{
+  const t=e.target,d=st.draft;if(!d)return;
+  if(t.id==="f-aula")d.aula=t.value;else if(t.id==="f-resumo")d.resumo=t.value;else if(t.id==="f-obs")d.obs=t.value;
+  else if(t.dataset.leg!=null&&d.fotos[+t.dataset.leg])d.fotos[+t.dataset.leg].legenda=t.value;
+});
+document.addEventListener("change",e=>{
+  const t=e.target;const d=st.draft;
+  if(t.dataset.got){if(t.checked)cfg.comprado[t.dataset.got]=1;else delete cfg.comprado[t.dataset.got];saveCfg();return}
+  if(t.dataset.cfg){const m=t.dataset.cfg.match(/^(.+-\d+)-(from|to|unit|ano|t|k|w0|w1)$/);if(m){const o=cfg.u[m[1]]=cfg.u[m[1]]||{};o[m[2]]=t.value===""?null:(["unit","k"].includes(m[2])?t.value:+t.value);saveCfg();
+    if(["from","to","unit"].includes(m[2])){const [bid,bi]=[m[1].slice(0,m[1].lastIndexOf("-")),+m[1].slice(m[1].lastIndexOf("-")+1)];const bk=BOOKS.find(x=>x.id===bid);if(bk){const u=effUse(bk,bi);const pv=document.getElementById(m[1]+"-prev");if(pv)pv.innerHTML=previewHTML(u,sessions(u))}}else render()}return}
+  if(t.classList.contains("chk")&&t.dataset.key){setDone(t.dataset.key,t.checked,t.dataset.label);const box=t.closest(".lesson,.card");if(box)box.classList.toggle("done",t.checked);if(st.tab==="semana")render()}
+  else if(t.id==="daypick"&&t.value){st.day=t.value;render()}
+  else if(t.id==="startDate"&&t.value){store.set("start",t.value);render()}
+  else if(t.id==="ano0"){store.set("ano0",+t.value);render()}
+  else if(t.id==="julho"){store.set("julho",t.checked);render()}
+  else if(d&&t.id==="f-date"&&t.value){const auto=!d.aula||d.aula===curLabelFor(d.subj,d.date);d.date=t.value;const l=locate(parseISO(d.date));if(l&&!l.gap)d.ano=l.ano;if(auto)d.aula=curLabelFor(d.subj,d.date);render()}
+  else if(d&&t.id==="f-quem"){d.quem=t.value}
+  else if(d&&t.id==="f-ano"){d.ano=+t.value}
+  else if(d&&(t.id==="f-cam"||t.id==="f-gal")&&t.files&&t.files.length){addFiles(Array.from(t.files));t.value=""}
+});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"&&profTimer){clearTimeout(profTimer);profSaved="";const body=Object.assign(profSnapshot(),{upd:Date.now()});if(prof.email){store.set("perfil:"+pid(prof.email),body);if(cloud.db)cloud.db.collection("perfis").doc(pid(prof.email)).set(body).catch(()=>{})}}});
+document.addEventListener("submit",e=>{
+  if(e.target.id!=="loginform")return;e.preventDefault();
+  if(window.FB_AUTH){
+    const em=(document.getElementById("l-email").value||"").trim().toLowerCase(),pw=document.getElementById("l-pass").value||"";
+    const er=document.getElementById("l-err"),go=document.getElementById("l-go");
+    prof.quem=document.getElementById("l-quem").value;store.set("quem",prof.quem);
+    go.disabled=true;go.textContent="Entrando…";er.hidden=true;
+    FB_AUTH.signInWithEmailAndPassword(em,pw).catch(err=>{
+      const c=err&&err.code||"";
+      er.textContent=c.includes("network")?"Sem internet. Conecte-se e tente de novo.":c.includes("too-many")?"Muitas tentativas. Espere alguns minutos.":c.includes("invalid-email")?"Digite um e-mail válido.":"E-mail ou senha incorretos.";
+      er.hidden=false;go.disabled=false;go.textContent="Entrar";
+    });
+    return;
+  }
+  const em=(document.getElementById("l-email").value||"").trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){document.getElementById("l-err").hidden=false;return}
+  prof.email=em;prof.quem=document.getElementById("l-quem").value;store.set("email",em);store.set("quem",prof.quem);
+  touched=false;prof.last=null;
+  const p=store.get("perfil:"+pid(em),null);if(p)applyProfile(p);
+  render();scrollTo(0,0);loadProfile();
+});
+if(location.hash){const h=location.hash.slice(1);if(TABS.some(([k])=>k===h))st.tab=h}
+if(window.FB_AUTH){
+  prof.email="";
+  FB_AUTH.onAuthStateChanged(u=>{
+    fbPending=false;
+    if(u){prof.email=(u.email||"").toLowerCase();store.set("email",prof.email);const p=store.get("perfil:"+pid(prof.email),null);if(p)applyProfile(p);render();if(!cloud.db)connect();}
+    else{prof.email="";render()}
+  });
+  render();
+}else{
+  if(prof.email){const p=store.get("perfil:"+pid(prof.email),null);if(p)applyProfile(p)}
+  render();
+  connect();
+}
+})();
+</script>
+
+<script>
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
+</script>
+</body>
+</html>
