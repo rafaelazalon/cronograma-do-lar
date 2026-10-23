@@ -444,6 +444,16 @@ table.ov td .r{font-weight:600}
   .viewer{align-items:end;padding:0}
   .vbox{border-radius:18px 18px 0 0;max-height:92vh}
 }
+
+.usebook{font-size:.85rem;font-weight:500!important;color:var(--muted)}
+.book.off{opacity:.65}
+.book.mine{border-top:3px solid var(--accent)}
+.book.nr{border-top-color:var(--danger)}
+.pill.nrp{background:color-mix(in srgb,var(--danger) 14%,var(--surface));color:var(--danger)}
+.mbox{border-top:5px solid var(--danger);max-width:480px}
+.mbox h3{font-size:1.25rem}
+.bform h2{font-size:1.4rem}
+.bk .nrm{font-size:.7rem;font-weight:600;color:var(--danger);margin-left:4px}
 </style>
 
 <header class="top">
@@ -940,7 +950,7 @@ async function connect(){
     cfg={u:d.u||{},comprado:d.comprado||{}};sessCache={};store.set("estante",cfg);
     if(!st.draft&&st.tab!=="estante"&&["hoje","semana","trimestres"].includes(st.tab))render();
   },()=>{});
-  loadProfile();
+  loadProfile();loadUBCloud();
   cloud.unsubM=db.collection("marcas").onSnapshot(snap=>{
     const remote={};snap.docs.forEach(d=>{const v=d.data();if(v&&v.done)remote[d.id]=1});
     Object.keys(marks).forEach(k=>{if(!remote[k])delete marks[k]});Object.assign(marks,remote);store.set("prog",marks);
@@ -967,7 +977,7 @@ function effUse(b,i){
     w0:+(o.w0||u.w[0]),w1:+(o.w1||u.w[1]),days:o.k&&o.k!==u.k?null:u.days,unit:o.unit||u.unit,
     from:o.from!=null&&o.from!==""?+o.from:def[0],to:o.to!=null&&o.to!==""?+o.to:def[1],txt:u.txt};
 }
-function allUses(){const out=[];BOOKS.forEach(b=>b.uses.forEach((_,i)=>out.push(effUse(b,i))));return out}
+function allUses(){if(ubFor!==prof.email)loadUBLocal();const out=[];allBooks().forEach(b=>b.uses.forEach((_,i)=>out.push(effUse(b,i))));return out}
 function slotMatches(u,s,dow){
   if(slotSubject(s,dow)!==u.k)return false;
   if(u.slot)return slotLabel(s,dow).includes(u.slot);
@@ -1025,7 +1035,7 @@ function weekBooks(ano,t,w,k){
 }
 function bookLine(x,withDays){
   const b=x.u.book,buy=!b.own&&!cfg.comprado[b.id];
-  return `<div class="bk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg><span><b>${esc(b.n)}</b>${x.u.txt?` · ${esc(x.u.txt)}`:""} — <span class="${x.need?"need":"pg"}">${esc(x.txt)}</span>${withDays&&x.dias?` <span class="muted">(${esc(x.dias)})</span>`:""}${x.need?` <button type="button" class="linkish" data-tab="estante">informar páginas</button>`:""}${buy?` <span class="buy">a comprar</span>`:""}</span></div>`;
+  return `<div class="bk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg><span><b>${esc(b.n)}</b>${x.u.txt?` · ${esc(x.u.txt)}`:""} — <span class="${x.need?"need":"pg"}">${esc(x.txt)}</span>${withDays&&x.dias?` <span class="muted">(${esc(x.dias)})</span>`:""}${x.need?` <button type="button" class="linkish" data-tab="estante">informar páginas</button>`:""}${buy?` <span class="buy">a comprar</span>`:""}${b.nr?`<span class="nrm">fora do método</span>`:""}</span></div>`;
 }
 /* Bíblia do dia: AT seg/qua/sex, NT ter/qui */
 function bibWeekLists(ano,t,w){
@@ -1106,15 +1116,110 @@ function previewHTML(u,ss){
   if(u.from!=null&&u.to!=null&&!isNaN(u.from)&&!isNaN(u.to)&&u.to>=u.from){const r0=ss.length?unitText(u,0,0,ss.length).txt:"";return `1ª aula: <b>${esc(r0)}</b> · ritmo de ~${Math.max(1,Math.round((u.to-u.from+1)/Math.max(1,ss.length)*10)/10)} por aula`}
   return `Informe o número inicial e final (${esc((UNOUN[u.unit]||"").toLowerCase())}) para o app dividir a leitura pelos dias.`;
 }
+/* ---------- livros de cada pessoa ---------- */
+let ub={lista:[],ocultos:{}},ubFor=null;
+function ubKey(){return "livros:"+pid(prof.email)}
+function loadUBLocal(){ubFor=prof.email;const v=store.get(ubKey(),null);ub=v&&v.lista?{lista:v.lista,ocultos:v.ocultos||{},upd:v.upd||0}:{lista:[],ocultos:{},upd:0};sessCache={}}
+async function loadUBCloud(){
+  if(!cloud.db||!prof.email)return;
+  try{const s=await cloud.db.collection("livros").doc(pid(prof.email)).get();if(s.exists){const r=JSON.parse(JSON.stringify(s.data()));if((r.upd||0)>(ub.upd||0)){ub={lista:r.lista||[],ocultos:r.ocultos||{},upd:r.upd||0};store.set(ubKey(),ub);sessCache={};render()}}}catch(e){}
+}
+function saveUB(){
+  ub.upd=Date.now();store.set(ubKey(),ub);sessCache={};
+  if(cloud.db&&prof.email)cloud.db.collection("livros").doc(pid(prof.email)).set(JSON.parse(JSON.stringify(ub))).catch(()=>toast("Não foi possível salvar seus livros na nuvem."));
+}
+function allBooks(){return BOOKS.filter(b=>!ub.ocultos[b.id]).concat(ub.lista)}
+const mhOn=()=>!ub.ocultos.mh;
+
+/* ---------- avaliação pelo método Charlotte Mason ---------- */
+const CM_TIPOS=[
+ ["vivo","Livro vivo: narrativa de um autor que ama o assunto",0],
+ ["classico","Clássico ou literatura infantil de qualidade",0],
+ ["biografia","Biografia ou história narrada",0],
+ ["natureza","Natureza ou livro de naturalista",0],
+ ["poesia","Poesia, hinos ou Bíblia",0],
+ ["referencia","Atlas, dicionário ou guia de consulta",0],
+ ["didatico","Livro didático ou apostila",1,"Livros didáticos e apostilas trazem fatos resumidos e já explicados, sem ideias vivas. Charlotte Mason os chamava de “resumos secos”."],
+ ["resumo","Resumo ou adaptação muito simplificada",1,"Versões resumidas ou “diluídas” tiram a linguagem do autor. O método pede o texto original ou adaptações bem escritas."],
+ ["personagem","Livro de personagem de desenho, filme ou TV",1,"Livros feitos a partir de personagens comerciais costumam ser o que Charlotte Mason chamava de “twaddle”: conteúdo raso, que não alimenta a mente."],
+ ["atividades","Livro de atividades, colorir ou exercícios",1,"Livros de atividades e exercícios não são lidos e narrados. O método usa livros para ler e narrar."],
+ ["gibi","Gibi ou história em quadrinhos",1,"Quadrinhos trocam a linguagem rica por balões curtos e imagens. Não servem para a narração do método."],
+ ["outro","Outro tipo",0]
+];
+const CM_WORDS=[["apostila","didatico"],["didátic","didatico"],["didatic","didatico"],["livro do aluno","didatico"],["livro do professor","didatico"],["caderno de exerc","atividades"],["colorir","atividades"],["atividades","atividades"],["passatempo","atividades"],["adesivos","atividades"],["resumo","resumo"],["resumido","resumo"],["em quadrinhos","gibi"],["quadrinhos","gibi"],["gibi","gibi"],["turma da mônica","gibi"],["turma da monica","gibi"],["disney","personagem"],["peppa","personagem"],["patrulha canina","personagem"],["frozen","personagem"],["barbie","personagem"],["galinha pintadinha","personagem"],["pokémon","personagem"],["pokemon","personagem"],["minecraft","personagem"],["bluey","personagem"],["marvel","personagem"],["luccas neto","personagem"],["mundo bita","personagem"],["masha","personagem"],["hot wheels","personagem"],["sonic","personagem"]];
+function cmCheck(d){
+  const t=CM_TIPOS.find(x=>x[0]===d.tipo);if(t&&t[2])return t[3];
+  const low=((d.n||"")+" "+(d.a||"")).toLowerCase();
+  const w=CM_WORDS.find(([k])=>low.includes(k));
+  if(w){const tt=CM_TIPOS.find(x=>x[0]===w[1]);return tt[3]}
+  return null;
+}
+function subjDays(ano,k){const g=TT[grp(ano)];const out=[];for(let d=1;d<=5;d++)if(g.slots.some(s=>slotSubject(s,d)===k))out.push(d);return out}
+function newBookDraft(){return {n:"",a:"",tipo:"vivo",k:"lin",slot:"Literatura",ano:st.ano,t:st.t||1,w0:1,w1:11,dia:"0",unit:"páginas",from:"",to:""}}
+function vBookForm(){
+  const d=st.bdraft;
+  const opt=(arr,val)=>arr.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(val)?"selected":""}>${esc(l)}</option>`).join("");
+  const days=subjDays(+d.ano,d.k);
+  return `<div class="panel form bform" id="bookform"><div class="row" style="justify-content:space-between"><h2>Adicionar livro</h2><button type="button" class="btn ghost" data-bcancel="1">Cancelar</button></div>
+  <p class="muted" style="margin:0">O livro fica salvo só na sua conta (${esc(prof.email)}) e entra no cronograma do ano e trimestre que você escolher.</p>
+  <div class="fgrid">
+   <label class="field" for="b-n">Título<input type="text" id="b-n" data-bf="n" value="${esc(d.n)}" placeholder="Ex.: O Jardim Secreto" required></label>
+   <label class="field" for="b-a">Autor<input type="text" id="b-a" data-bf="a" value="${esc(d.a)}" placeholder="Ex.: Frances Hodgson Burnett"></label>
+  </div>
+  <label class="field" for="b-tipo">Que tipo de livro é?<select id="b-tipo" data-bf="tipo">${opt(CM_TIPOS.map(x=>[x[0],x[1]]),d.tipo)}</select><span class="hint">Usado para conferir se o livro combina com o método de Charlotte Mason.</span></label>
+  <div class="fgrid">
+   <label class="field" for="b-k">Matéria<select id="b-k" data-bf="k">${opt(ORDER.map(k=>[k,S[k].n]),d.k)}</select></label>
+   ${d.k==="lin"?`<label class="field" for="b-slot">Parte da aula<select id="b-slot" data-bf="slot">${opt([["Literatura","Literatura e narração"],...(grp(+d.ano)==="A"?[["Leitura","Leitura (a criança lê)"]]:[])],d.slot)}</select></label>`:""}
+   <label class="field" for="b-ano">Ano<select id="b-ano" data-bf="ano">${opt([1,2,3,4].map(a=>[a,a+"º ano"]),d.ano)}</select></label>
+   <label class="field" for="b-t">Trimestre<select id="b-t" data-bf="t">${opt([1,2,3].map(a=>[a,a+"º trimestre"]),d.t)}</select></label>
+   <label class="field" for="b-w0">Da semana<select id="b-w0" data-bf="w0">${opt(Array.from({length:11},(_,i)=>[i+1,i+1]),d.w0)}</select></label>
+   <label class="field" for="b-w1">até a semana<select id="b-w1" data-bf="w1">${opt(Array.from({length:11},(_,i)=>[i+1,i+1]),d.w1)}</select></label>
+   <label class="field" for="b-dia">Em quais dias<select id="b-dia" data-bf="dia">${opt([["0","Todas as aulas de "+S[d.k].n],...days.map(x=>[x,"Só às "+DAYN[x].toLowerCase()+"s"])],d.dia)}</select></label>
+  </div>
+  <div class="fgrid">
+   <label class="field" for="b-unit">Contar por<select id="b-unit" data-bf="unit">${opt(Object.keys(UNITS).map(x=>[x,x]),d.unit)}</select></label>
+   <label class="field" for="b-from">${esc(UNOUN[d.unit]||"Início")} inicial<input type="number" min="1" inputmode="numeric" id="b-from" data-bf="from" value="${esc(d.from)}" placeholder="1"></label>
+   <label class="field" for="b-to">${esc(UNOUN[d.unit]||"")} final<input type="number" min="1" inputmode="numeric" id="b-to" data-bf="to" value="${esc(d.to)}" placeholder="última"></label>
+  </div>
+  <div class="lerr" id="b-err" hidden></div>
+  <div class="row"><button type="button" class="btn primary big" data-bsave="1">Adicionar à estante e ao cronograma</button></div></div>`;
+}
+function saveBookDraft(force){
+  const d=st.bdraft;if(!d)return;
+  const er=document.getElementById("b-err");
+  if(!d.n.trim()){er.textContent="Digite o título do livro.";er.hidden=false;return}
+  if(+d.w0>+d.w1){er.textContent="A semana inicial precisa vir antes da final.";er.hidden=false;return}
+  if(d.from!==""&&d.to!==""&&+d.to<+d.from){er.textContent="O número final precisa ser maior que o inicial.";er.hidden=false;return}
+  const motivo=cmCheck(d);
+  if(motivo&&!force){showModal(d,motivo);return}
+  const use={ano:+d.ano,t:+d.t,k:d.k,w:[+d.w0,+d.w1],unit:d.unit,def:[d.from===""?null:+d.from,d.to===""?null:+d.to]};
+  if(d.k==="lin")use.slot=d.slot;if(d.dia!=="0")use.days=[+d.dia];
+  const b={id:"u"+newId(),n:d.n.trim(),a:d.a.trim(),tipo:d.tipo,own:1,custom:1,uses:[use]};
+  if(motivo)b.nr=1;
+  ub.lista.push(b);saveUB();st.bdraft=null;hideModal();
+  toast("Livro adicionado à sua estante e ao cronograma.");render();scrollTo(0,0);
+}
+function showModal(d,motivo){
+  const tt=document.getElementById("toast");if(tt)tt.hidden=true;
+  let m=document.getElementById("cmmodal");
+  if(!m){m=document.createElement("div");m.id="cmmodal";document.body.appendChild(m)}
+  m.innerHTML=`<div class="viewer" data-mbg="1"><div class="vbox mbox" role="alertdialog" aria-modal="true" aria-labelledby="cm-t"><div class="vb">
+   <div class="eyebrow" style="color:var(--danger)">Atenção</div>
+   <h3 id="cm-t">Este livro não é recomendado para o método Charlotte Mason</h3>
+   <p style="margin:0"><b>${esc(d.n)}</b>${d.a?" · "+esc(d.a):""}</p>
+   <p class="muted" style="margin:0">${esc(motivo)}</p>
+   <p style="margin:0;font-weight:600">Quer continuar?</p>
+   <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-mcancel="1">Cancelar</button><button type="button" class="btn primary" data-mok="1">Continuar mesmo assim</button></div>
+  </div></div></div>`;
+  const b=m.querySelector("[data-mcancel]");if(b)b.focus();
+}
+function hideModal(){const m=document.getElementById("cmmodal");if(m)m.innerHTML=""}
+
 /* ---------- Estante ---------- */
 function vEstante(){
+  if(ubFor!==prof.email)loadUBLocal();
   const sel=(id,opts,val)=>`<select id="${id}" data-cfg="${id}">${opts.map(([v,l])=>`<option value="${v}" ${String(v)===String(val)?"selected":""}>${esc(l)}</option>`).join("")}</select>`;
-  const card=b=>{
-    const buy=!b.own;const got=!!cfg.comprado[b.id];
-    const head=`<div class="bh"><div><h3>${esc(b.n)}</h3>${b.a?`<div class="muted" style="font-size:.88rem">${esc(b.a)}</div>`:""}</div>${buy?`<label class="toggle got" for="got-${b.id}"><input type="checkbox" id="got-${b.id}" data-got="${b.id}" ${got?"checked":""}> Já comprei</label>`:`<span class="pill own">Tenho</span>`}</div>`;
-    if(b.mh)return `<article class="book s-bib">${head}<div class="use"><span class="tag">${badge("bib",true)}Bíblia · todos os anos</span><div>Preparação dos pais: antes de cada aula de Bíblia, leia o comentário de Matthew Henry sobre a passagem do dia (o app mostra qual).</div></div></article>`;
-    const uses=b.uses.map((_,i)=>{const u=effUse(b,i);const ss=sessions(u);const r0=ss.length?unitText(u,0,0,ss.length).txt:"";
-      const p=u.id;
+  const useBlock=(b,i)=>{const u=effUse(b,i);const ss=sessions(u);const p=u.id;
       return `<div class="use s-${u.k}"><div class="row" style="justify-content:space-between"><span class="tag">${badge(u.k,true)}${esc(S[u.k].n)} · ${u.ano}º ano · ${u.t}º trimestre</span><span class="pill">${ss.length} aula${ss.length===1?"":"s"}${u.days?" · "+u.days.map(d=>DAYN[d].slice(0,3).toLowerCase()).join(", "):""}</span></div>
       ${u.txt?`<div class="muted" style="font-size:.85rem">${esc(u.txt)}</div>`:""}
       <div class="ugrid">
@@ -1129,13 +1234,29 @@ function vEstante(){
        <label class="field" for="${p}-w0">Da semana${sel(p+"-w0",Array.from({length:11},(_,i)=>[i+1,i+1]),u.w0)}</label>
        <label class="field" for="${p}-w1">até a semana${sel(p+"-w1",Array.from({length:11},(_,i)=>[i+1,i+1]),u.w1)}</label>
       </div></details>
-      <div class="preview" id="${p}-prev">${previewHTML(u,ss)}</div></div>`}).join("");
-    return `<article class="book">${head}${uses}</article>`;
+      <div class="preview" id="${p}-prev">${previewHTML(u,ss)}</div></div>`};
+  const recCard=b=>{
+    const buy=!b.own;const got=!!cfg.comprado[b.id];const off=!!ub.ocultos[b.id];
+    const head=`<div class="bh"><div><h3>${esc(b.n)}</h3>${b.a?`<div class="muted" style="font-size:.88rem">${esc(b.a)}</div>`:""}</div>${buy?`<label class="toggle got" for="got-${b.id}"><input type="checkbox" id="got-${b.id}" data-got="${b.id}" ${got?"checked":""}> Já comprei</label>`:`<span class="pill own">Tenho</span>`}</div>
+    <label class="toggle usebook" for="use-${b.id}"><input type="checkbox" id="use-${b.id}" data-usebook="${b.id}" ${off?"":"checked"}> Usar no meu cronograma</label>`;
+    if(off)return `<article class="book off">${head}<div class="muted" style="font-size:.85rem">Fora do seu cronograma. Marque acima para voltar a usar.</div></article>`;
+    if(b.mh)return `<article class="book s-bib">${head}<div class="use"><span class="tag">${badge("bib",true)}Bíblia · todos os anos</span><div>Preparação dos pais: antes de cada aula de Bíblia, leia o comentário de Matthew Henry sobre a passagem do dia (o app mostra qual).</div></div></article>`;
+    return `<article class="book">${head}${b.uses.map((_,i)=>useBlock(b,i)).join("")}</article>`;
+  };
+  const myCard=b=>{
+    const tipo=(CM_TIPOS.find(x=>x[0]===b.tipo)||[0,""])[1];
+    return `<article class="book mine${b.nr?" nr":""}"><div class="bh"><div><h3>${esc(b.n)}</h3>${b.a?`<div class="muted" style="font-size:.88rem">${esc(b.a)}</div>`:""}${tipo?`<div class="muted" style="font-size:.78rem">${esc(tipo)}</div>`:""}</div>${b.nr?`<span class="pill nrp">Fora do método</span>`:`<span class="pill own">Meu livro</span>`}</div>
+    ${b.uses.map((_,i)=>useBlock(b,i)).join("")}
+    <div class="row" style="justify-content:flex-end"><button type="button" class="btn danger" data-delbook="${esc(b.id)}">Remover livro</button></div></article>`;
   };
   const own=BOOKS.filter(b=>b.own),buy=BOOKS.filter(b=>!b.own);
-  return `<div><div class="eyebrow">Livros da família</div><div class="lead">Estante</div><p class="muted" style="margin:4px 0 0">Digite a primeira e a última página (ou capítulo, conto, volume) que serão lidas. O app divide a leitura pelas aulas e mostra, em cada dia, exatamente o que ler. Os livros que vocês têm entram primeiro; os que vão comprar ficam mais para a frente.</p></div>
-  <h2 class="shelf">Livros que tenho <span class="pill">${own.length}</span></h2><div class="books">${own.map(card).join("")}</div>
-  <h2 class="shelf">Vou comprar <span class="pill">${buy.length}</span></h2><div class="books">${buy.map(card).join("")}</div>`;
+  return `<div class="today-head"><div><div class="eyebrow">Livros</div><div class="lead">Estante</div></div>${st.bdraft?"":`<button type="button" class="btn primary big" data-addbook="1">+ Adicionar livro</button>`}</div>
+  <p class="muted" style="margin:0;max-width:72ch">Digite a primeira e a última página (ou capítulo, conto, volume) de cada livro. O app divide a leitura pelas aulas e mostra, em cada dia, exatamente o que ler.</p>
+  ${st.bdraft?vBookForm():""}
+  <h2 class="shelf">Meus livros <span class="pill">${ub.lista.length}</span></h2>
+  ${ub.lista.length?`<div class="books">${ub.lista.map(myCard).join("")}</div>`:`<div class="notice">Você ainda não adicionou livros. Use <b>+ Adicionar livro</b>: ele fica salvo só na sua conta e entra no cronograma do ano que você escolher.</div>`}
+  <h2 class="shelf">Recomendados · já temos <span class="pill">${own.length}</span></h2><div class="books">${own.map(recCard).join("")}</div>
+  <h2 class="shelf">Recomendados · para comprar <span class="pill">${buy.length}</span></h2><div class="books">${buy.map(recCard).join("")}</div>`;
 }
 /* ---------- topo ---------- */
 function renderAnos(){
@@ -1191,7 +1312,7 @@ function dayLessons(ano,t,w,dow,dateKey){
     const key="d:"+dateKey+":"+i;const done=isDone(key);
     const tip=s.tip||S[k].how;
     let blines=bks.map(x=>bookLine(x)).join("");
-    if(k==="bib"){const b=bibleDay(ano,t,w,dow);blines=`<div class="bk prep"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg><span>Preparação dos pais: <b>Comentário Bíblico de Matthew Henry</b> — ${esc(b.ref)}</span></div>`+blines}
+    if(k==="bib"&&mhOn()){const b=bibleDay(ano,t,w,dow);blines=`<div class="bk prep"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg><span>Preparação dos pais: <b>Comentário Bíblico de Matthew Henry</b> — ${esc(b.ref)}</span></div>`+blines}
     const nfotos=recs.filter(r=>r.date===dateKey&&r.subj===k).reduce((n,r)=>n+(r.fotos||[]).length,0);
     return `<div class="lesson s-${k}${done?" done":""}"><div class="time">${s.h}<small>${s.m} min</small></div><div><span class="tag">${badge(k,true)}${esc(S[k].n)}</span><h3>${esc(label)}</h3><div class="what">${esc(what)}</div>${blines?`<div class="bks">${blines}</div>`:""}<div class="how">${esc(tip)}</div></div><div class="acts"><input class="chk" type="checkbox" id="c-${esc(key)}" data-key="${esc(key)}" data-label="${esc(label+" · "+what)}" ${done?"checked":""} aria-label="Concluída: ${esc(label)}">${dateKey!=="previa"?`<button type="button" class="reg" data-reg="${k}" data-rdate="${dateKey}" data-rlabel="${esc(label+": "+what)}" aria-label="Registrar aula de ${esc(S[k].n)}">${svg("cam",14)}${nfotos?nfotos:""}</button>`:""}</div></div>`;
   });
@@ -1256,7 +1377,7 @@ function vSemana(){
       const list=k==="lin"?`<ul>${d.t.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"";
       const nreg=recs.filter(r=>r.ano===ano&&r.t===t&&r.w===w&&r.subj===k).length;
       let wb=weekBooks(ano,t,w,k).map(x=>bookLine(x,true)).join("");
-      if(k==="bib"){const L=bibWeekLists(ano,t,w);wb=`<div class="bk prep"><span>Preparação dos pais: <b>Matthew Henry</b> sobre ${esc(fmtRange(L.at))} e ${esc(fmtRange(L.nt))}</span></div>`+wb}
+      if(k==="bib"&&mhOn()){const L=bibWeekLists(ano,t,w);wb=`<div class="bk prep"><span>Preparação dos pais: <b>Matthew Henry</b> sobre ${esc(fmtRange(L.at))} e ${esc(fmtRange(L.nt))}</span></div>`+wb}
       return `<article class="card s-${k}${done?" done":""}"><div class="head"><span class="tag">${badge(k)}${esc(S[k].n)}</span><input class="chk" type="checkbox" id="c-${key}" data-key="${key}" data-label="${esc(S[k].n+" · "+a.main)}" ${done?"checked":""} aria-label="Semana concluída: ${esc(S[k].n)}"></div><div class="body"><div class="assign">${k==="lin"?"Foco: "+esc(a.main):esc(a.main)}</div>${wb?`<div class="bks">${wb}</div>`:""}${a.sub&&k!=="lin"?`<div class="meta">${esc(a.sub)}</div>`:""}${list}${k==="lin"&&a.sub?`<div class="meta">${esc(a.sub)}</div>`:""}<div class="meta">${esc(S[k].how)}</div><div class="row"><button type="button" class="btn color" data-reg="${k}" data-rdate="${regDate}" data-rlabel="${esc(a.main)}">${svg("cam",15)} Registrar aula</button>${nreg?`<span class="pill">${nreg} registro${nreg>1?"s":""}</span>`:""}</div></div></article>`;
     }).join("");
     let aval="";
@@ -1281,7 +1402,7 @@ function vTri(){
     if(k==="bib"){const b=BIB[ano][t-1];det=`<ol style="list-style:none;padding:0"><li>AT: ${esc(fmtRange(flat(b.at)))}</li><li>NT: ${esc(fmtRange(flat(b.nt)))}</li></ol>`}
     else if(d.t)det=`<ol>${d.t.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`;
     const bl=allUses().filter(u=>u.ano===ano&&u.t===t&&u.k===k);
-    if(k==="bib")bl.unshift({book:BOOKS[0],w0:1,w1:11});
+    if(k==="bib"&&mhOn())bl.unshift({book:BOOKS[0],w0:1,w1:11});
     if(bl.length)det+=`<div class="tbooks">${bl.map(u=>`<span class="${!u.book.own&&!cfg.comprado[u.book.id]?"buy":"own"}">${esc(u.book.n)}${u.w0>1||u.w1<11?` (sem. ${u.w0}–${u.w1})`:""}</span>`).join("")}</div>`;
     return `<td><div class="r">${esc(d.r)}</div>${det}</td>`}).join("")}</tr>`).join("");
   const hab=`<tr style="--sc:var(--c-geo)"><th scope="row"><span class="in" style="color:var(--c-geo)">Hábito</span></th>${[1,2,3].map(t=>`<td><div class="r">${esc(HAB[ano][t-1][0])}</div></td>`).join("")}</tr>`;
@@ -1462,8 +1583,14 @@ function arm(btn,key,label,fn){
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");
-  if(!b){if(e.target.dataset&&e.target.dataset.vbg){openPhoto=null;renderViewer()}return}
+  if(!b){if(e.target.dataset&&e.target.dataset.vbg){openPhoto=null;renderViewer()}if(e.target.dataset&&e.target.dataset.mbg){hideModal()}return}
   const ds=b.dataset;touched=true;
+  if(ds.addbook){st.bdraft=newBookDraft();render();const bf=document.getElementById("bookform");if(bf)bf.scrollIntoView({block:"start"});return}
+  if(ds.bcancel){st.bdraft=null;render();return}
+  if(ds.bsave){saveBookDraft(false);return}
+  if(ds.mok){saveBookDraft(true);return}
+  if(ds.mcancel){hideModal();st.bdraft=null;toast("Livro não adicionado.");render();return}
+  if(ds.delbook){arm(b,"db"+ds.delbook,"Confirmar remoção",()=>{ub.lista=ub.lista.filter(x=>x.id!==ds.delbook);saveUB();toast("Livro removido.");render()});return}
   if(ds.logout){if(window.FB_AUTH){FB_AUTH.signOut().finally(()=>location.reload());return}prof.email="";prof.last=null;store.set("email","");profSaved="";render();scrollTo(0,0);return}
   if(ds.forgot){const em=(document.getElementById("l-email").value||"").trim();const er=document.getElementById("l-err");if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){er.textContent="Digite seu e-mail acima e toque de novo em “Esqueci minha senha”.";er.hidden=false;return}FB_AUTH.sendPasswordResetEmail(em).then(()=>{er.hidden=true;toast("Enviamos um e-mail para criar uma nova senha.")}).catch(()=>{er.textContent="Não foi possível enviar o e-mail. Confira o endereço.";er.hidden=false});return}
   if(ds.goto){const [a,t,w]=ds.goto.split("-").map(Number);st.ano=a;st.t=t;st.w=w;st.tab="semana";render();scrollTo(0,0);return}
@@ -1493,12 +1620,15 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&openPhoto){openPhoto=null;renderViewer()}if(e.key==="Enter"&&e.target.id==="v-com"){e.preventDefault();document.querySelector("[data-vcom]").click()}});
 document.addEventListener("input",e=>{
+  if(e.target.dataset&&e.target.dataset.bf&&st.bdraft){st.bdraft[e.target.dataset.bf]=e.target.value;return}
   const t=e.target,d=st.draft;if(!d)return;
   if(t.id==="f-aula")d.aula=t.value;else if(t.id==="f-resumo")d.resumo=t.value;else if(t.id==="f-obs")d.obs=t.value;
   else if(t.dataset.leg!=null&&d.fotos[+t.dataset.leg])d.fotos[+t.dataset.leg].legenda=t.value;
 });
 document.addEventListener("change",e=>{
   const t=e.target;const d=st.draft;
+  if(t.dataset.usebook){if(t.checked)delete ub.ocultos[t.dataset.usebook];else ub.ocultos[t.dataset.usebook]=1;saveUB();render();return}
+  if(t.dataset.bf&&st.bdraft){const f=t.dataset.bf;st.bdraft[f]=t.value;if(f==="k"){st.bdraft.dia="0";if(t.value!=="lin")st.bdraft.slot="Literatura"}if(f==="ano"){st.bdraft.dia="0";if(grp(+t.value)==="B")st.bdraft.slot="Literatura"}if(["k","ano","unit"].includes(f))render();return}
   if(t.dataset.got){if(t.checked)cfg.comprado[t.dataset.got]=1;else delete cfg.comprado[t.dataset.got];saveCfg();return}
   if(t.dataset.cfg){const m=t.dataset.cfg.match(/^(.+-\d+)-(from|to|unit|ano|t|k|w0|w1)$/);if(m){const o=cfg.u[m[1]]=cfg.u[m[1]]||{};o[m[2]]=t.value===""?null:(["unit","k"].includes(m[2])?t.value:+t.value);saveCfg();
     if(["from","to","unit"].includes(m[2])){const [bid,bi]=[m[1].slice(0,m[1].lastIndexOf("-")),+m[1].slice(m[1].lastIndexOf("-")+1)];const bk=BOOKS.find(x=>x.id===bid);if(bk){const u=effUse(bk,bi);const pv=document.getElementById(m[1]+"-prev");if(pv)pv.innerHTML=previewHTML(u,sessions(u))}}else render()}return}
