@@ -454,6 +454,10 @@ table.ov td .r{font-weight:600}
 .mbox h3{font-size:1.25rem}
 .bform h2{font-size:1.4rem}
 .bk .nrm{font-size:.7rem;font-weight:600;color:var(--danger);margin-left:4px}
+
+.efilters{display:grid;gap:12px}
+.efilters input[type=search]{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface);font-weight:400;width:100%}
+.efrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 </style>
 
 <header class="top">
@@ -1258,14 +1262,39 @@ function vEstante(){
     ${b.uses.map((_,i)=>useBlock(b,i)).join("")}
     <div class="row" style="justify-content:flex-end"><button type="button" class="btn danger" data-delbook="${esc(b.id)}">Remover livro</button></div></article>`;
   };
-  const own=BOOKS.filter(b=>b.own),buy=BOOKS.filter(b=>!b.own);
+  const ef=st.ef||(st.ef={q:"",k:"todas",ano:0,t:0,sit:"todos"});
+  const norm=x=>(x||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const match=b=>{
+    if(ef.q){const q=norm(ef.q);if(!norm(b.n+" "+(b.a||"")).includes(q))return false}
+    if(b.mh)return (ef.k==="todas"||ef.k==="bib")&&!ef.t;
+    if(ef.k==="todas"&&!ef.ano&&!ef.t)return true;
+    return b.uses.some((_,i)=>{const u=effUse(b,i);return (ef.k==="todas"||u.k===ef.k)&&(!ef.ano||u.ano===ef.ano)&&(!ef.t||u.t===ef.t)});
+  };
+  const showMine=ef.sit==="todos"||ef.sit==="meus",showOwn=ef.sit==="todos"||ef.sit==="tenho",showBuy=ef.sit==="todos"||ef.sit==="comprar";
+  const mine=showMine?ub.lista.filter(match):[];
+  const own=showOwn?BOOKS.filter(b=>b.own&&match(b)):[],buy=showBuy?BOOKS.filter(b=>!b.own&&match(b)):[];
+  const active=ef.q||ef.k!=="todas"||ef.ano||ef.t||ef.sit!=="todos";
+  const total=mine.length+own.length+buy.length;
+  const chip=(attr,val,cur,label,cls)=>`<button type="button" ${cls?`class="${cls}"`:""} data-${attr}="${val}" aria-pressed="${String(cur)===String(val)}">${esc(label)}</button>`;
+  const filtros=`<div class="panel efilters">
+    <label class="field" for="e-q">Buscar livro<input type="search" id="e-q" value="${esc(ef.q)}" placeholder="Título ou autor" autocomplete="off"></label>
+    <div class="field">Matéria<div class="chips" role="group" aria-label="Filtrar por matéria">${chip("efk","todas",ef.k,"Todas")}${ORDER.map(k=>chip("efk",k,ef.k,S[k].n,"s-"+k)).join("")}</div></div>
+    <div class="efrow">
+     <div class="field">Ano<div class="chips" role="group" aria-label="Filtrar por ano">${chip("efano",0,ef.ano,"Todos")}${[1,2,3,4].map(a=>chip("efano",a,ef.ano,a+"º ano")).join("")}</div></div>
+     <div class="field">Trimestre<div class="chips" role="group" aria-label="Filtrar por trimestre">${chip("eft",0,ef.t,"Todos")}${[1,2,3].map(a=>chip("eft",a,ef.t,a+"º")).join("")}</div></div>
+    </div>
+    <div class="field">Situação<div class="chips" role="group" aria-label="Filtrar por situação">${[["todos","Todos"],["meus","Meus livros"],["tenho","Já temos"],["comprar","Para comprar"]].map(([v,l])=>chip("efsit",v,ef.sit,l)).join("")}</div></div>
+    <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:.88rem;font-weight:600">${total} livro${total===1?"":"s"}${active?" encontrado"+(total===1?"":"s"):""}</span>${active?`<button type="button" class="linkish" data-efclear="1">Limpar filtros</button>`:""}</div>
+  </div>`;
+  const sec=(title,list,fn,empty)=>list.length?`<h2 class="shelf">${title} <span class="pill">${list.length}</span></h2><div class="books">${list.map(fn).join("")}</div>`:(empty&&!active?empty:"");
   return `<div class="today-head"><div><div class="eyebrow">Livros</div><div class="lead">Estante</div></div>${st.bdraft?"":`<button type="button" class="btn primary big" data-addbook="1">+ Adicionar livro</button>`}</div>
   <p class="muted" style="margin:0;max-width:72ch">Digite a primeira e a última página (ou capítulo, conto, volume) de cada livro. O app divide a leitura pelas aulas e mostra, em cada dia, exatamente o que ler.</p>
   ${st.bdraft?vBookForm():""}
-  <h2 class="shelf">Meus livros <span class="pill">${ub.lista.length}</span></h2>
-  ${ub.lista.length?`<div class="books">${ub.lista.map(myCard).join("")}</div>`:`<div class="notice">Você ainda não adicionou livros. Use <b>+ Adicionar livro</b>: ele fica salvo só na sua conta e entra no cronograma do ano que você escolher.</div>`}
-  <h2 class="shelf">Recomendados · já temos <span class="pill">${own.length}</span></h2><div class="books">${own.map(recCard).join("")}</div>
-  <h2 class="shelf">Recomendados · para comprar <span class="pill">${buy.length}</span></h2><div class="books">${buy.map(recCard).join("")}</div>`;
+  ${filtros}
+  ${showMine&&!ub.lista.length&&!active?`<h2 class="shelf">Meus livros <span class="pill">0</span></h2><div class="notice">Você ainda não adicionou livros. Use <b>+ Adicionar livro</b>: ele fica salvo só na sua conta e entra no cronograma do ano que você escolher.</div>`:sec("Meus livros",mine,myCard)}
+  ${sec("Recomendados · já temos",own,recCard)}
+  ${sec("Recomendados · para comprar",buy,recCard)}
+  ${active&&!total?`<div class="panel empty"><h3 style="font-size:1.2rem">Nenhum livro encontrado</h3><p class="muted" style="margin:0">Tente outra matéria, outro ano ou limpe os filtros.</p><button type="button" class="btn" data-efclear="1">Limpar filtros</button></div>`:""}`;
 }
 /* ---------- topo ---------- */
 function renderAnos(){
@@ -1594,6 +1623,9 @@ document.addEventListener("click",e=>{
   const b=e.target.closest("button");
   if(!b){if(e.target.dataset&&e.target.dataset.vbg){openPhoto=null;renderViewer()}if(e.target.dataset&&e.target.dataset.mbg){hideModal()}return}
   const ds=b.dataset;touched=true;
+  if(ds.efk||ds.efano!=null||ds.eft!=null||ds.efsit||ds.efclear){const ef=st.ef||(st.ef={q:"",k:"todas",ano:0,t:0,sit:"todos"});
+    if(ds.efk)ef.k=ds.efk;if(ds.efano!=null)ef.ano=+ds.efano;if(ds.eft!=null)ef.t=+ds.eft;if(ds.efsit)ef.sit=ds.efsit;if(ds.efclear){st.ef={q:"",k:"todas",ano:0,t:0,sit:"todos"}}
+    render();return}
   if(ds.addbook){st.bdraft=newBookDraft();render();const bf=document.getElementById("bookform");if(bf)bf.scrollIntoView({block:"start"});return}
   if(ds.bcancel){st.bdraft=null;render();return}
   if(ds.bsave){saveBookDraft(false);return}
@@ -1629,6 +1661,7 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&openPhoto){openPhoto=null;renderViewer()}if(e.key==="Enter"&&e.target.id==="v-com"){e.preventDefault();document.querySelector("[data-vcom]").click()}});
 document.addEventListener("input",e=>{
+  if(e.target.id==="e-q"){const ef=st.ef||(st.ef={q:"",k:"todas",ano:0,t:0,sit:"todos"});ef.q=e.target.value;clearTimeout(window.__eqT);window.__eqT=setTimeout(()=>{render();const i=document.getElementById("e-q");if(i){i.focus();const n=i.value.length;try{i.setSelectionRange(n,n)}catch(_){}}},250);return}
   if(e.target.dataset&&e.target.dataset.bf&&st.bdraft){st.bdraft[e.target.dataset.bf]=e.target.value;return}
   const t=e.target,d=st.draft;if(!d)return;
   if(t.id==="f-aula")d.aula=t.value;else if(t.id==="f-resumo")d.resumo=t.value;else if(t.id==="f-obs")d.obs=t.value;
